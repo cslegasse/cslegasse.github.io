@@ -7,7 +7,7 @@ const config = {
     limit: 10, // How many projects to display.
     exclude: {
       forks: true, // Forked projects will not be displayed if set to true.
-      projects: [], // These projects will not be displayed. example: ['my-project1', 'my-project2']
+      projects: ['cslegasse', 'Shellhacks_Leftovers_Backup'], // These projects will not be displayed. example: ['my-project1', 'my-project2']
     },
   },
   social: {
@@ -109,20 +109,20 @@ const config = {
 
   // To hide the `My Projects` section, keep it empty.
   externalProjects: [
-    // {
-    //   title: 'Project Name',
-    //   description:
-    //     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
-    //   imageUrl: 'https://via.placeholder.com/250x250',
-    //   link: 'https://example.com',
-    // },
-    // {
-    //   title: 'Project Name',
-    //   description:
-    //     'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
-    //   imageUrl: 'https://via.placeholder.com/250x250',
-    //   link: 'https://example.com',
-    // },
+     {
+       title: 'Synapse X',
+       description:
+         'A multitool hack client for cross-platform gaming.',
+       imageUrl: 'https://logos.fandom.com/wiki/Synapse_X?file=Synapse_X_2018.png',
+       link: 'https://x.synapse.to',
+     },
+     {
+       title: 'Project Name',
+       description:
+         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
+       imageUrl: 'https://via.placeholder.com/250x250',
+       link: 'https://example.com',
+     },
   ],
   // Display blog posts from your medium or dev account. (Optional)
   blog: {
@@ -139,7 +139,7 @@ const config = {
     snippetVersion: 6,
   },
   themeConfig: {
-    defaultTheme: 'light',
+    defaultTheme: 'dark',
 
     // Hides the switch in the navbar
     // Useful if you want to support a single color mode

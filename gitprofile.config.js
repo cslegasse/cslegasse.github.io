@@ -116,13 +116,7 @@ const config = {
        imageUrl: 'https://logos.fandom.com/wiki/Synapse_X?file=Synapse_X_2018.png',
        link: 'https://x.synapse.to',
      },
-     {
-       title: 'Project Name',
-       description:
-         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed euismod, nunc ut.',
-       imageUrl: 'https://via.placeholder.com/250x250',
-       link: 'https://example.com',
-     },
+
   ],
   // Display blog posts from your medium or dev account. (Optional)
   blog: {

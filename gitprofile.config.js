@@ -2,7 +2,7 @@
 
 const config = {
   github: {
-    username: 'FelixNgFender', // Your GitHub org/user name. (Required)
+    username: 'cslegasse', // Your GitHub org/user name. (Required)
     sortBy: 'updated', // stars | updated
     limit: 10, // How many projects to display.
     exclude: {
@@ -11,7 +11,7 @@ const config = {
     },
   },
   social: {
-    linkedin: 'felixngfender',
+    linkedin: 'legasseremon',
     twitter: '',
     mastodon: '',
     facebook: '',
@@ -21,55 +21,60 @@ const config = {
     behance: '',
     medium: '',
     dev: '',
-    stackoverflow: '20442594/thinh-nguyen', // example: '1/jeff-atwood'
+    stackoverflow: '', // example: '1/jeff-atwood'
     skype: '',
     telegram: '',
     website: '',
-    phone: '774-519-8920',
-    email: 'ngthinh302@gmail.com',
+    phone: '',
+    email: 'legasseahs1@gmail.com',
   },
   resume: {
     fileUrl:
-      'https://drive.google.com/file/d/1zdFidTb_wWdm-4w7ADuGC5jB10rqzYVY/view?usp=sharing', // Empty fileUrl will hide the `Download Resume` button.
+      'https://drive.google.com/drive/folders/1DUb2_FfRmx1XRDHhyGYJnO_PXNknCyYQ?usp=sharing', // Empty fileUrl will hide the `Download Resume` button.
   },
   skills: [
     'Python', 
     'Java', 
     'C', 
     'C++', 
-    'Racket', 
     'Bash', 
-    'HTML', 
-    'CSS', 
-    'JavaScript',
-    'TypeScript', 
+    'Metasploit', 
+    'Ghidra', 
+    'Splunk',
+    'Bootstrap', 
     'SQL', 
-    'React', 
-    'Node.js', 
-    'Express', 
-    'Jest', 
-    'FastAPI', 
-    'TensorFlow', 
-    'PyTorch', 
+    'Burpsuite', 
+    'Tanium', 
+    'Operating Systems', 
+    'Wireshark', 
     'Flask', 
-    'Streamlit',
-    'Beautiful Soup', 
-    'Selenium', 
-    'Docker', 
-    'Nginx', 
+    'Lua',
+    'MaterialUI',
     'Linux', 
-    'Git', 
     'GitHub', 
     'Heroku', 
-    'AWS'
   ],
   experiences: [
     {
-      company: 'Worcester Polytechnic Institute, Business School',
-      position: 'Web Developer',
-      from: 'December 2022',
-      to: 'April 2023',
-      companyLink: 'https://www.wpi.edu/academics/business',
+      company: 'Synapse X',
+      position: 'Script Developer',
+      from: 'August 2017',
+      to: 'Present',
+      companyLink: 'x.synapse.to',
+    },
+    {
+      company: 'Raymond James Financial',
+      position: 'Cyber Threat Intern',
+      from: 'May 2023',
+      to: 'July 2023',
+      companyLink: 'https://www.raymondjames.com/',
+    },
+    {
+      company: 'University of Florida',
+      position: 'Assistant Researcher',
+      from: 'June 2022',
+      to: 'Present',
+      companyLink: 'https://fics.institute.ufl.edu/',
     },
     // {
     //   company: 'Company Name',
@@ -89,8 +94,8 @@ const config = {
   ], */
   education: [
     {
-      institution: 'Worcester Polytechnic Institute',
-      degree: 'Bachelor of Science',
+      institution: 'University of Florida',
+      degree: 'Bachelor of Science in Computer Science',
       from: '2022',
       to: '2025',
     },
@@ -193,12 +198,7 @@ const config = {
     },
   },
 
-  // Optional Footer. Supports plain text or HTML.
-  footer: `Made with <a 
-      class="text-primary" href="https://github.com/arifszn/gitprofile"
-      target="_blank"
-      rel="noreferrer"
-    >GitProfile</a> and ❤️`,
+ 
 };
 
 export default config;

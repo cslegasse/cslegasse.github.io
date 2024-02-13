@@ -11,7 +11,7 @@ const config = {
     },
   },
   social: {
-    linkedin: 'legasseremon',
+    linkedin: 'legasse-remon',
     twitter: '',
     mastodon: '',
     facebook: '',
@@ -24,9 +24,9 @@ const config = {
     stackoverflow: '', // example: '1/jeff-atwood'
     skype: '',
     telegram: '',
-    website: '',
+    website: 'legasse.club',
     phone: '',
-    email: 'legasseahs1@gmail.com',
+    email: 'legasseremon@ufl.edu',
   },
   resume: {
     fileUrl:
@@ -47,42 +47,48 @@ const config = {
     'Tanium', 
     'Operating Systems', 
     'Wireshark', 
-    'Flask', 
     'Lua',
-    'MaterialUI',
     'Linux', 
     'GitHub', 
     'Heroku', 
   ],
   experiences: [
     {
-      company: 'Synapse X',
-      position: 'Script Developer',
-      from: 'August 2017',
-      to: 'Present',
-      companyLink: 'x.synapse.to',
+      company: 'IBM',
+      position: 'X-Force Security Intern',
+      from: 'August 2024',
+      to: 'December 2024',
+      companyLink: 'ibm.com',
+    },
+    {
+      company: 'Mastercard',
+      position: 'Security Engineering Intern',
+      from: 'August 2023',
+      to: 'December 2023',
+      companyLink: 'mastercard.us',
     },
     {
       company: 'Raymond James Financial',
       position: 'Cyber Threat Intern',
       from: 'May 2023',
       to: 'July 2023',
-      companyLink: 'https://www.raymondjames.com/',
+      companyLink: 'raymondjames.com',
+    },
+    {
+      company: 'Synapse Softworks (ROBLOX)',
+      position: 'Scripter',
+      from: 'August 2017',
+      to: 'December 2023',
+      companyLink: 'x.synapse.to',
     },
     {
       company: 'University of Florida',
       position: 'Assistant Researcher',
       from: 'June 2022',
       to: 'Present',
-      companyLink: 'https://fics.institute.ufl.edu/',
+      companyLink: 'fics.institute.ufl.edu',
     },
-    // {
-    //   company: 'Company Name',
-    //   position: 'Position',
-    //   from: 'July 2019',
-    //   to: 'August 2021',
-    //   companyLink: 'https://example.com',
-    // },
+    
   ],
   /* certifications: [
     {
@@ -113,8 +119,8 @@ const config = {
        title: 'Synapse X',
        description:
          'A multitool hack client for cross-platform gaming.',
-       imageUrl: 'https://logos.fandom.com/wiki/Synapse_X?file=Synapse_X_2018.png',
-       link: 'https://x.synapse.to',
+       imageUrl: 'https://synapsesoftworks.llc/_next/static/media/logo.5845b078.svg',
+       link: 'https://synapsesoftworks.llc/',
      },
 
   ],

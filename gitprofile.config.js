@@ -51,22 +51,9 @@ const config = {
     'Linux', 
     'GitHub', 
     'Heroku', 
+    'Test',
   ],
   experiences: [
-    {
-      company: 'IBM',
-      position: 'X-Force Security Intern',
-      from: 'August 2024',
-      to: 'December 2024',
-      companyLink: 'ibm.com',
-    },
-    {
-      company: 'Mastercard',
-      position: 'Security Engineering Intern',
-      from: 'August 2023',
-      to: 'December 2023',
-      companyLink: 'mastercard.us',
-    },
     {
       company: 'Raymond James Financial',
       position: 'Cyber Threat Intern',
@@ -87,6 +74,20 @@ const config = {
       from: 'June 2022',
       to: 'Present',
       companyLink: 'fics.institute.ufl.edu',
+    },
+    {
+      company: 'IBM',
+      position: 'X-Force Security Intern',
+      from: 'August 2024',
+      to: 'December 2024',
+      companyLink: 'ibm.com',
+    },
+    {
+      company: 'Mastercard',
+      position: 'Security Engineering Intern',
+      from: 'August 2023',
+      to: 'December 2023',
+      companyLink: 'mastercard.us',
     },
     
   ],

@@ -1,144 +1,63 @@
-html {
-    font-family: 'Source Sans Pro', sans-serif;
-    font-size: larger;
-    font-weight: 300;
-}
-
-a {
-    text-decoration: none;
-    color: #1565c0;
-}
-
-a:hover {
-    color: #217ee7;
-}
-
-#content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    bottom: -50%;
-    margin-right: -50%;
-    transform: translate(-50%, -50%) ;
-    text-align: center;
-    max-width: 520px;
-    padding: 20px;
-    line-height: 1.6em;
-}
-
-img.avatar {
-    max-width: 20%;
-    height: auto;
-    display: block; 
-  }
-
-.avatar {
-    width: 100%; 
-    max-width: 400px; 
-    height: auto; 
-    display: block; 
-    margin: 0 auto; 
-  }
-
-.icons {
-    list-style-type: none;
-    font-size: xx-large;
-    padding: 0;
-    display: flex;
-    justify-content: space-between;
-    width: 80%;
-    max-width: 320px;
-    margin: 1em auto;
-}
-
-.icons li {
-    display: inline;
-    width: 42px;
-}
-
-.icons a {
-    color: black;
-}
-
-.icons a:hover {
-    color: #1565c0;
-}
-
-
+/* General styles */
 body {
-    font-family: 'Source Sans Pro', sans-serif;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-  }
-  
-  #content {
-    padding: 20px;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-  
-  .avatar {
-    display: block;
-    max-width: 150px;
-    border-radius: 50%;
-    margin: 20px auto;
-  }
-  
-  h1 {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: 600;
-  }
-  
-  p {
-    text-align: center;
-    font-size: 1rem;
-    line-height: 1.5;
-  }
-  
-  .icons {
-    display: flex;
-    justify-content: center;
-    list-style: none;
-    padding: 0;
-  }
-  
-  .icons li {
-    margin: 0 10px;
-  }
-  
-  .icons a {
-    font-size: 1.5rem;
-    color: #333;
-  }
-  
-  #additional-content h2 {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin: 20px 0 10px;
-    text-align: left;
-  }
-  
-  #additional-content p {
-    text-align: left;
-    margin-bottom: 20px;
-  }
+  margin: 0;
+  padding: 0;
+  font-family: Arial, sans-serif;
+  text-align: left;
+}
 
-  #additional-content ul {
-    margin: 0;
-    padding-left: 20px; 
-    list-style-type: disc; 
-    text-align: left; 
-  }
-  
-  #additional-content li {
-    margin-bottom: 10px;
-  }
+/* Content section styles */
+#content {
+  padding: 20px;
+  text-align: left; /* Ensures text is left-aligned */
+}
 
-  ul.icons {
-    margin-bottom: 50px; /* Adds margin below the icons */
-    padding-bottom: 50px; /* Adds padding below the icons */
-  }
-  
-  
+/* Avatar styles */
+#content .avatar {
+  display: block;
+  margin: 10px 0; /* Space around the image */
+  width: 150px; /* Adjust size */
+  height: auto;
+}
+
+/* Headings and paragraphs */
+#content h1 {
+  margin-top: 0;
+  font-size: 24px;
+  color: #333; /* Darker color for contrast */
+}
+
+#content p {
+  margin: 10px 0;
+  line-height: 1.5;
+}
+
+/* Links */
+#content a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+#content a:hover {
+  text-decoration: underline;
+}
+
+/* List styles */
+#content ul {
+  list-style-type: none; /* Removes bullet points */
+  padding: 0;
+  margin: 10px 0;
+}
+
+#content ul li {
+  margin: 5px 0;
+}
+
+#content ul li a {
+  text-decoration: none;
+  color: #0066cc;
+}
+
+#content ul li a:hover {
+  text-decoration: underline;
+}

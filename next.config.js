@@ -1,15 +1,8 @@
 /** @type {import('next').NextConfig} */
-;
-
-const isProd = process.env.NODE_ENV === 'production';
 const nextConfig = {
+  output: "export", 
   reactStrictMode: true,
-  images: {
-    unoptimized: true, // Disable default image optimization
-  },
-  assetPrefix: isProd ? '/cslegasse.github.io/' : '',
-  basePath: isProd ? '/cslegasse.github.io' : '',
-  output: 'export'
+  basePath: "/cslegassse.github.io",
 };
 
-export default nextConfig;
+module.exports = nextConfig;

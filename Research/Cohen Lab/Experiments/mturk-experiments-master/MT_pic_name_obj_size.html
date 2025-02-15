@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Experiment Template</title>
+    <script src="jspsych-6.0.5/jspsych.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-survey-html-form.js"></script>
+    <script src="aws-sdk-2.701.0.min.js"></script>
+    <link href="jspsych-6.0.5/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+  </head>
+  <body></body>
+  <script>
+    // set security.fileuri.strict_origin_policy to FALSE to disable cors error
+    var objects = ['elephant'];
+    fetch('objects.json').then(response => response.json()).then(jsonResponse => objects = jsonResponse);
+    var sizes = [];
+    fetch('sizes.json').then(response => response.json()).then(jsonResponse => sizes = jsonResponse);
+    
+    var pic_naming_train_pairs = [];
+    fetch('pic_naming_train_pairs.json').then(response => response.json()).then(jsonResponse => pic_naming_train_pairs = jsonResponse[Math.floor(Math.random() * 101)]);
+    var pic_naming_test_pairs = [];
+    fetch('pic_naming_test_pairs.json').then(response => response.json()).then(jsonResponse => pic_naming_test_pairs = jsonResponse[Math.floor(Math.random() * 101)]);
+    
+    var word_size_train_pairs = [];
+    fetch('word_size_train_pairs.json').then(response => response.json()).then(jsonResponse => word_size_train_pairs = jsonResponse[Math.floor(Math.random() * 101)]);
+    var word_size_test_pairs = [];
+    fetch('word_size_test_pairs.json').then(response => response.json()).then(jsonResponse => word_size_test_pairs = jsonResponse[Math.floor(Math.random() * 101)]);
+    
+    var pic_naming_word_size_train_pairs = [];
+    fetch('pic_naming_word_size_train_pairs.json').then(response => response.json()).then(jsonResponse => pic_naming_word_size_train_pairs = jsonResponse[Math.floor(Math.random() * 101)]);
+    var pic_naming_word_size_test_pairs = [];
+    fetch('pic_naming_word_size_test_pairs.json').then(response => response.json()).then(jsonResponse => pic_naming_word_size_test_pairs = jsonResponse[Math.floor(Math.random() * 101)]);
+    async function startJsPsych() {
+        await new Promise(r => setTimeout(r, 500));
+    
+        let bucket_name = "bhv-semantic-data";
+        let aws_success = 0;
+        AWS.config.region = 'us-east-1';
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: 'us-east-1:0284783b-226e-4f9c-ad9e-bc1b553e5347',
+        });
+        var do_upload = function(s3,params) {
+        s3.upload(params, function(err,data) {
+            if(err){
+              console.log(err,err.stack);
+            } else {
+              console.log('success');
+              aws_success++;
+            }
+        });
+        }
+        var uploadS3 = function(id, metadata, data, blob) {
+        var s3 = new AWS.S3({params:{Bucket:bucket_name}});
+        var params = {
+            Bucket: bucket_name,
+            Key: id+'-audio',
+            Body: blob
+        };
+        do_upload(s3,params);
+        params.Key = id+'-metadata';
+        params.Body = metadata;
+        do_upload(s3,params);
+        params.Key = id+'-data';
+        params.Body = data;
+        do_upload(s3,params);
+        };
+        let shouldStop = false;
+        let stopped = false;
+        let processSpeech = false;
+        let participantID = "";
+        let metadata = {mediaStartTime: 0};
+        var ws = new WebSocket("ws://localhost:8899");
+        ws.onmessage = function (evt) {
+            alert(evt.data);
+        };
+        
+        const player = document.getElementById('player');
+        const handleSuccess = function(stream) {
+            mic_works = true;
+            const options = {type: 'audio/webm'};
+            const mediaRecorder = new MediaRecorder(stream, options);
+            mediaRecorder.start(100);
+            metadata.mediaStartTime = Date.now();
+            const recordedChunks = [];
+
+            mediaRecorder.addEventListener('dataavailable', function(e) {
+            if (e.data.size > 0) {
+                recordedChunks.push(e.data);
+            }
+            
+            if (processSpeech) {
+                console.log(recordedChunks);
+                const blob = new Blob(recordedChunks, {'type':'audio/webm'});
+                console.log(blob);
+                console.log('sending blob');
+                ws.send(blob);
+                processSpeech = false;
+            }
+            
+            if(shouldStop === true && stopped === false) {
+                console.log('stopping in the fn');
+                mediaRecorder.stop();
+                const blob = new Blob(recordedChunks, {'type':'audio/webm'});
+                console.log(blob);
+                stopped = true;
+                if(!participantID.length) {
+                const first_part = parseInt(Math.random()*10000).toString();
+                const second_part = parseInt(Math.random()*10000).toString();
+                const third_part = parseInt(Math.random()*10000).toString();
+                participantID = first_part+'-'+second_part+'-'+third_part;
+                metadata.participantid = participantID;
+                }
+                console.log('doing the upload');
+                uploadS3(participantID,JSON.stringify(metadata),jsPsych.data.get().json(),blob);
+            }
+        });
+
+        mediaRecorder.addEventListener('stop', function() {
+        /*downloadLink.href = URL.createObjectURL(new Blob(recordedChunks));
+        downloadLink.download = 'acetest.wav';*/
+        //const audioBlob = new Blob(recordedChunks,{'type':'audio/wav'});
+        //const audioURL = URL.createObjectURL(audioBlob);
+        //const audio = new Audio(audioURL);
+        //audio.play();
+        //var file = new File([audioBlob],'audio.blob');
+        });
+        
+        };
+
+        var make_img_stimuli = function(paths) {
+        var stimuli = [];
+        paths.forEach(element => {
+            stimuli.push({stimulus:"<img src='img_matched/"+element+".bmp' style='width:5in;height:5in;'>"});
+        });
+        return stimuli;
+        }
+        var make_word_stimuli = function(words) {
+        var stimuli = [];
+        words.forEach(element => {
+            stimuli.push({stimulus:"<p style='font-size:60pt;'><b>"+element+"</b></p>"});
+        });
+        return stimuli;
+        }
+        var make_pic_word_stimuli = function(pairs) {
+        var stimuli = [];
+        pairs.forEach(elements => {
+            stimuli.push({stimulus:"<div style='position:relative;'><img src='img_matched/"+elements[0]+".bmp' style='width:5in;height:5in;'> \
+                                    <p style='font-size:60pt;position:absolute;margin:0 auto;top:50%;left:50%;transform: translateX(-50%) translateY(-50%);'><b>"+elements[1]+"</b></p> \
+                                    </div>",
+                        picture:elements[0],
+                        word:elements[1]
+                        });
+        });
+        return stimuli;
+        }
+        
+        var make_img_familiarization = function(names,sizes) {
+        var stimuli = '';
+        for(var i=0;i<names.length;i++) {
+            stimuli += "<div style='display:flex;'><div style='float:left;'><img src='img_matched/"+names[i]+".bmp' style='width:5in;height:5in;'></div><div style='float:right;width:5in;height:5in;align-content:center;display:grid;text-align:left;'><p style='font-size:24pt;'><b>Name: </b>"+names[i]+"</p><p style='font-size:24pt;'><b>Size: </b>"+sizes[i]+"</p></div></div>";
+        }
+        return stimuli;
+        }
+    
+    
+        var button_map = {small:'f',big:'j'};
+        var test_stimuli = make_img_stimuli(objects);
+                                            
+
+        var timeline = [];
+        var mic_works = false;
+        
+        var handle_close = function(data){
+        shouldStop = true;
+        console.log('hc!');
+        console.log(jsPsych.data.get().last(1).values[0]);
+        participantID = JSON.parse(jsPsych.data.get().last(1).values()[0].responses).workerid;
+        metadata.participantid = participantID;
+        console.log('set shouldStop to true.');
+        console.log(jsPsych.data.get().json());
+        }
+        
+        var mic_check_fn = function() {
+        navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(handleSuccess).catch(function(err){mic_works=false;console.log(err)})
+        }
+
+        var informed_consent_msg = "Psychology Experiment - Informed Consent Form<br>You have been invited to take part in a research study.<br>TITLE OF RESEARCH: Dual-Task Semantic Judgements<br>INVESTIGATOR: Jonathan Cohen, Tyler Giallanza \
+        <br><br>The following informed consent is required by Princeton University for any person involved in a research study conducted by investigators at the University. This study has been approved by the University's Institutional Review Board for Human Subjects.<br><br>You will be asked to make judgements about objects. The study will take approximately 25 minutes to complete and you will be rewarded $3 for your participation. Based on your performance relative to all of the participants, you have the chance of earning an additional $[X].<br> \
+        <b>If you have any questions about this study, your payment, or the research being conducted, you may contact the research team at tylerg.research.experiments@gmail.com.</b> If you have questions regarding your rights as a research subject, or if problems arise which you do not feel you can discuss with the Investigator, please contact the Institutional Review Board at:<br><br> Office of Research Integrity and Assurance<br>Compliance Administrator<br>Phone: (609) 258-0865<br>Email: irb@princeton.edu<br><br> \
+        By continuing with the study, you affirm that: Your participation is voluntary, and you may withdraw your consent and discontinue participation in the project at any time. Your refusal to participate will not result in any penalty. \
+        By signing this agreement, you do not waive any legal rights or release Princeton University, its agents, or you from liability for negligence. There may be no direct benefit to you from participation in this study other than the monetary payment as described above, though there may be indirect benefits as a result of what we learn about the human mind from your participation. The information obtained from this study will be confidential. It will be available to the investigators performing the study. Your worker ID will be anonymized and your identity will remain anonymous in any publications resulting from this study. You are a legal adult at your jurisdiction. This means you are 21 or older if you are in Mississippi; 19 or older if you are in Alabama, Delaware, and Nebraska; 18 or older in another state, or an emancipated minor according to your local laws. This document and/or additional email communication with the investigators answered any questions that you have regarding the study. <br><br> \
+        If you understand and consent to these terms, press the 'f' button on your keyboard to continue with the experiment.";
+        var consent = {
+        type: "html-keyboard-response",
+        stimulus: informed_consent_msg,
+        choices: ['f']
+        };
+        var mic_check = {
+        type: "html-keyboard-response",
+        stimulus: "This experiment involves making verbal responses to stimuli. If you are unwilling or unable to share audio recordings of your voice and make audible responses, you will be unable to participate in this survey.<br> \
+                    Please allow your browser to share microphone permissions. When you are done, press the 'f' button on your keyboard to continue with the experiment.",
+        on_load: function(data) {mic_check_fn()},
+        choices: ['f']
+        };
+        var mic_failure = {
+        timeline: [{
+            type: "html-keyboard-response",
+            stimulus: "An error occured when trying to access your microphone. Therefore you cannot participate, and you will not be reimbursed.<br> If you accidentally denied microphone permissions, please reload the webpage and attempt the experiment again.",
+            choices: jsPsych.NO_KEYS,
+        }],
+        conditional_function: function() {
+            return !mic_works;
+        }
+        }
+        var welcome = {
+        timeline: [consent, mic_check, mic_failure]
+        };
+        
+        
+        var familizarize_instructions = {
+        type: "html-keyboard-response",
+        stimulus: "During this experiment, you will be asked to perform tasks involving 20 different objects. You will need to know the names and sizes of these objects. <br>\
+                    On the next page, a picture of each object is presented along with its name and size. Please take as long as you need to familizarize yourself with this information. <br><br> \
+                    Press the 'f' button on your keyboard to view the stimuli. When you are finished, press the 'f' button a second time to continue with the experiment.",
+        choices: ['f'],
+        data: {show_stims:true}
+        }
+        var familizarize_stims = {
+        timeline: [{
+            type: "html-keyboard-response",
+            stimulus: make_img_familiarization(objects,sizes),
+            choices: ['f']
+        }],
+        conditional_function: function() {
+            return jsPsych.data.get().last(1).values()[0].show_stims;
+        }
+        }
+        var check_familiarize = {
+        type: "html-keyboard-response",
+        stimulus: "If you have finished familiarizing yourself with the stimuli, press 'f' to continue the experiment. If you would like to view the stimuli again, press 'j' to go back. Please note that this is the last opportunity you will have to familizarize yourself with the stimuli before the experiment begins.",
+        choices: ['f','j'],
+        on_finish: function(data) {
+            data.show_stims = data.key_press==jsPsych.pluginAPI.convertKeyCharacterToKeyCode('j');
+        }
+        }
+        
+        var familizarize = {
+        timeline: [familizarize_instructions,familizarize_stims,check_familiarize,familizarize_stims]
+        };
+        
+        
+        
+        var fixation = {
+        type: "html-keyboard-response",
+        stimulus: "<div style='font-size:60px;'>+</div>",
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 500,
+        data: {trial_condition:'fixation'}
+        };
+        var speech_trial = function(trial_type){return {
+        type: "html-keyboard-response",
+        stimulus: jsPsych.timelineVariable('stimulus'),
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 2000,
+        on_start: function(trial) {
+            trial.data = {start_time:Date.now(),trial_condition:trial_type};
+        },
+        on_finish: function(data) {
+            //processSpeech = true;
+        }
+        }};
+        var keyboard_trial = function(trial_type, duration=function(){return 2000;}){return {
+        type: "html-keyboard-response",
+        stimulus: jsPsych.timelineVariable('stimulus'),
+        choices: ['f','j'],
+        trial_duration: 2000,
+        //stimulus_duration: duration,
+        on_start: function(trial) {
+            trial.data = {start_time:Date.now(),trial_condition:trial_type};
+            trial.stimulus_duration = duration();
+        }
+        }};
+        
+        
+        var trial_feedback = function(trial_condition) {return {
+        type: "html-keyboard-response",
+        stimulus: function() {
+            if (trial_condition == 'pic_naming') {
+                return "For the last trial, the correct response was to say the word '"+jsPsych.timelineVariable('picture',true)+"'. Press 'f' to continue.";
+            } else if (trial_condition == 'word_size') {
+                var size = sizes[objects.indexOf(jsPsych.timelineVariable('word',true))];
+                var button = button_map[size];
+                return "For the last trial, the correct response was to press the button '"+button+"', \
+                        because the size of '"+jsPsych.timelineVariable('word',true)+"' is '"+size+"'. Press 'f' to continue.";
+            } else if (trial_condition == 'pic_naming_word_size') {
+                var size = sizes[objects.indexOf(jsPsych.timelineVariable('word',true))];
+                var button = button_map[size];
+                return "For the last trial, the correct response was to say the word '"+jsPsych.timelineVariable('picture',true)+"' \
+                        while simultaneously pressing the button '"+button+"' (because the size of '"+jsPsych.timelineVariable('word',true)+"' is '"+size+"'). Press 'f' to continue.";
+            }
+        },
+        choices: ['f']
+        }};
+        var pic_naming_instructions = {
+        type: "html-keyboard-response",
+        stimulus: "<h2>Task 1: Picture Naming</h2><br> \
+                    In this task, you will be presented with a picture of an object, and a word indicating the name of a second object overlayed on top of the picture. \
+                    Upon seeing the stimulus, please say out loud the name of the <b>pictured</b> object. Ignore the <b>named</b> object. \
+                    For example, if you were presented a picture of a pencil and the word 'apple', the task would be to say 'pencil'.<br><br> \
+                    Please respond quickly and accurately. You will have the opportunity to practice this task 5 times. Press 'f' to begin.",
+        choices: ['f']
+        }
+        var pic_naming_train_stimuli = make_pic_word_stimuli(pic_naming_train_pairs);
+        var pic_naming_test_stimuli = make_pic_word_stimuli(pic_naming_test_pairs);
+        pic_naming_test_stimuli = [['alligator','triangle']]; //FLAG
+        var pic_naming_train = {
+        timeline:[fixation,speech_trial('pic_naming_train'),trial_feedback('pic_naming')],
+        timeline_variables: pic_naming_train_stimuli
+        }
+        var pic_naming_test_instructions = {
+        type: "html-keyboard-response",
+        stimulus: "You have finished training for this task. Press 'f' to begin the task itself.",
+        choices: ['f']
+        }
+        var pic_naming_test = {
+        timeline:[fixation,speech_trial('pic_naming_test')],
+        timeline_variables: pic_naming_test_stimuli
+        }
+        var pic_naming_task = {
+        timeline: [pic_naming_instructions,pic_naming_train,pic_naming_test_instructions,pic_naming_test]
+        }
+        
+        
+        var word_size_instructions = {
+        type: "html-keyboard-response",
+        stimulus: "<h2>Task 2: Size Decision</h2><br> \
+                    In this task, you will be once again be presented with a picture of an object and a word indicating the name of a second object.\
+                    This time, please indicate the size of the <b>named</b> object as given during the stimulus familiarization, while ignoring the <b>pictured</b> object. \
+                    Press 'f' if the object is 'small', and press 'j' if the object is 'big'.<br>\
+                    For example, if you were presented a picture of a pencil and the word 'tuba', the task would be to press 'j', because 'tuba' is a 'big' object.\
+                    <br><br> \
+                    Please respond quickly and accurately. You will have the opportunity to practice this task 5 times. Press 'f' to begin.",
+        choices: ['f']
+        }
+        var word_size_train_stimuli = make_pic_word_stimuli(word_size_train_pairs);
+        var word_size_test_stimuli = make_pic_word_stimuli(word_size_test_pairs);
+        word_size_train_stimuli = [['alligator','triangle']]; //FLAG
+        word_size_test_stimuli = make_pic_word_stimuli([['alligator','triangle'],['triangle','alligator']]); //FLAG
+        var word_size_train = {
+        timeline:[fixation,keyboard_trial('word_size_train'),trial_feedback('word_size')],
+        timeline_variables: word_size_train_stimuli
+        }
+        var word_size_test_instructions = {
+        type: "html-keyboard-response",
+        stimulus: "You have finished training for this task. Press 'f' to begin the task itself.",
+        choices: ['f']
+        }
+        var word_size_test = {
+        timeline:[fixation,keyboard_trial('word_size_test')],
+        timeline_variables: word_size_test_stimuli
+        }
+        var word_size_task = {
+        timeline: [word_size_instructions, word_size_train, word_size_test_instructions, word_size_test]
+        }
+        
+        pic_naming_word_size_train_stimuli = make_pic_word_stimuli(pic_naming_word_size_train_pairs);
+        pic_naming_word_size_test_stimuli = make_pic_word_stimuli(pic_naming_word_size_test_pairs);
+        pic_naming_word_size_test_stimuli = [['alligator','triangle']]; //FLAG
+        var pic_naming_word_size_instructions = {
+        type: "html-keyboard-response",
+        stimulus: "<h2>Task 3: Picture Naming and Size Decision</h2><br> \
+                    In this task, you will be presented with both the name of one object and the picture of a second object. Upon seeing the name/picture pair, please complete both of the following tasks at the same time:<br> \
+                    Determine the size of the <b>named</b> object by pressing 'f' if the object is 'small', and pressing 'j' if the object is 'big'.<br>\
+                    Determine the name of the <b>pictured</b> object by saying the name out loud.<br><br> \
+                    Note that these are the same two tasks you completed earlier in the experiment; now, you will do both tasks at the same time. Please try to finish both tasks at once, i.e. \
+                    try to say the name of the pictured object and press the button at the same time.<br><br> \
+                    The name/picture pair will stay on the screen for a short period of time. Please try to complete the tasks as accurately as possible before the name/picture pair disappears. <b>The participant with the greatest \
+                    percentage of correct responses during this time limit will earn a $[X] bonus award.</b><br><br> \
+                    You will have the opportunity to practice this task 5 times. Performance on the practice trials will not factor in to determining which participant gets the bonus award. Press 'f' to begin.",
+        choices: ['f']
+        }
+        var calc_mt_duration = function() {
+          var data = jsPsych.data.get().filter({trial_condition:'word_size_test'}).select('rt');
+          return Math.ceil(data.mean()+2*data.sd());
+        }
+        var pic_naming_word_size_train = {
+        timeline: [fixation,keyboard_trial('pic_naming_word_size_train',calc_mt_duration),trial_feedback('pic_naming_word_size')],
+        timeline_variables: pic_naming_word_size_train_stimuli
+        }
+        var pic_naming_word_size_test_instructions = {
+        type: "html-keyboard-response",
+        stimulus: "You have finished training for this task. Remember: the bonus award is based on how many correct responses you make <b>before</b> the name/picture pair disappears.<br><br> \
+        Press 'f' to begin the task itself.",
+        choices: ['f']
+        }
+        var pic_naming_word_size_test = {
+        timeline: [fixation,keyboard_trial('pic_naming_word_size_test')],
+        timeline_variables: pic_naming_word_size_test_stimuli
+        }
+        var pic_naming_word_size_task = {
+        timeline: [pic_naming_word_size_instructions,pic_naming_word_size_train,pic_naming_word_size_test_instructions,pic_naming_word_size_test]
+        }
+        
+        var exit = {
+        timeline:[
+            {
+            type: "survey-html-form",
+            preamble: "You have completed all of the tasks. Please enter the following information:",
+            html: "Gender: <input name='gender' type='text' /><br>Age: <input name='age' type='num' /><br> \
+                    MTurk Worker ID (optional): <input name='workerid' type='text' />",
+            on_finish: function(data) {handle_close(data)} 
+            },
+            {
+              type: 'html-keyboard-response',
+              stimulus: "Please wait for a few of seconds while we upload your data. Do not navigate away from this page.",
+              choices: jsPsych.NO_KEYS,
+              trial_duration: 3000
+            },
+            {
+            type: "html-keyboard-response",
+            stimulus: "Thank you for your participation.<br><br>Your survey validation code is djf2-100.<br><br>If you have any concerns about payment, please contact <b>tylerg.research.experiments@gmail.com</b> with any questions.",
+            choices: jsPsych.NO_KEYS
+            }
+        ]
+        }
+        
+        
+        timeline.push(welcome);
+        timeline.push(familizarize);
+        timeline.push(pic_naming_task);
+        timeline.push(word_size_task);
+        timeline.push(pic_naming_word_size_task);
+        timeline.push(exit);
+
+        console.log(objects);
+        jsPsych.init({
+        timeline: timeline,
+        exclusions: {
+            min_width: 800,
+            min_height: 600
+        }
+        });
+    }
+    startJsPsych();
+  </script>
+</html>

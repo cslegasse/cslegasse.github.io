@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Experiment Template</title>
+    <script src="jspsych-6.0.5/jspsych.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-free-sort.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-survey-html-form.js"></script>
+    <script src="aws-sdk-2.701.0.min.js"></script>
+    <link href="jspsych-6.0.5/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+  </head>
+  <body>Please wait while the experiment loads. If you continue to see this page, you may be experiencing an internet connectivity issue or our server may be overloaded with requests. Please wait a few more seconds while we continue loading the experiment data. If you see this page for longer than one minute, please try refreshing the page, or closing and re-opening your web browser.</body>
+  <script>
+    // set security.fileuri.strict_origin_policy to FALSE to disable cors error
+    let dev_test = false;//FLAG
+    let metadata = {mediaStartTime: 0};
+    var objects = ["alligator", "elephant", "giraffe", "rhino", "shark", "frog", "hamster", "iguana", "mouse", "goldfish", "cello", "drumkit", "harp", "piano", "organ", "harmonica", "panflute", "recorder", "tambourine", "triangle"];
+    var sizes = ["big", "big", "big", "big", "big", "small", "small", "small", "small", "small", "big", "big", "big", "big", "big", "small", "small", "small", "small", "small"];
+    if(Math.random() < 0.5) {
+        var trial_types = ['word_size_button','word_category_button'];
+        var trial_complements = ['pic_size_button','pic_category_button'];
+    } else {
+        var trial_types = ['word_category_button','word_size_button'];
+        var trial_complements = ['pic_category_button','pic_size_button'];
+    }
+    var trial_types = ['word_size_button','word_category_button'];
+    var trial_complements = ['pic_size_button','pic_category_button'];
+    var train_pairs = [];
+    var test_pairs = [];
+    var needs_mic = false;
+    
+    
+    var train_pairs_total = [];
+    var test_pairs_total = [];
+    
+    
+    var not_yet_loaded = function() {
+      return false;
+    }
+    
+    async function startJsPsych() {
+        while(not_yet_loaded()) {
+            await new Promise(r => setTimeout(r, 750));
+        }
+    
+        metadata.experiment_type = 'filtering_v2';
+        metadata.description = 'Filtering pilot experiment. Here is the organization: \n\
+                                Consent; audio check; stimulus familizarization. \n\
+                                Then, the simple case where you have to do the tasks on images and words w/o distractors. \n\
+                                Then, the complex case where you do the tasks on image/word pairs. \n\
+                                Metadata has the following params: \n\
+                                objects: list of object names used in the experiment. \n\
+                                sizes: sizes listed in the same order as the objects. \n\
+                                trial_types: list of which condition this participant was tested in. \n\
+                                trial_complements: list of the opposite input modality as trial_types (e.g., name word vs name pic). \n\
+                                train_pairs: list of lists of (pic, word) pairs for training. \n\
+                                test_pairs: list of lists of test pairs. \n\
+                                nodistractor_object_orders: list of the order of the objects for the simple (no-distractor) blocks. \n\
+                                first_modes: list of the the task that came first in the simple (no-distractor) blocks. e.g, participant either does words or imgs first.'
+        metadata.objects = objects;
+        metadata.sizes = sizes;
+        
+        let bucket_name = "bhv-filtering-data";
+        let aws_success = 0;
+        AWS.config.region = 'us-east-1';
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: 'us-east-1:0284783b-226e-4f9c-ad9e-bc1b553e5347',
+        });
+        var do_upload = function(s3,params) {
+            s3.upload(params, function(err,data) {
+                if(err){
+                console.log(err,err.stack);
+                } else {
+                console.log('success');
+                aws_success++;
+                }
+            });
+        }
+        var uploadS3 = function(id, metadata, data, blob) {
+            var s3 = new AWS.S3({params:{Bucket:bucket_name}});
+            var params = {
+                Bucket: bucket_name,
+                Key: id+'_filtering-metadata',
+                Body: metadata
+            };
+            do_upload(s3,params);
+            params.Key = id+'_filtering-data';
+            params.Body = data;
+            do_upload(s3,params);
+        };
+        let participantID = "";
+        
+        const handleSuccessNoMic = function() {
+            if(!participantID.length) {
+                const first_part = parseInt(Math.random()*10000).toString();
+                const second_part = parseInt(Math.random()*10000).toString();
+                const third_part = parseInt(Math.random()*10000).toString();
+                participantID = first_part+'-'+second_part+'-'+third_part;
+                metadata.participantid = participantID;
+            }
+            uploadS3(participantID,JSON.stringify(metadata),jsPsych.data.get().json(),'');
+        }
+        var size_button_map = {small:'f',big:'j'};
+        var cat_button_map = {animal:'f',instrument:'j'};
+        var size_naming_map = {small:'yes',big:'no'};
+        var cat_naming_map = {animal:'yes',instrument:'no'};
+        var category_map = {alligator:'animal',cello:'instrument',drumkit:'instrument',elephant:'animal',frog:'animal',giraffe:'animal',
+                            goldfish:'animal',hamster:'animal',harmonica:'instrument',harp:'instrument',iguana:'animal',mouse:'animal',
+                            organ:'instrument',panflute:'instrument',piano:'instrument',recorder:'instrument',rhino:'animal',shark:'animal',
+                            tambourine:'instrument',triangle:'instrument'};
+        var make_img_familiarization = function(names,sizes,response_set=[]) {
+            var stimuli = '';
+            var trial_type = 'size categ';
+            stimuli += '<div>';
+            var font=24;
+            var size=3.5;
+            var style='display:inline-block;width:18%;';
+            if(response_set.length>0) {
+              font=18;
+              size=2.5;
+            }
+            for(var i=0;i<names.length;i++) {
+                if(response_set.length>0 && response_set.includes(names[i])) {
+                    style='display:inline-block;width:16%;border:solid;border-width:2px;border-color:green;margin:1.5%;';
+                } else {
+                    style='display:inline-block;width:16%;margin:1.5%;'
+                }
+                //stimuli += '<div style="'+style+'"><div style="text-align:center;"><p style="font-size:'+font+'pt"><b>Name:</b> '+names[i]+'</p><p style="font-size:'+font+'pt"><b>Size:</b> '+sizes[i]+'</p></div>';
+                //stimuli += '<img style="width:'+size+'in;height:'+size+'in;padding:10px;" src="img_matched/'+names[i]+'.bmp"></div>';
+                stimuli += '<div style="'+style+'"><div style="text-align:center;"><p style="font-size:'+font+'pt"><b>Name:</b> '+names[i]+'</p><p style="font-size:'+font+'pt"><b>Size:</b> '+sizes[i]+'</p></div>';
+                stimuli += '<img style="max-width:100%;" src="img_matched/'+names[i]+'.bmp"></div>';
+            }
+            stimuli += '</div>';
+            return stimuli;
+        }
+    
+    
+        var timeline = [];
+        
+        var handle_close = function(data){
+            var participantID = '';
+            metadata.participantid = participantID;
+            handleSuccessNoMic();
+            console.log(jsPsych.data.get().last(1).values[0]);
+            metadata.responses = JSON.parse(jsPsych.data.get().last(1).values()[0].responses);
+            console.log(jsPsych.data.get().json());
+        }
+        
+        var informed_consent_msg = "Psychology Experiment - Informed Consent Form<br>You have been invited to take part in a research study.<br>TITLE OF RESEARCH: Behavioral Study of Attention<br>INVESTIGATOR: Jonathan Cohen, Tyler Giallanza \
+        <br><br>The following informed consent is required by Princeton University for any person involved in a research study conducted by investigators at the University. This study has been approved by the University's Institutional Review Board for Human Subjects.<br><br>You will be asked to make judgements about objects. The study will take approximately half an hour to complete and you will receive course credit for your participation. \
+        <b>If you have any questions about this study, your course credit, or the research being conducted, you may contact the research team at tylerg@princeton.edu.</b> If you have questions regarding your rights as a research subject, or if problems arise which you do not feel you can discuss with the Investigator, please contact the Institutional Review Board at:<br> Office of Research Integrity and Assurance<br>Compliance Administrator<br>Phone: (609) 258-0865<br>Email: irb@princeton.edu<br><br> \
+        By continuing with the study, you affirm that: Your participation is voluntary, and you may withdraw your consent and discontinue participation in the project at any time. Your refusal to participate will not result in any penalty. \
+        By signing this agreement, you do not waive any legal rights or release Princeton University, its agents, or you from liability for negligence. There may be no direct benefit to you from participation in this study other than the monetary payment as described above, though there may be indirect benefits as a result of what we learn about the human mind from your participation. The information obtained from this study will be confidential. It will be available to the investigators performing the study. Your name will be anonymized and your identity will remain anonymous in any publications resulting from this study. You are a legal adult at your jurisdiction. This means you are 21 or older if you are in Mississippi; 19 or older if you are in Alabama, Delaware, and Nebraska; 18 or older in another state, or an emancipated minor according to your local laws. This document and/or additional email communication with the investigators answered any questions that you have regarding the study. <br><br> \
+        If you understand and consent to these terms, press the 'f' button on your keyboard to continue with the experiment.";
+        var consent = {
+        type: "html-keyboard-response",
+        stimulus: informed_consent_msg,
+        choices: ['f']
+        };
+        var welcome = {
+        timeline: [consent]
+        };
+        
+        var familizarize_instructions = {
+            type: "html-keyboard-response",
+            stimulus: "During this experiment, you will be asked to perform tasks involving 20 different objects. You will need to know the size of these objects. <br>\
+                        On the next page, a picture of each object is presented along with its name and size. Please take as long as you need to familizarize yourself with this information. <br><br> \
+                        Press the 'f' button on your keyboard to view the stimuli. When you are finished, press the 'f' button again to continue with the experiment.",
+            choices: ['f'],
+            data: {show_stims:true}
+        }
+        var familizarize_stims = {
+            timeline: [{
+                type: "html-keyboard-response",
+                stimulus: make_img_familiarization(objects,sizes),
+                choices: ['f']
+            }],
+            conditional_function: function() {
+                return jsPsych.data.get().last(1).values()[0].show_stims;
+            }
+        }
+        var check_familiarize = {
+        type: "html-keyboard-response",
+        stimulus: "If you have finished familiarizing yourself with the stimuli, press 'f' to continue the experiment. If you would like to view the stimuli again, press 'j' to go back. Please note that this is the last opportunity you will have to familizarize yourself with the stimuli before the experiment begins.",
+        choices: ['f','j'],
+        on_finish: function(data) {
+            data.show_stims = data.key_press==jsPsych.pluginAPI.convertKeyCharacterToKeyCode('j');
+        }
+        }
+        
+        var familizarize = {
+        timeline: [familizarize_instructions,familizarize_stims,check_familiarize,familizarize_stims]
+        };
+        
+        
+        
+        var fixation = {
+        type: "html-keyboard-response",
+        stimulus: "<div style='font-size:60px;'>+</div>",
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 500,
+        data: {trial_condition:'fixation'}
+        };
+        var keyboard_trial = function(trial_type, trial_duration=2000){return {
+            type: "html-keyboard-response",
+            stimulus: jsPsych.timelineVariable('stimulus'),
+            choices: ['f','j',' '],
+            trial_duration: trial_duration,
+            on_start: function(trial) {
+                trial.data = {start_time:Date.now(),trial_condition:trial_type};
+            }
+        }};
+        
+        var trial_feedback = function(response_set=[]) {return {
+            type: "html-keyboard-response",
+            stimulus: function() {
+                var pic = jsPsych.timelineVariable('picture',true);
+                var size = sizes[objects.indexOf(pic)];
+                if(response_set.length>0 && !response_set.includes(pic)) {
+                    return "For the last trial, the correct response was to press the space bar, \
+                            because '"+pic+"' is not in the list of objects. Press 'f' to continue.";
+                } else {
+                    return "For the last trial, the correct response was to press '"+size_button_map[size]+"', because the size of '"+pic+"' is '"+size+"'. Press 'f' to continue.";
+                }
+            },
+            choices: ['f']
+        }};
+        
+        var sample_uniform = function(original_array, n) {
+            var array = [];
+            for(var i=0;i<n;i++) {
+                random_index = Math.floor(Math.random()*original_array.length);
+                array.push(original_array[random_index]);
+            }
+            return array;
+        }
+        function shuffle(array) {
+            let currentIndex = array.length,  randomIndex;
+            // While there remain elements to shuffle...
+            while (currentIndex != 0) {
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+                // And swap it with the current element.
+                [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]];
+            }
+            return array;
+        }
+        var make_stimuli = function(names) {
+            var stimuli = [];
+            names.forEach(element => {
+                stimuli.push({stimulus:"<div style='position:relative;'><img src='img_matched/"+element+".bmp' style='width:5in;height:5in;'></div>",
+                            picture:element,
+                            });
+            });
+            return stimuli;
+        }
+        
+        var make_progress = function(completed_blocks=0,total_blocks=10) {
+            var instructions = {
+                type: "html-keyboard-response",
+                stimulus: "You have completed "+completed_blocks+" parts of the experiment. You have "+(total_blocks-completed_blocks)+" parts remaining.\n\n \
+                           Feel free to take a short break, and when you are ready press 'f' to continue.",
+                choices: ['f']
+            }
+            return { timeline: [instructions] }
+        }
+        
+        var make_block_no_filter = function(maxtime=1000,blockname='', do_train=true, train_n=5, test_n=100) {
+            var instructions = {
+                type: "html-keyboard-response",
+                stimulus: "In this task, you will be presented with pictures of different objects. Upon seeing each stimulus, please indicate the size of the object. \
+                           Press the 'f' key if the object is small, and press 'j' if the object is big. For example, if you saw a picture of an elephant, the correct response \
+                           would be pressing 'j', because elephants are big.<br><br> \
+                           You will now have the opportunity to practice this task with 5 practice trials. Remember to try to respond quickly and accurately. Press 'f' to continue to the test trials.",
+                choices: ['f']
+            }
+            var train = {
+                timeline: [fixation,keyboard_trial('train-'+blockname,maxtime),trial_feedback()],
+                timeline_variables: make_stimuli(sample_uniform(objects,train_n))
+            }
+            var test_instructions = {
+                type: "html-keyboard-response",
+                stimulus: "You have finished practicing for this task. Press 'f' to begin the task itself. You will have the opportunity to take a break in approximately 2 minutes.",
+                choices: ['f']
+            }
+            var test_instructions2 = {
+                type: "html-keyboard-response",
+                stimulus: "You have finished the first part of the task. You will now complete the task again. Feel free to take a short break, and press 'f' to continue to the task.\
+                           You will have the opportunity to take another break in approximately 2 minutes.",
+                choices: ['f']
+            }
+            var test = {
+                timeline: [fixation,keyboard_trial('test-'+blockname,maxtime)],
+                timeline_variables: make_stimuli(sample_uniform(objects,test_n))
+            }
+            if (do_train) {
+                return { timeline: [instructions, train, test_instructions, test] }
+            } else {
+                return { timeline: [test_instructions2, test] }
+            }
+        }
+        var make_filter_memory = function() {
+            var sorting_stimuli = [];
+            for (var i = 0; i < objects.length; i++) {
+                sorting_stimuli.push("img_matched/" + objects[i] + ".bmp");
+            }
+
+            var sort_trial = {
+                type: 'free-sort',
+                stimuli: sorting_stimuli,
+                prompt: "<p>You will now be asked to identify which objects you were supposed to respond to in the last block of trials. \
+                        Move all objects that you were supposed to respond to onto the right side of the screen, and move objects that you were supposed to ignore onto the left side of the screen.</p>"
+            };
+            return { timeline: [sort_trial] };
+        }
+        var make_filter_instructions = function() {
+            var instructions = {
+                type: "html-keyboard-response",
+                stimulus: "In the next set of tasks, you will again be shown a series of stimuli and asked to make size judgments. <b> However, this time you will only be asked \
+                           to make size judgments about a subset of the stimuli, while ignoring the other stimuli.</b> At the beginning of eack task you will be provided with a list \
+                           of the objects that you should respond to. If the stimulus is not in that list, press the space bar. If the stimulus is in the list, indicate the size \
+                           of the object as before, pressing the 'f' key if the object is small and the 'j' key if the object is big.<br><br> \
+                           For example, if the list of objects that you should respond to is 'elephants, giraffes, and pianos,' and you saw a picture of an elephant, the correct response \
+                           would be pressing 'j', because 'elephant' is a big object and in the list. If you saw a mouse, however, the correct response would be pressing the space bar, \
+                           because 'mouse' is not in the list. You will have the opportunity to practice each task before beginning. Press 'f' to continue.",
+                choices: ['f']
+            }
+            return { timeline: [instructions] };
+        }
+        var make_block_filter = function(response_set,maxtime=1000,blockname='', do_train=true, train_n=5, test_n=100) {
+            var instructions = {
+                timeline: [{
+                type: "html-keyboard-response",
+                stimulus: function() {return "In this task, you will be asked to make responses to the highlighted objects <b>only:</b> \
+                          "+make_img_familiarization(objects,sizes,jsPsych.timelineVariable('response_set',true))+" \
+                          Please study which objects are highlighed. You will need this information for the task. During the task, you will be presented with a series of stimuli. \
+                          Upon seeing each stimulus, please indicate the size of the object \
+                          by pressing 'f' for small and 'j' for big, but only if the object is highlighted in the lsit above. \
+                          If the object is not highlighted, please press the space bar.<br><br> \
+                          You will have the opportunity to practice this task with 5 practice trials. Please try to respond quickly and accurately. Press 'f' to begin practicing."},
+                choices: ['f'] }],
+                timeline_variables: [{'response_set':response_set}]
+            }
+            var train = {
+                timeline: [fixation,keyboard_trial('train-'+blockname,maxtime),trial_feedback(response_set)],
+                timeline_variables: make_stimuli(sample_uniform(objects,train_n))
+            }
+            var test_instructions = {
+                timeline: [{
+                type: "html-keyboard-response",
+                stimulus: function() {return "You have finished practicing for this task. Press 'f' to begin the task itself. \
+                           You will have the opportunity to take a break in approximately 2 minutes. \
+                           As a reminder, in this task you are asked to make responses quickly and accurately to the highlighted objects: "+make_img_familiarization(objects,sizes,jsPsych.timelineVariable('response_set',true))},
+                choices: ['f']}],
+                timeline_variables: [{'response_set':response_set}]
+            }
+            var test_instructions2 = {
+                timeline: [{
+                type: "html-keyboard-response",
+                stimulus: function() {return "You have finished the first part of the task. You will now complete the task again. Feel free to take a short break, \
+                           and press 'f' to continue to the task. You will have the opportunity to take another break in approximately 2 minutes. \
+                           As a reminder, in this task you are asked to make quick and accurate responses to the highlighted objects: "+make_img_familiarization(objects,sizes,jsPsych.timelineVariable('response_set',true))},
+                choices: ['f']}],
+                timeline_variables: [{'response_set':response_set}]
+            }
+            var test = {
+                timeline: [fixation,keyboard_trial('test-'+blockname,maxtime)],
+                timeline_variables: make_stimuli(sample_uniform(objects,test_n))
+            }
+            if (do_train) {
+                return { timeline: [instructions, train, test_instructions, test] }
+            } else {
+                return { timeline: [test_instructions2, test] }
+            }
+        }
+        var exit = {
+        timeline:[
+            {
+                type: "survey-html-form",
+                preamble: "You have completed all the tasks. Please answer the following questions:",
+                html: "Did you notice any patterns linking the highlighted objects that you were supposed to pay attention to? Please describe any patterns you noticed. <textarea name='patterns'></textarea><br> \
+                       Did you use any strategies to remember the highlighted objects? Please describe any strategies you used in detail. <textarea name='strategies'></textarea>"
+            },
+            {
+            type: "survey-html-form",
+            preamble: "Please enter the following demographic information. <b>Make sure to include your name to receive course credit</b>.",
+            html: "Gender: <input name='gender' type='text' /><br>Age: <input name='age' type='num' /><br> \
+                   Name: <input name='name' type='text' /><br> \
+                   Comments (optional): <input name='comments' type='text' />",
+            on_finish: function(data) {handle_close(data)} 
+            },
+            {
+              type: 'html-keyboard-response',
+              stimulus: "Please wait for a few seconds while we upload your data. Do not navigate away from this page.",
+              choices: jsPsych.NO_KEYS,
+              trial_duration: 3000
+            },
+            {
+                timeline: [{
+                    type: 'html-keyboard-response',
+                    stimulus: 'Please continue waiting - we are still uploading your data.',
+                    choices: jsPsych.NO_KEYS,
+                    trial_duration: 3000
+                }],
+                conditional_function: function() {
+                    return aws_success < 2; 
+                }
+            },
+            {
+                timeline: [{
+                    type: 'html-keyboard-response',
+                    stimulus: 'We apologize for the delay - please wait an additional 5 seconds while we finish uploading the data.',
+                    choices: jsPsych.NO_KEYS,
+                    trial_duration: 5000
+                }],
+                conditional_function: function() {
+                    return aws_success < 2; 
+                }
+            },
+            
+            {
+            type: "html-keyboard-response",
+            stimulus: "Thank you for your participation.<br><br>Your response has been recorded. Please contact tylerg@princeton.edu if you have any issues regarding course credit for participating in this study.",
+            choices: jsPsych.NO_KEYS
+            }
+        ]
+        }
+        
+
+        var category_map = {alligator:'animal',cello:'instrument',drumkit:'instrument',elephant:'animal',frog:'animal',giraffe:'animal',
+                            goldfish:'animal',hamster:'animal',harmonica:'instrument',harp:'instrument',iguana:'animal',mouse:'animal',
+                            organ:'instrument',panflute:'instrument',piano:'instrument',recorder:'instrument',rhino:'animal',shark:'animal',
+                            tambourine:'instrument',triangle:'instrument'};
+        var list_small_animals = ['frog','goldfish','hamster','iguana','mouse'];
+        var list_big_animals = ['alligator','elephant','giraffe','rhino','shark'];
+        var list_small_instruments = ['harmonica','panflute','recorder','tambourine','triangle'];
+        var list_big_instruments = ['cello','drumkit','harp','organ','piano'];
+        var group1 = ['elephant','giraffe','rhino','mouse','hamster','piano','organ','panflute','recorder','harmonica'];
+        var group2 = ['elephant','giraffe','rhino','shark','drumkit','mouse','hamster','goldfish','frog','iguana']; //alligator to drumkit
+        var group3 = ['giraffe','shark','mouse','frog','cello','organ','harp','flute','tambourine','harmonica'];
+        var group4 = ['elephant','giraffe','rhino','shark','piano','mouse','hamster','goldfish','frog','iguana'];
+        var group5 = ['alligator','rhino','iguana','goldfish','mouse','organ','drumkit','harp','recorder','tambourine'];
+        var group6 = ['elephant','giraffe','alligator','rhino','shark','recorder','panflute','harmonica','tambourine','triangle'];
+        var group7 = list_small_animals.concat(list_big_instruments);
+        var group8 = list_small_instruments.concat(list_big_animals);
+        var group9  = ['piano','giraffe','rhino','shark','drumkit','mouse','hamster','goldfish','frog','iguana']; //al to drum and el to piano
+        var group10 = ['piano','giraffe','harp','shark','drumkit','mouse','hamster','goldfish','frog','iguana']; //al to drum el to epiano rhino to harp
+        
+        //Blocks:
+        //No filter
+        //Animals only; Instruments only
+        //Small only; Big only
+        //Sm-an+big-in; Sm-in+big-an
+
+        var filter_block_stimuli = [  ];
+        if(Math.random() < 0.0001) {
+            // XOR conditions
+            if(Math.random() < 0.5) {
+                filter_block_stimuli = list_small_animals+list_big_instruments;
+            } else {
+                filter_block_stimuli = list_small_instruments+list_big_animals;
+            }
+        } else if(Math.random() < 0.001) {
+            // Easier conditions
+            if(Math.random() < 0.5) {
+                filter_block_stimuli = group1;
+            } else {
+                filter_block_stimuli = group2;
+            }
+        } else if(Math.random() < 0.8) {
+            // Harder conditions
+            if(Math.random() < 0.8) {
+                filter_block_stimuli = group3;
+            } else {
+                filter_block_stimuli = group4;
+            }
+        } else if(Math.random() < 0.01){
+            if(Math.random() < 0.5) {
+                filter_block_stimuli = group5;
+            } else {
+                filter_block_stimuli = group6;
+            }
+        } else if(Math.random() < 0.01) {
+            if(Math.random() < 0.5) {
+                filter_block_stimuli = group7;
+            } else {
+                filter_block_stimuli = group8;
+            }
+        } else {
+            if(Math.random() < 0.9) {
+                filter_block_stimuli = group9;
+            } else {
+                filter_block_stimuli = group10;
+            }
+        }
+        //filter_block_stimuli = shuffle(filter_block_stimuli);
+        metadata.block_order = filter_block_stimuli;
+
+        //Give ~5 minutes for start and end
+        //Each block of 200 trials is ~5 minutes
+        //For 30 minutes, gets 5 blocks of trials
+        
+        let devmode=false;
+        let n_trials=60;
+        let n_blocks=4;
+        if (devmode) {
+            n_trials=2;
+            n_blocks=1;
+        }
+        timeline.push(welcome); //1 minute
+        timeline.push(familizarize); //2 minutes
+        if(!devmode) {
+            timeline.push(make_block_no_filter(1000,'no-filter-block0-part1',true,5,n_trials)); //5 practice+100 trials -> less than 2.5 minutes
+            timeline.push(make_block_no_filter(1000,'no-filter-block0-part2',false,0,n_trials)); //100 trials -> less than 2.5 minutes
+        }
+        for(var i=0;i<n_blocks;i++) {
+            timeline.push(make_progress(i+1,5));
+            if(i==0) {
+                timeline.push(make_filter_instructions());
+            }
+            timeline.push(make_block_filter(filter_block_stimuli,1000,'filter-block'+i+'-part1',true,5,n_trials));
+            timeline.push(make_block_filter(filter_block_stimuli,1000,'filter-block'+i+'-part2',false,0,n_trials));
+            timeline.push(make_filter_memory(filter_block_stimuli));
+        }
+        timeline.push(exit);
+
+        jsPsych.init({
+        timeline: timeline,
+        exclusions: {
+            min_width: 800,
+            min_height: 600
+        }
+        });
+    }
+    startJsPsych();
+  </script>
+</html>

@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Experiment Template</title>
+    <script src="jspsych-6.0.5/jspsych.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-survey-html-form.js"></script>
+    <script src="aws-sdk-2.701.0.min.js"></script>
+    <link href="jspsych-6.0.5/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+  </head>
+  <body>Please wait while the experiment loads.</body>
+  <script>
+    // set security.fileuri.strict_origin_policy to FALSE to disable cors error
+    let dev_test = false;//FLAG
+    let metadata = {mediaStartTime: 0};
+    var objects = ['elephant'];
+    fetch('objects.json').then(response => response.json()).then(jsonResponse => objects = jsonResponse);
+    var sizes = [];
+    fetch('sizes.json').then(response => response.json()).then(jsonResponse => sizes = jsonResponse);
+    if(Math.random() < 0.5) {
+        var trial_types = ['pic_size_button','pic_category_button'];
+        var trial_complements = ['word_size_button','word_category_button'];
+    } else {
+        var trial_types = ['pic_category_button','pic_size_button'];
+        var trial_complements = ['word_category_button','word_size_button'];
+    }
+    var needs_mic = false;
+    
+    var train_pairs = [];
+    var test_pairs = [];
+    
+    var train_pairs_1a = [];
+    fetch('st_train_pairs.json').then(response => response.json()).then(jsonResponse => train_pairs_1a = jsonResponse[Math.floor(Math.random() * 101)]);
+    var test_pairs_1a = [];
+    fetch('st_test_pairs.json').then(response => response.json()).then(jsonResponse => test_pairs_1a = jsonResponse[Math.floor(Math.random() * 101)]);
+    var train_pairs_1b = [];
+    fetch('st_train_pairs.json').then(response => response.json()).then(jsonResponse => train_pairs_1b = jsonResponse[Math.floor(Math.random() * 101)]);
+    var test_pairs_1b = [];
+    fetch('st_test_pairs.json').then(response => response.json()).then(jsonResponse => test_pairs_1b = jsonResponse[Math.floor(Math.random() * 101)]);
+    
+    var train_pairs_2a = [];
+    fetch('st_train_pairs.json').then(response => response.json()).then(jsonResponse => train_pairs_2a = jsonResponse[Math.floor(Math.random() * 101)]);
+    var test_pairs_2a = [];
+    fetch('st_test_pairs.json').then(response => response.json()).then(jsonResponse => test_pairs_2a = jsonResponse[Math.floor(Math.random() * 101)]);
+    var train_pairs_2b = [];
+    fetch('st_train_pairs.json').then(response => response.json()).then(jsonResponse => train_pairs_2b = jsonResponse[Math.floor(Math.random() * 101)]);
+    var test_pairs_2b = [];
+    fetch('st_test_pairs.json').then(response => response.json()).then(jsonResponse => test_pairs_2b = jsonResponse[Math.floor(Math.random() * 101)]);
+    
+    var train_pairs_3a = [];
+    fetch('st_train_pairs.json').then(response => response.json()).then(jsonResponse => train_pairs_3a = jsonResponse[Math.floor(Math.random() * 101)]);
+    var test_pairs_3a = [];
+    fetch('st_test_pairs.json').then(response => response.json()).then(jsonResponse => test_pairs_3a = jsonResponse[Math.floor(Math.random() * 101)]);
+    var train_pairs_3b = [];
+    fetch('st_train_pairs.json').then(response => response.json()).then(jsonResponse => train_pairs_3b = jsonResponse[Math.floor(Math.random() * 101)]);
+    var test_pairs_3b = [];
+    fetch('st_test_pairs.json').then(response => response.json()).then(jsonResponse => test_pairs_3b = jsonResponse[Math.floor(Math.random() * 101)]);
+    
+    
+    async function startJsPsych() {
+        await new Promise(r => setTimeout(r, 750));
+    
+        metadata.experiment_type = 'ST_pilot';
+        metadata.description = 'Singletask pilot experiment. Here is the organization: \n\
+                                Consent; audio check; stimulus familizarization. \n\
+                                Then, the simple case where you have to do the tasks on images and words w/o distractors. \n\
+                                Then, the complex case where you do the tasks on image/word pairs. \n\
+                                Metadata has the following params: \n\
+                                objects: list of object names used in the experiment. \n\
+                                sizes: sizes listed in the same order as the objects. \n\
+                                trial_types: list of which condition this participant was tested in. \n\
+                                trial_complements: list of the opposite input modality as trial_types (e.g., name word vs name pic). \n\
+                                train_pairs: list of lists of (pic, word) pairs for training. \n\
+                                test_pairs: list of lists of test pairs. \n\
+                                nodistractor_object_orders: list of the order of the objects for the simple (no-distractor) blocks. \n\
+                                first_modes: list of the the task that came first in the simple (no-distractor) blocks. e.g, participant either does words or imgs first.'
+        metadata.objects = objects;
+        metadata.sizes = sizes;
+        metadata.trial_types = trial_types;
+        metadata.trial_complements = trial_complements;
+        train_pairs.push(train_pairs_1a);
+        train_pairs.push(train_pairs_1b);
+        test_pairs.push(test_pairs_1a);
+        test_pairs.push(test_pairs_1b);
+        if(trial_types.length >= 2) {
+            train_pairs.push(train_pairs_2a);
+            train_pairs.push(train_pairs_2b);
+            test_pairs.push(test_pairs_2a);
+            test_pairs.push(test_pairs_2b);
+        }
+        if(trial_types.length >= 3) {
+            train_pairs.push(train_pairs_3a);
+            train_pairs.push(train_pairs_3b);
+            test_pairs.push(test_pairs_3a);
+            test_pairs.push(test_pairs_3b);
+        }
+        if(dev_test) {
+          for(var i=0;i<train_pairs.length;i++) {
+            train_pairs[i] = train_pairs[i].slice(0,5);
+            test_pairs[i] = test_pairs[i].slice(0,5);
+          }
+        }
+        metadata.train_pairs = train_pairs;
+        metadata.test_pairs = test_pairs;
+        
+        let bucket_name = "bhv-semantic-data";
+        let aws_success = 0;
+        AWS.config.region = 'us-east-1';
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: 'us-east-1:0284783b-226e-4f9c-ad9e-bc1b553e5347',
+        });
+        var do_upload = function(s3,params) {
+        s3.upload(params, function(err,data) {
+            if(err){
+              console.log(err,err.stack);
+            } else {
+              console.log('success');
+              aws_success++;
+            }
+        });
+        }
+        var uploadS3 = function(id, metadata, data, blob) {
+        var s3 = new AWS.S3({params:{Bucket:bucket_name}});
+        var params = {
+            Bucket: bucket_name,
+            Key: id+'_STpilot-audio',
+            Body: blob
+        };
+        do_upload(s3,params);
+        params.Key = id+'_STpilot-metadata';
+        params.Body = metadata;
+        do_upload(s3,params);
+        params.Key = id+'_STpilot-data';
+        params.Body = data;
+        do_upload(s3,params);
+        };
+        let shouldStop = false;
+        let stopped = false;
+        let processSpeech = false;
+        let participantID = "";
+        
+        const player = document.getElementById('player');
+        const handleSuccessNoMic = function() {
+            stopped = true;
+            if(!participantID.length) {
+                const first_part = parseInt(Math.random()*10000).toString();
+                const second_part = parseInt(Math.random()*10000).toString();
+                const third_part = parseInt(Math.random()*10000).toString();
+                participantID = first_part+'-'+second_part+'-'+third_part;
+                metadata.participantid = participantID;
+            }
+            uploadS3(participantID,JSON.stringify(metadata),jsPsych.data.get().json(),'');
+        }
+        
+        const handleSuccess = function(stream) {
+            mic_works = true;
+            const options = {type: 'audio/webm'};
+            const mediaRecorder = new MediaRecorder(stream, options);
+            mediaRecorder.start(100);
+            metadata.mediaStartTime = Date.now();
+            const recordedChunks = [];
+
+            mediaRecorder.addEventListener('dataavailable', function(e) {
+            if (e.data.size > 0) {
+                recordedChunks.push(e.data);
+            }
+            
+            if (processSpeech) {
+                console.log(recordedChunks);
+                const blob = new Blob(recordedChunks, {'type':'audio/webm'});
+                console.log(blob);
+                console.log('sending blob');
+                ws.send(blob);
+                processSpeech = false;
+            }
+            
+            if(shouldStop === true && stopped === false) {
+                mediaRecorder.stop();
+                const blob = new Blob(recordedChunks, {'type':'audio/webm'});
+                console.log(blob);
+                stopped = true;
+                if(!participantID.length) {
+                const first_part = parseInt(Math.random()*10000).toString();
+                const second_part = parseInt(Math.random()*10000).toString();
+                const third_part = parseInt(Math.random()*10000).toString();
+                participantID = first_part+'-'+second_part+'-'+third_part;
+                metadata.participantid = participantID;
+                }
+                
+                uploadS3(participantID,JSON.stringify(metadata),jsPsych.data.get().json(),blob);
+            }
+        });
+
+        mediaRecorder.addEventListener('stop', function() {
+        });
+        
+        };
+
+        var make_img_stimuli = function(paths,neutral=true) {
+        var stimuli = [];
+        if(neutral) {
+            var pairs = [];
+            paths.forEach(element => {
+                pairs.push([element,'XXXXX']);
+            });
+            stimuli = make_pic_word_stimuli(pairs);
+        } else {
+            paths.forEach(element => {
+                stimuli.push({stimulus:"<img src='img_matched/"+element+".bmp' style='width:5in;height:5in;'>"});
+            });
+        }
+        return stimuli;
+        }
+        var make_word_stimuli = function(words,neutral=true) {
+        var stimuli = [];
+        if(neutral) {
+            var pairs = [];
+             words.forEach(element => {
+                pairs.push(['neutral',element])
+            });
+            stimuli = make_pic_word_stimuli(pairs);
+        } else {
+            words.forEach(element => {
+                stimuli.push({stimulus:"<p style='font-size:60pt;'><b>"+element+"</b></p>"});
+            });
+        }
+        return stimuli;
+        }
+        var make_pic_word_stimuli = function(pairs) {
+        var stimuli = [];
+        pairs.forEach(elements => {
+            stimuli.push({stimulus:"<div style='position:relative;'><img src='img_matched/"+elements[0]+".bmp' style='width:5in;height:5in;'> \
+                                    <p style='font-size:60pt;position:absolute;margin:0 auto;top:50%;left:50%;transform: translateX(-50%) translateY(-50%);'><b>"+elements[1]+"</b></p> \
+                                    </div>",
+                        picture:elements[0],
+                        word:elements[1]
+                        });
+        });
+        return stimuli;
+        }
+        
+        var size_button_map = {small:'f',big:'j'};
+        var cat_button_map = {animal:'f',instrument:'j'};
+        var size_naming_map = {small:'yes',big:'no'};
+        var cat_naming_map = {animal:'yes',instrument:'no'};
+        var category_map = {alligator:'animal',cello:'instrument',drumkit:'instrument',elephant:'animal',frog:'animal',giraffe:'animal',
+                            goldfish:'animal',hamster:'animal',harmonica:'instrument',harp:'instrument',iguana:'animal',mouse:'animal',
+                            organ:'instrument',panflute:'instrument',piano:'instrument',recorder:'instrument',rhino:'animal',shark:'animal',
+                            tambourine:'instrument',triangle:'instrument'};
+        var make_img_familiarization = function(names,sizes) {
+            var stimuli = '';
+            var trial_type = 'size categ';
+            for(var i=0;i<names.length;i++) {
+                stimuli += "<div style='display:flex;'><div style='float:left;'><img src='img_matched/"+names[i]+".bmp' style='width:5in;height:5in;'></div><div style='float:right;width:5in;height:5in;align-content:center;display:grid;text-align:left;'>";
+                if(true) {//if (trial_type.includes('nam')) {
+                stimuli += "<p style='font-size:24pt;'><b>Name: </b>"+names[i]+"</p>";
+                }
+                if (trial_type.includes('size')) {
+                stimuli += "<p style='font-size:24pt;'><b>Size: </b>"+sizes[i]+"</p>";
+                }
+                if (trial_type.includes('categ')) {
+                stimuli += "<p style='font-size:24pt;'><b>Category: </b>"+category_map[names[i]]+"</p>";
+                }
+                stimuli += "</div></div>";
+            }
+            return stimuli;
+        }
+    
+    
+        var test_stimuli = make_img_stimuli(objects);
+                                            
+
+        var timeline = [];
+        var mic_works = false;
+        
+        var handle_close = function(data){
+            if(needs_mic) {
+              shouldStop = true;
+            } else {
+              participantID = JSON.parse(jsPsych.data.get().last(1).values()[0].responses).workerid;
+              metadata.participantid = participantID;
+              handleSuccessNoMic();
+            }
+            console.log('hc!');
+            console.log(jsPsych.data.get().last(1).values[0]);
+            participantID = JSON.parse(jsPsych.data.get().last(1).values()[0].responses).workerid;
+            metadata.participantid = participantID;
+            metadata.responses = jsPsych.data.get().last(1).values()[0].responses;
+            console.log('set shouldStop to true.');
+            console.log(jsPsych.data.get().json());
+        }
+        
+        var mic_check_fn = function() {
+            navigator.mediaDevices.getUserMedia({ audio: true, video: false }).then(handleSuccess).catch(function(err){mic_works=false;console.log(err)})
+        }
+
+        var informed_consent_msg = "Psychology Experiment - Informed Consent Form<br>You have been invited to take part in a research study.<br>TITLE OF RESEARCH: Dual-Task Semantic Judgements<br>INVESTIGATOR: Jonathan Cohen, Tyler Giallanza \
+        <br><br>The following informed consent is required by Princeton University for any person involved in a research study conducted by investigators at the University. This study has been approved by the University's Institutional Review Board for Human Subjects.<br><br>You will be asked to make judgements about objects. The study will take approximately 20 minutes to complete and you will be rewarded $2.50 for your participation.<br> \
+        <b>If you have any questions about this study, your payment, or the research being conducted, you may contact the research team at tylerg.research.experiments@gmail.com.</b> If you have questions regarding your rights as a research subject, or if problems arise which you do not feel you can discuss with the Investigator, please contact the Institutional Review Board at:<br><br> Office of Research Integrity and Assurance<br>Compliance Administrator<br>Phone: (609) 258-0865<br>Email: irb@princeton.edu<br><br> \
+        By continuing with the study, you affirm that: Your participation is voluntary, and you may withdraw your consent and discontinue participation in the project at any time. Your refusal to participate will not result in any penalty. \
+        By signing this agreement, you do not waive any legal rights or release Princeton University, its agents, or you from liability for negligence. There may be no direct benefit to you from participation in this study other than the monetary payment as described above, though there may be indirect benefits as a result of what we learn about the human mind from your participation. The information obtained from this study will be confidential. It will be available to the investigators performing the study. Your worker ID will be anonymized and your identity will remain anonymous in any publications resulting from this study. You are a legal adult at your jurisdiction. This means you are 21 or older if you are in Mississippi; 19 or older if you are in Alabama, Delaware, and Nebraska; 18 or older in another state, or an emancipated minor according to your local laws. This document and/or additional email communication with the investigators answered any questions that you have regarding the study. <br><br> \
+        If you understand and consent to these terms, press the 'f' button on your keyboard to continue with the experiment.";
+        var consent = {
+        type: "html-keyboard-response",
+        stimulus: informed_consent_msg,
+        choices: ['f']
+        };
+        var mic_check = {
+        type: "html-keyboard-response",
+        stimulus: "This experiment involves making verbal responses to stimuli. If you are unwilling or unable to share audio recordings of your voice and make audible responses, you will be unable to participate in this survey.<br> \
+                    Please allow your browser to share microphone permissions. When you are done, press the 'f' button on your keyboard to continue with the experiment.",
+        on_load: function(data) {mic_check_fn()},
+        choices: ['f']
+        };
+        var mic_failure = {
+        timeline: [{
+            type: "html-keyboard-response",
+            stimulus: "An error occured when trying to access your microphone. Therefore you cannot participate, and you will not be reimbursed.<br> If you accidentally denied microphone permissions, please reload the webpage and attempt the experiment again.",
+            choices: jsPsych.NO_KEYS,
+        }],
+        conditional_function: function() {
+            return !mic_works;
+        }
+        }
+        var mic_timeline = {
+          timeline: [mic_check, mic_failure],
+          conditional_function: function() {
+            return needs_mic;
+          }
+        }
+        var welcome = {
+        timeline: [consent, mic_timeline]
+        };
+        
+        
+        var fancy_trial_names = {pic_naming:'',word_naming:'',pic_size:' and size',word_size:' and size',pic_category:' and category',word_category:' and category'};
+        var familizarize_instructions = {
+            type: "html-keyboard-response",
+            stimulus: "During this experiment, you will be asked to perform tasks involving 20 different objects. You will need to know the name, size, and category of these objects. <br>\
+                        On the next page, a picture of each object is presented along with its name, size, and category. Please take as long as you need to familizarize yourself with this information. <br><br> \
+                        Press the 'f' button on your keyboard to view the stimuli. When you are finished, press the 'f' button again to continue with the experiment.",
+            choices: ['f'],
+            data: {show_stims:true}
+        }
+        var familizarize_stims = {
+            timeline: [{
+                type: "html-keyboard-response",
+                stimulus: make_img_familiarization(objects,sizes),
+                choices: ['f']
+            }],
+            conditional_function: function() {
+                return jsPsych.data.get().last(1).values()[0].show_stims;
+            }
+        }
+        var check_familiarize = {
+        type: "html-keyboard-response",
+        stimulus: "If you have finished familiarizing yourself with the stimuli, press 'f' to continue the experiment. If you would like to view the stimuli again, press 'j' to go back. Please note that this is the last opportunity you will have to familizarize yourself with the stimuli before the experiment begins.",
+        choices: ['f','j'],
+        on_finish: function(data) {
+            data.show_stims = data.key_press==jsPsych.pluginAPI.convertKeyCharacterToKeyCode('j');
+        }
+        }
+        
+        var familizarize = {
+        timeline: [familizarize_instructions,familizarize_stims,check_familiarize,familizarize_stims]
+        };
+        
+        
+        
+        var fixation = {
+        type: "html-keyboard-response",
+        stimulus: "<div style='font-size:60px;'>+</div>",
+        choices: jsPsych.NO_KEYS,
+        trial_duration: 500,
+        data: {trial_condition:'fixation'}
+        };
+        var speech_trial = function(trial_type,trial_duration=2000){return {
+        type: "html-keyboard-response",
+        stimulus: jsPsych.timelineVariable('stimulus'),
+        choices: jsPsych.NO_KEYS,
+        trial_duration: trial_duration,
+        on_start: function(trial) {
+            trial.data = {start_time:Date.now(),trial_condition:trial_type};
+        },
+        on_finish: function(data) {
+            //processSpeech = true;
+        }
+        }};
+        var keyboard_trial = function(trial_type, trial_duration=2000){return {
+        type: "html-keyboard-response",
+        stimulus: jsPsych.timelineVariable('stimulus'),
+        choices: ['f','j'],
+        trial_duration: trial_duration,
+        on_start: function(trial) {
+            trial.data = {start_time:Date.now(),trial_condition:trial_type};
+        }
+        }};
+        
+        
+        var trial_feedback = function(trial_condition) {return {
+        type: "html-keyboard-response",
+        stimulus: function() {
+            if (trial_condition == 'pic_naming') {
+                return "For the last trial, the correct response was to say the word '"+jsPsych.timelineVariable('picture',true)+"'. Press 'f' to continue.";
+            } else if (trial_condition == 'word_naming') {
+                return "For the last trial, the correct response was to say the word '"+jsPsych.timelineVariable('word',true)+"'. Press 'f' to continue.";
+            } else if (trial_condition == 'pic_category_naming') { 
+                var category = category_map[jsPsych.timelineVariable('picture',true)];
+                return "For the last trial, the correct response was to say '"+cat_naming_map[category]+"'. Press 'f' to continue.";
+            } else if (trial_condition == 'word_category_naming') {
+                var category = category_map[jsPsych.timelineVariable('word',true)];
+                return "For the last trial, the correct response was to say '"+cat_naming_map[category]+"'. Press 'f' to continue.";
+            } else if (trial_condition == 'pic_category_button') { 
+                var category = category_map[jsPsych.timelineVariable('picture',true)];
+                return "For the last trial, the correct response was to press '"+cat_button_map[category]+"'. Press 'f' to continue.";
+            } else if (trial_condition == 'word_category_button') { 
+                var category = category_map[jsPsych.timelineVariable('word',true)];
+                return "For the last trial, the correct response was to press '"+cat_button_map[category]+"'. Press 'f' to continue.";
+            } else if (trial_condition == 'pic_size_naming') {
+                var size = sizes[objects.indexOf(jsPsych.timelineVariable('picture',true))];
+                return "For the last trial, the correct response was to say '"+size_naming_map[size]+"'. Press 'f' to continue.";
+            } else if (trial_condition == 'word_size_naming') {
+                var size = sizes[objects.indexOf(jsPsych.timelineVariable('word',true))];
+                return "For the last trial, the correct response was to say '"+size_naming_map[size]+"'. Press 'f' to continue.";
+            } else if (trial_condition == 'pic_size_button') {
+                var size = sizes[objects.indexOf(jsPsych.timelineVariable('picture',true))];
+                var button = size_button_map[size];
+                return "For the last trial, the correct response was to press the button '"+button+"', \
+                        because the size of '"+jsPsych.timelineVariable('picture',true)+"' is '"+size+"'. Press 'f' to continue.";
+            } else if (trial_condition == 'word_size_button') {
+                var size = sizes[objects.indexOf(jsPsych.timelineVariable('word',true))];
+                var button = size_button_map[size];
+                return "For the last trial, the correct response was to press the button '"+button+"', \
+                        because the size of '"+jsPsych.timelineVariable('word',true)+"' is '"+size+"'. Press 'f' to continue.";
+            }
+        },
+        choices: ['f']
+        }};
+        
+        function shuffle(originalArray) {
+            var array = [].concat(originalArray);
+            var currentIndex = array.length, temporaryValue, randomIndex;
+
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // And swap it with the current element.
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+
+            return array;
+        }
+        var make_nodistractor_block = function(trial_type, object_names, maxtime=1000) {
+            //trial_type: ['pic_naming','word_naming','pic_category','word_category','pic_size','word_size'];
+            var stim = '';
+            var trial_fn = speech_trial;
+            var stim_fn = make_img_stimuli;
+            if (trial_type == 'pic_naming') {
+                stim = "In this task, you will be presented with a picture of an object. On top of the object will be a row of Xs ('XXXXX'). \
+                        Upon seeing the stimulus, please say out loud the name of the object. Ignore the row of Xs.<br><br>\
+                        For example, if you were presented a picture of a elephant the task would be to say 'elephant'.<br><br> \
+                        Please respond quickly and accurately. Press 'f' to begin."
+            } else if (trial_type == 'word_naming') {
+                stim = "In this task, you will be presented with the name of an object. \
+                        Upon seeing the stimulus, please say out loud the name of the object. <br><br>\
+                        For example, if you were presented with the word 'elephant' the task would be to say 'elephant'.<br><br> \
+                        Please respond quickly and accurately. Press 'f' to begin.";
+                stim_fn = make_word_stimuli;
+            } else if (trial_type == 'pic_category_naming') {
+                stim = "In this task, you will be presented with a picture of an object. On top of the object will be a row of Xs ('XXXXX').\
+                        Upon seeing the stimulus, please say out load 'yes' if the object is an animal - otherwise, say 'no'. Ignore the row of Xs. <br><br>\
+                        For example, if you were presented a picture of a elephant the task would be to say 'yes'.<br><br> \
+                        Please respond quickly and accurately. Press 'f' to begin."
+            } else if (trial_type == 'word_category_naming') {
+                stim = "In this task, you will be presented with the name of an object. \
+                        Upon seeing the stimulus, please say out loud 'yes' if the object is an animal - otherwise, say 'no'. <br><br>\
+                        For example, if you were presented with the word 'elephant' the task would be to say 'yes'.<br><br> \
+                        Please respond quickly and accurately. Press 'f' to begin.";
+                stim_fn = make_word_stimuli;
+            } else if (trial_type == 'pic_category_button') {
+                stim = "In this task, you will be presented with a picture of an object. On top of the object will be a row of Xs ('XXXXX').\
+                        Upon seeing the stimulus, please indicate the category of the object. Press 'f' if the object is an animal, and 'j' if the object is an instrument.  Ignore the row of Xs.<br><br>\
+                        For example, if you were presented a picture of a elephant the task would be to press 'f'.<br><br> \
+                        Please respond quickly and accurately. Press 'f' to begin.";
+                trial_fn = keyboard_trial;
+            } else if (trial_type == 'word_category_button') {
+                stim = "In this task, you will be presented with the name of an object. \
+                        Upon seeing the stimulus, please indicate the category of the object. Press 'f' if the object is an animal, and 'j' if the object is an instrument. <br><br>\
+                        For example, if you were presented with the word 'elephant' the task would be to press 'f'.<br><br> \
+                        Please respond quickly and accurately. Press 'f' to begin.";
+                stim_fn = make_word_stimuli;
+                trial_fn = keyboard_trial;
+            } else if (trial_type == 'pic_size_naming') {
+                stim = "In this task, you will be presented with a picture of an object. On top of the object will be a row of Xs ('XXXXX').\
+                        Upon seeing the stimulus, please say out load 'yes' if the object is small - otherwise, say 'no'. Ignore the row of Xs. <br><br>\
+                        For example, if you were presented a picture of a elephant the task would be to say 'no'.<br><br> \
+                        Please respond quickly and accurately. Press 'f' to begin."
+            } else if (trial_type == 'word_size_naming') {
+                stim = "In this task, you will be presented with the name of an object. \
+                        Upon seeing the stimulus, please say out load 'yes' if the object is small - otherwise, say 'no'. <br><br>\
+                        For example, if you were presented with the word 'elephant' the task would be to say 'no'.<br><br> \
+                        Please respond quickly and accurately. Press 'f' to begin."
+                stim_fn = make_word_stimuli;
+            } else if (trial_type == 'pic_size_button') {
+                stim = "In this task, you will be presented with a picture of an object. On top of the object will be a row of Xs ('XXXXX').\
+                        Upon seeing the stimulus, please indicate the size of the object. Press 'f' if the object is small, and 'j' if the object is big. Ignore the row of Xs.<br><br>\
+                        For example, if you were presented a picture of a elephant the task would be to press 'j'.<br><br> \
+                        Please respond quickly and accurately. Press 'f' to begin.";
+                trial_fn = keyboard_trial;
+            } else if (trial_type == 'word_size_button') {
+                stim = "In this task, you will be presented with the name of an object. \
+                        Upon seeing the stimulus, please indicate the size of the object. Press 'f' if the object is small, and 'j' if the object is big. <br><br>\
+                        For example, if you were presented with the word 'elephant' the task would be to press 'j'.<br><br> \
+                        Please respond quickly and accurately. Press 'f' to begin.";
+                trial_fn = keyboard_trial;
+                stim_fn = make_word_stimuli;
+            }
+            
+            var instructions = {
+                type: "html-keyboard-response",
+                stimulus: stim,
+                choices: ['f']
+            }
+            var test_stimuli = stim_fn(object_names);
+            var test = {
+                timeline:[fixation,trial_fn(trial_type+'_test',trial_duration=maxtime)],
+                timeline_variables: test_stimuli
+            }
+            
+            return { timeline: [instructions,test] }
+        }
+        var make_block = function(trial_type, train_pairs, test_pairs, maxtime=2000, blockname='', do_train=true) {
+            //trial_type: ['pic_naming','word_naming','pic_category','word_category','pic_size','word_size'];
+            var stim = '';
+            var trial_fn = speech_trial;
+            if (trial_type == 'pic_naming') {
+                stim = "In this task, you will be presented with a picture of an object, and a word indicating the name of a second object overlayed on top of the picture. \
+                        Upon seeing the stimulus, please say out loud the name of the <b>pictured</b> object. Ignore the <b>named</b> object. <br><br>\
+                        For example, if you were presented a picture of a elephant and the word 'harmonica', the task would be to say 'elephant'.<br><br> \
+                        Please respond quickly and accurately. You will have the opportunity to practice this task 5 times. Press 'f' to begin."
+            } else if (trial_type == 'word_naming') {
+                stim = "In this task, you will be presented with a picture of an object, and a word indicating the name of a second object overlayed on top of the picture. \
+                        Upon seeing the stimulus, please say out loud the name of the <b>named</b> object. Ignore the <b>pictured</b> object. <br><br> \
+                        For example, if you were presented a picture of a elephant and the word 'harmonica', the task would be to say 'harmonica'.<br><br> \
+                        Please respond quickly and accurately. You will have the opportunity to practice this task 5 times. Press 'f' to begin."
+            } else if (trial_type == 'pic_category_naming') {
+                stim = "In this task, you will be presented with a picture of an object, and a word indicating the name of a second object overlayed on top of the picture. \
+                        Upon seeing the stimulus, please say out 'yes' if the <b>pictured</b> object is an animal - otherwise, say 'no'. Ignore the <b>named</b> object. <br><br> \
+                        For example, if you were presented a picture of a elephant and the word 'harmonica', the task would be to say 'yes' (because 'elephant' is an animal).<br><br> \
+                        Please respond quickly and accurately. You will have the opportunity to practice this task 5 times. Press 'f' to begin."
+            } else if (trial_type == 'word_category_naming') {
+                stim = "In this task, you will be presented with a picture of an object, and a word indicating the name of a second object overlayed on top of the picture. \
+                        Upon seeing the stimulus, please say out loud 'yes' if the <b>named</b> object is an animal - otherwise, say 'no'. Ignore the <b>pictured</b> object. <br><br> \
+                        For example, if you were presented a picture of a elephant and the word 'harmonica', the task would be to say 'no' becase ('harmonica' is not an animal).<br><br> \
+                        Please respond quickly and accurately. You will have the opportunity to practice this task 5 times. Press 'f' to begin."
+            } else if (trial_type == 'pic_category_button') {
+                stim = "In this task, you will be presented with a picture of an object, and a word indicating the name of a second object overlayed on top of the picture. \
+                        Upon seeing the stimulus, please indicate the category of the <b>pictured</b> object. Ignore the <b>named</b> object. Press 'f' if the object is an animal, and 'j' if the object is an instrument. <br><br> \
+                        For example, if you were presented a picture of a elephant and the word 'harmonica', the task would be to press 'f' (because 'elephant' is an animal).<br><br> \
+                        Please respond quickly and accurately. You will have the opportunity to practice this task 5 times. Press 'f' to begin.";
+                trial_fn = keyboard_trial;
+            } else if (trial_type == 'word_category_button') {
+                stim = "In this task, you will be presented with a picture of an object, and a word indicating the name of a second object overlayed on top of the picture. \
+                        Upon seeing the stimulus, please indicate the category of the <b>named</b> object. Ignore the <b>pictured</b> object. Press 'f' if the object is an animal, and 'j' if the object is an instrument. <br><br> \
+                        For example, if you were presented a picture of a elephant and the word 'harmonica', the task would be to press 'j' (because 'harmonica' is an instrument).<br><br> \
+                        Please respond quickly and accurately. You will have the opportunity to practice this task 5 times. Press 'f' to begin.";
+                trial_fn = keyboard_trial;
+            } else if (trial_type == 'pic_size_naming') {
+                stim = "In this task, you will be presented with a picture of an object, and a word indicating the name of a second object overlayed on top of the picture. \
+                        Upon seeing the stimulus, please indicate the size of the <b>pictured</b> object. Ignore the <b>named</b> object. Say 'yes' if the object is small, and 'no' if the object is big.<br><br>\
+                        For example, if you were presented a picture of a elephant and the word 'harmonica', the task would be to say 'no' (because an 'elephant' is 'big').<br><br> \
+                        Please respond quickly and accurately. You will have the opportunity to practice this task 5 times. Press 'f' to begin.";
+            } else if (trial_type == 'word_size_naming') {
+                stim = "In this task, you will be presented with a picture of an object, and a word indicating the name of a second object overlayed on top of the picture. \
+                        Upon seeing the stimulus, please indicate the size of the <b>named</b> object. Ignore the <b>pictured</b> object. Say 'yes' if the object is small, and 'no' if the object is big.<br><br>\
+                        For example, if you were presented a picture of a elephant and the word 'harmonica', the task would be to say 'yes' (because a 'harmonica' is 'small').<br><br> \
+                        Please respond quickly and accurately. You will have the opportunity to practice this task 5 times. Press 'f' to begin.";
+            } else if (trial_type == 'pic_size_button') {
+                stim = "In this task, you will be presented with a picture of an object, and a word indicating the name of a second object overlayed on top of the picture. \
+                        Upon seeing the stimulus, please indicate the size of the <b>pictured</b> object. Ignore the <b>named</b> object. Press 'f' if the object is small, and 'j' if the object is big.<br><br>\
+                        For example, if you were presented a picture of a elephant and the word 'harmonica', the task would be to press 'j' (because an 'elephant' is 'big').<br><br> \
+                        Please respond quickly and accurately. You will have the opportunity to practice this task 5 times. Press 'f' to begin.";
+                trial_fn = keyboard_trial;
+            } else if (trial_type == 'word_size_button') {
+                stim = "In this task, you will be presented with a picture of an object, and a word indicating the name of a second object overlayed on top of the picture. \
+                        Upon seeing the stimulus, please indicate the size of the <b>named</b> object. Ignore the <b>pictured</b> object. Press 'f' if the object is small, and 'j' if the object is big.<br><br>\
+                        For example, if you were presented a picture of a elephant and the word 'harmonica', the task would be to press 'f' (because a 'harmonica' is 'small').<br><br> \
+                        Please respond quickly and accurately. You will have the opportunity to practice this task 5 times. Press 'f' to begin.";
+                trial_fn = keyboard_trial;
+            }
+            
+            var instructions = {
+                type: "html-keyboard-response",
+                stimulus: stim,
+                choices: ['f']
+            }
+            var train_stimuli = make_pic_word_stimuli(train_pairs);
+            var test_stimuli = make_pic_word_stimuli(test_pairs);
+            var train = {
+                timeline:[fixation,trial_fn(trial_type+'_train-'+blockname,trial_duration=maxtime),trial_feedback(trial_type)],
+                timeline_variables: train_stimuli
+            }
+            var test_instructions = {
+                type: "html-keyboard-response",
+                stimulus: "You have finished training for this task. Press 'f' to begin the task itself.",
+                choices: ['f']
+            }
+            var test_instructions2 = {
+                type: "html-keyboard-response",
+                stimulus: "You have finished the first block of the task. You will now complete the task again. Feel free to take a short break, and press 'f' when you are ready to continue.",
+                choices: ['f']
+            }
+            var test = {
+                timeline:[fixation,trial_fn(trial_type+'_test-'+blockname,trial_duration=maxtime)],
+                timeline_variables: test_stimuli
+            }
+            
+            if (do_train) {
+                return { timeline: [instructions,train,test_instructions,test] }
+            } else {
+                return { timeline: [test_instructions2,test] }
+            }
+        }
+        
+        var exit = {
+        timeline:[
+            {
+            type: "survey-html-form",
+            preamble: "You have completed all of the tasks. Please enter the following information:",
+            html: "Gender: <input name='gender' type='text' /><br>Age: <input name='age' type='num' /><br> \
+                    MTurk Worker ID (optional): <input name='workerid' type='text' /><br> \
+                    Comments (optional): <input name='comments' type='text' />",
+            on_finish: function(data) {handle_close(data)} 
+            },
+            {
+              type: 'html-keyboard-response',
+              stimulus: "Please wait for a few of seconds while we upload your data. Do not navigate away from this page.",
+              choices: jsPsych.NO_KEYS,
+              trial_duration: 4000
+            },
+            {
+                timeline: [{
+                    type: 'html-keyboard-response',
+                    stimulus: 'Please continue waiting - we are still uploading your data.',
+                    choices: jsPsych.NO_KEYS,
+                    trial_duration: 5000
+                }],
+                conditional_function: function() {
+                    return aws_success < 3; 
+                }
+            },
+            {
+                timeline: [{
+                    type: 'html-keyboard-response',
+                    stimulus: 'We apologize for the delay - please wait an additional 5 seconds while we finish uploading the data.',
+                    choices: jsPsych.NO_KEYS,
+                    trial_duration: 5000
+                }],
+                conditional_function: function() {
+                    return aws_success < 3; 
+                }
+            },
+            
+            {
+            type: "html-keyboard-response",
+            stimulus: "Thank you for your participation.<br><br>Your survey validation code is djf2-163.<br><br>If you have any concerns about payment, please contact <b>tylerg.research.experiments@gmail.com</b> with any questions.",
+            choices: jsPsych.NO_KEYS
+            }
+        ]
+        }
+        
+        
+        timeline.push(welcome);
+        timeline.push(familizarize);
+        metadata.nodistractor_object_orders = [];
+        metadata.first_modes = [];
+        for(var i=0;i<trial_types.length;i++) {
+            var trial_type = trial_types[i];
+            var trial_complement = trial_complements[i];
+            if(Math.random() < 0.5){
+                metadata.first_modes.push(trial_type);
+                var obj_names = shuffle(objects);
+                if(dev_test) {
+                  obj_names = obj_names.slice(0,5);
+                }
+                timeline.push(make_nodistractor_block(trial_type,obj_names));
+                metadata.nodistractor_object_orders.push(obj_names);
+                obj_names = shuffle(objects);
+                if(dev_test) {
+                  obj_names = obj_names.slice(0,5);
+                }
+                timeline.push(make_nodistractor_block(trial_complement,obj_names));
+                metadata.nodistractor_object_orders.push(obj_names);
+            } else {
+                metadata.first_modes.push(trial_complement);
+                var obj_names = shuffle(objects);
+                if(dev_test) {
+                  obj_names = obj_names.slice(0,5);
+                }
+                timeline.push(make_nodistractor_block(trial_complement,obj_names));
+                metadata.nodistractor_object_orders.push(obj_names);
+                obj_names = shuffle(objects);
+                if(dev_test) {
+                  obj_names = obj_names.slice(0,5);
+                }
+                timeline.push(make_nodistractor_block(trial_type,obj_names));
+                metadata.nodistractor_object_orders.push(obj_names);
+            }
+            var train_pairs_1 = metadata.train_pairs[2*i];
+            var test_pairs_1 = metadata.test_pairs[2*i];
+            var train_pairs_2 = metadata.train_pairs[2*i+1];
+            var test_pairs_2 = metadata.test_pairs[2*i+1];
+            timeline.push(make_block(trial_type,train_pairs_1,test_pairs_1,2000,blockname='block1'));
+            timeline.push(make_block(trial_type,train_pairs_2,test_pairs_2,2000,blockname='block2',do_train=false));
+        }
+        timeline.push(exit);
+
+        jsPsych.init({
+        timeline: timeline,
+        exclusions: {
+            min_width: 800,
+            min_height: 600
+        }
+        });
+    }
+    startJsPsych();
+  </script>
+</html>

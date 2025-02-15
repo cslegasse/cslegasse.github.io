@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Experiment Template</title>
+    <script src="jspsych-6.0.5/jspsych.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-survey-text.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-survey-html-form.js"></script>
+    <script src="aws-sdk-2.701.0.min.js"></script>
+    <link href="jspsych-6.0.5/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+  </head>
+  <body>Please wait while the experiment loads. If you continue to see this page, you may be experiencing an internet connectivity issue or our server may be overloaded with requests. Please wait a few more seconds while we continue loading the experiment data. If you see this page for longer than one minute, please try refreshing the page, or closing and re-opening your web browser.</body>
+  <script>
+      
+      async function startJsPsych() {
+
+        var MAX_TRIALS = 10;
+        var NUM_PROMPTS = 2;
+        var metadata = {};
+        
+        stimulus_list = ['bee', 'leech', 'horsefly', 'centipede', 'fruit_fly', 'bumblebee',
+       'cockroach', 'beetle', 'cricket', 'dragonfly', 'ladybug', 'louse',
+       'maybug', 'ant', 'moth', 'mosquito', 'earwig', 'wood_louse',
+       'caterpillar', 'spider', 'grashopper', 'fly', 'butterfly', 'flee',
+       'wasp', 'worm', 'anchovy', 'dolphin', 'trout', 'goldfish', 'shark',
+       'herring', 'squid', 'cod', 'carp', 'orca', 'eel', 'piranha',
+       'plaice', 'flatfish', 'sperm_whale', 'ray', 'sardine', 'pike_(fish)',
+       'stickleback_(fish)', 'whale', 'salmon', 'swordfish', 'alligator', 'boa',
+       'cobra', 'dinosaur', 'gecko', 'lizard', 'blindworm', 'caiman',
+       'chameleon', 'frog', 'crocodile', 'iguana', 'toad', 'python',
+       'salamander', 'tortoise', 'snake', 'monitor_lizard', 'turtle',
+       'eagle', 'dove', 'duck', 'magpie', 'pheasant', 'vulture',
+       'rooster', 'turkey', 'canary', 'chicken', 'cuckoo', 'crow',
+       'chickadee', 'seagull', 'blackbird', 'sparrow', 'stork', 'parrot',
+       'parakeet', 'peacock', 'pelican', 'penguin', 'heron', 'robin',
+       'woodpecker', 'ostrich', 'owl', 'falcon', 'swan', 'swallow',
+       'monkey', 'beaver', 'bison', 'dromedary', 'squirrel', 'hedgehog',
+       'donkey', 'giraffe', 'hamster', 'deer', 'dog', 'polar_bear',
+       'kangaroo', 'cat', 'cow', 'rabbit', 'llama', 'lion', 'mouse',
+       'rhinoceros', 'hippopotamus', 'elephant', 'horse', 'sheep',
+       'tiger', 'pig', 'bat', 'fox', 'wolf', 'zebra', 'red_currant',
+       'strawberry', 'apricot', 'pineapple', 'apple', 'banana',
+       'blueberry', 'blackberry', 'lemon', 'clementine', 'dates (fruit)',
+       'grape', 'raspberry', 'cherry', 'kiwi', 'coconut', 'lime',
+       'lychee', 'mango', 'melon', 'nectarine', 'papaya', 'passion_fruit',
+       'pear', 'peach', 'grapefruit', 'pumpkin', 'plum', 'orange', 'fig',
+       'potato', 'onions', 'asparagus', 'eggplant', 'gherkins', 'beet',
+       'cauliflower', 'beans', 'mushrooms', 'zucchini', 'peas', 'chervil',
+       'cucumber', 'garlic', 'corn', 'pepper', 'parsley', 'leek',
+       'radish', 'black_salsify', 'celery', 'lettuce', 'spinach',
+       'Brussels_sprouts', 'tomato', '(water)cress', 'endive', 'carrot',
+       'anvil', 'chisel', 'drill', 'crowbar', 'lawn_mower', 'hammer',
+       'spanner', 'pickaxe', 'wheelbarrow', 'knife', 'wrench', 'oil_can',
+       'filling_knife', 'plough', 'plane', 'shovel', 'screwdriver',
+       'grinding_disc', 'nail', 'wire_brush', 'vacuum_cleaner', 'tongs',
+       'paint_brush', 'file', 'level', 'saw', 'can_opener', 'plate',
+       'toaster', 'bottle', 'furnace', 'fridge', 'glass', 'towel',
+       'kettle', 'whisk', 'coffee_maker', 'spoon', 'butterknife',
+       'microwave_oven', 'mixer', 'nutcracker', 'place_mat', 'oven',
+       'pan', 'jar', 'grater', 'scissors', 'apron', 'spatula', 'mug',
+       'teaspoon', 'colander', 'fork', 'electric_kettle', 'scales', 'wok',
+       'sieve', 'accordion', 'bagpipe', 'banjo', 'bass_(guitar)',
+       'bassoon', 'bugle', 'cello', 'clarinet', 'cymbals', 'drum',
+       'drum_set', 'flute', 'panflute', 'guitar', 'harmonica', 'harp_',
+       'harpsichord', 'kazoo', 'mandolin', 'organ', 'panpipe', 'piano',
+       'saxophone', 'synthesizer', 'tambourine', 'triangle', 'bra',
+       'blouse', 'pants', 'tie', 'shirt', 'hat', 'coat', 'jeans',
+       'jogging', 'dress', 'costume', 'boots', 'cap_(clothing)',
+       'pyjamas', 'belt', 'skirt', 'dungarees', 'shoes', 'shorts',
+       'scarf', 'panties', 'socks', 'sweater', 'top', 't-shirt',
+       'mittens', 'bathing_suit', 'bazooka', 'axe', 'bowl', 'dagger',
+       'rifle', 'grenade', 'canon', 'slingshot', 'club_(weapon)', 'machinegun',
+       'pistol', 'shield', 'spear', 'stick', 'tank', 'rope', 'doublegun',
+       'sword', 'whip', 'car', 'boat', 'scooter', 'motorbike', 'bus',
+       'truck', 'delivery_van', 'trailer', 'submarine', 'bicycle',
+       'go-cart', 'helicopter', 'hovercraft', 'jeep', 'cart', 'carriage',
+       '(hot_air)_balloon', 'subway_train', 'rocket', 'skateboard',
+       'sled', 'moped', 'taxi', 'tractor', 'tram', 'train', 'airplane',
+       'semi_truck', 'Zeppelin', 'shrimp', 'lobster', 'oyster',
+       'barnacle', 'crawfish', 'flea', 'scorpion', 'grasshopper',
+       'mantis', 'silverfish', 'octopus', 'snail', 'jellyfish',
+       'starfish', 'leopard', 'jaguar', 'cheetah', 'bobcat', 'sloth',
+       'anteater', 'raccoon', 'rat', 'weasel', 'hare', 'skunk', 'ferret',
+       'groundhog', 'otter', 'chipmunk', 'porcupine', 'chinchilla',
+       'opossum', 'bear', 'panda', 'walrus', 'manatee', 'koala',
+       'platypus', 'sphinx', 'man', 'woman', 'child', 'ape', 'rhino',
+       'hippo', 'goat', 'antelope', 'camel', 'moose', 'boar', 'warthog',
+       'bean', 'fern', 'cactus', 'aloe', 'bamboo', 'cranberry',
+       'gooseberry', 'winterberry', 'kumquat', 'guava', 'pomegranate',
+       'breadfruit', 'persimmon', 'avocado', 'rice', 'wheat', 'walnut',
+       'pistachio', 'chestnut', 'pecan', 'macadamia', 'cashew',
+       'hazelnut', 'rhubarb', 'chili', 'nutmeg', 'thyme', 'spearmint',
+       'onion', 'pea', 'cabbage', 'broccoli', 'mushroom', 'turnip',
+       'kale', 'artichoke', 'okra', 'scallion', 'parsnip', 'mistletoe',
+       'house', 'jail', 'church', 'library', 'tower', 'castle', 'casino',
+       'mall', 'tent', 'cave', 'hut', 'stadium', 'lighthouse',
+       'greenhouse', 'auditorium', 'windmill', 'newsstand', 'gazebo',
+       'coliseum', 'outhouse', 'sawmill', 'city', 'road', 'bridge',
+       'tunnel', 'fountain', 'pier', 'graveyard', 'playground',
+       'carousel', 'manhole', 'pothole', 'guardrail', 'streetlamp', 'bed',
+       'table', 'chair', 'couch', 'lamp', 'rug', 'curtain', 'bench',
+       'crib', 'drawers', 'vase', 'jukebox', 'chandelier', 'hammock',
+       'phone', 'book', 'bag', 'key', 'computer', 'clock', 'camera',
+       'cup', 'bell', 'television', 'toilet', 'wire', 'newspaper',
+       'wallet', 'flag', 'sink', 'basket', 'blanket', 'battery', 'pillow',
+       'envelope', 'bucket', 'coin', 'ladder', 'refrigerator', 'cane',
+       'tray', 'candle', 'stove', 'umbrella', 'razor', 'bolt',
+       'flashlight', 'videotape', 'condom', 'microphone', 'ashtray',
+       'typewriter', 'cork', 'bandage', 'antenna', 'lantern',
+       'dishwasher', 'burner', 'cassette', 'blender', 'extinguisher',
+       'hanger', 'projector', 'thermostat', 'corkscrew', 'thermos',
+       'toothpick', 'matchbook', 'hourglass', 'sprinkler', 'loudspeaker',
+       'teapot', 'treadmill', 'ladle', 'hairbrush', 'padlock',
+       'camcorder', 'chalice', 'mousetrap', 'doormat', 'earpiece',
+       'birdcage', 'coffeepot', 'trashcan', 'hairpin', 'sharpener',
+       'shredder', 'strongbox', 'gramophone', 'joystick', 'thimble',
+       'eggbeater', 'thumbtack', 'eyedropper', 'saltshaker', 'breadbox',
+       'candelabra', 'dishrag', 'hotplate', 'flashbulb', 'paperclip',
+       'matchstick', 'lightbulb', 'wall', 'kitchen', 'shower', 'closet',
+       'elevator', 'stairs', 'fence', 'locker', 'drain', 'ceiling',
+       'mailbox', 'radiator', 'escalator', 'grate', 'ring', 'crown',
+       'necklace', 'bracelet', 'earring', 'wristwatch', 'bib', 'trombone',
+       'trumpet', 'ukulele', 'viola', 'robot', 'barrel', 'coffin',
+       'bubble', 'anchor', 'banner', 'fireworks', 'altar', 'crate',
+       'knot', 'backpack', 'casket', 'wand', 'cube', 'graffiti',
+       'microchip', 'gravel', 'guillotine', 'scoreboard', 'gargoyle',
+       'cauldron', 'defibrillator', 'sundial', 'beaker', 'birdhouse',
+       'chalkboard', 'scaffolding', 'burlap', 'odometer', 'gearshift',
+       'oscilloscope', 'photocopier', 'cogwheel', 'needle', 'pencil',
+       'broom', 'mop', 'compass', 'chalk', 'ruler', 'telescope',
+       'microscope', 'thermometer', 'syringe', 'binoculars', 'calculator',
+       'toolbox', 'pliers', 'tweezers', 'stethoscope', 'stapler',
+       'blowtorch', 'paintbrush', 'lawnmower', 'crayon', 'squeegee',
+       'dustpan', 'fishnet', 'highlighter', 'flyswatter', 'calipers',
+       'ship', 'motorcycle', 'wheelchair', 'canoe', 'parachute',
+       'spacecraft', 'bulldozer', 'blimp', 'stagecoach', 'forklift',
+       'gondola', 'snowplow', 'steamroller', 'bobsleigh', 'gun', 'bullet',
+       'missile', 'cannon', 'cake', 'pie', 'bread', 'cookie', 'muffin',
+       'doughnut', 'brownie', 'cupcake', 'bagel', 'bun', 'pastry',
+       'croissant', 'scone', 'baguette', 'toast', 'egg', 'pancake',
+       'omelet', 'granola', 'milk', 'cheese', 'pudding', 'custard',
+       'tapioca', 'pizza', 'steak', 'hamburger', 'noodles', 'sushi',
+       'lasagna', 'taco', 'tofu', 'meatball', 'burrito', 'nacho',
+       'fondue', 'kebab', 'spareribs', 'hotdog', 'tortilla', 'tamale',
+       'eggroll', 'lemonade', 'milkshake', 'dough', 'pickle', 'salsa',
+       'coleslaw', 'guacamole', 'crouton', 'candy', 'chocolate', 'peanut',
+       'popcorn', 'pretzel', 'marshmallow', 'lollypop', 'cinnamon',
+       'cumin', 'fire', 'beach', 'river', 'moon', 'lake', 'mountain',
+       'desert', 'nest', 'canyon', 'rainbow', 'hay', 'reef', 'volcano',
+       'emerald', 'waterfall', 'iceberg', 'meteorite', 'anthill',
+       'tumbleweed', 'honeycomb', 'seashell', 'geyser', 'waterspout',
+       'acorn', 'violin', 'gong', 'xylophone', 'synthesizer', 'tuba',
+       'almond', 'pine_nut', 'brazil_nut', 'quinoa', 'oats', 'barley',
+       'rye', 'basil', 'black_pepper', 'ginger', 'horseradish', 'oregano',
+       'paprika', 'saffron', 'tumeric', 'tupip', 'rose', 'sunflower',
+       'daisy', 'dandelion', 'lily', 'pine_tree', 'maple_tree',
+       'oak_tree', 'aspen_tree', 'palm_tree', 'animal', 'bird',
+       'building', 'clothing', 'fish', 'food', 'fruit', 'furniture',
+       'grain', 'house', 'insect', 'instrument', 'jewelry', 'kitchen',
+       'mammal', 'nut', 'plant', 'reptile', 'scene', 'spice', 'tool',
+       'vegetable', 'vehicle', 'weapon', 'flower', 'tree', 'plant']
+
+        var blacklist = [
+        'dagger',
+'burrito',
+'egg',
+'antelope',
+'cockroach',
+'motorcycle',
+'table',
+'drum',
+'chocolate',
+'reef',
+'papaya',
+'louse',
+'kumquat',
+'outhouse',
+'bed',
+'chicken',
+'plant',
+'calipers',
+'cherry',
+'trashcan',
+'taco',
+'wheelbarrow',
+'semi truck',
+'wand',
+'orca',
+'avocado',
+'peas',
+'gazebo',
+'emerald',
+'toilet',
+'doughnut',
+'barley',
+'chili',
+'stove',
+'matchstick',
+'motorbike',
+'crawfish',
+'grater',
+'meteorite',
+'bandage',
+'leech',
+'clock',
+'thumbtack',
+'dustpan',
+'needle',
+'cow',
+'camel',
+'thermostat',
+'belt',
+'robin',
+'cauldron',
+'delivery van',
+'plough',
+'photocopier',
+'bridge',
+'sheep',
+'crocodile',
+'loudspeaker',
+'beans',
+'bee',
+'canary',
+'trailer',
+'rooster',
+'violin',
+'gargoyle',
+'spatula',
+'viola',
+'corkscrew',
+'ring',
+'shredder',
+'dress',
+'sloth',
+'tractor',
+'weasel',
+'kale',
+'honeycomb',
+'anchovy',
+'sphinx',
+'orange',
+'pumpkin',
+'man',
+'rose',
+'fox',
+'manhole',
+'octopus',
+'flyswatter',
+'chandelier',
+'bobcat',
+'hotplate',
+'ginger',
+'bucket',
+'ferret',
+'salsa',
+'casino',
+'ship',
+'apple',
+'toad',
+'coin',
+'antenna',
+'owl',
+'couch',
+'rainbow',
+'beaver',
+'pillow',
+'tambourine',
+'plane',
+'flea',
+'mantis',
+'coliseum',
+'aloe',
+'geyser',
+'radish',
+'kebab',
+'pike (fish)',
+'furnace',
+'piano',
+'turkey',
+'vase',
+'crow',
+'beaker',
+'blouse',
+'giraffe',
+'pineapple',
+'vulture',
+'mittens',
+'envelope',
+'parsley',
+'calculator',
+'gun',
+'bear',
+'pan',
+'scarf',
+'bell',
+'wolf',
+'dungarees',
+'dough',
+'artichoke',
+'candy',
+'boots',
+'sled',
+'crayon',
+'curtain',
+'cake',
+'bird',
+'mushroom',
+'ostrich',
+'garlic',
+'skunk',
+'spacecraft',
+'baguette',
+'towel',
+'knife',
+'spear',
+'organ',
+'tower',
+'pea',
+'wristwatch',
+'boar',
+'bazooka',
+'ladybug',
+'jellyfish',
+'parrot',
+'animal',
+'seashell',
+'onion',
+'rug',
+'omelet',
+'paint brush',
+'lemon',
+'shoes',
+'forklift',
+'leopard',
+'oven',
+'milk',
+'hare',
+'parsnip',
+'mistletoe',
+'cave',
+'canoe',
+'bra',
+'melon',
+'pancake',
+'bus',
+'chisel',
+'altar',
+'ape',
+'moped',
+'apron',
+'flashbulb',
+'chipmunk',
+'fork',
+'cheese',
+'bison',
+'cricket',
+'anchor',
+'house',
+'apricot',
+'cuckoo',
+'stethoscope',
+'gearshift',
+'worm',
+'thimble',
+'odometer',
+'tent',
+'fig',
+'persimmon',
+'microchip',
+'lamp',
+'caiman',
+'horseradish',
+'eyedropper',
+'knot',
+'guardrail',
+'cumin',
+'hat',
+'rat',
+'dandelion',
+'sawmill',
+'graffiti',
+'dog',
+'boat',
+'bench',
+'toothpick',
+'broccoli',
+'celery',
+'glass',
+'bamboo',
+'popcorn',
+'rhino',
+'projector',
+'blanket',
+'tweezers',
+'pizza',
+'lightbulb',
+'chalk',
+'quinoa',
+'lasagna',
+'robot',
+'kitchen',
+'pig',
+'croissant',
+'jeep',
+'trout',
+'insect',
+'bagel',
+'graveyard',
+'jeans',
+'tray',
+'blimp',
+'grapefruit',
+'toaster',
+'Brussels sprouts',
+'swan',
+'maybug',
+'oregano',
+'crib',
+'windmill',
+'birdhouse',
+'triangle',
+'woman',
+'horsefly',
+'lighthouse',
+'nut',
+'missile',
+'shorts',
+'(hot air) balloon',
+'stadium',
+'fountain',
+'kiwi',
+'bun',
+'lychee',
+'nutmeg',
+'lemonade',
+'tunnel',
+'ashtray',
+'pyjamas',
+'t-shirt',
+'grasshopper',
+'weapon',
+'whip',
+'grate',
+'compass',
+'banana',
+'python',
+'colander',
+'screwdriver',
+'bumblebee',
+'rice',
+'submarine',
+'river',
+'palm tree',
+'tie',
+'casket',
+'microwave oven',
+'drawers',
+'mango',
+'thermos',
+'seagull',
+'platypus',
+'child',
+'airplane',
+'anteater',
+'panda',
+'fishnet',
+'peanut',
+'hippopotamus',
+'lion',
+'banjo',
+'walrus',
+'lawnmower',
+'noodles',
+'granola',
+'vacuum cleaner',
+'rhinoceros',
+'milkshake',
+'koala',
+'lily',
+'backpack',
+'taxi',
+'trombone',
+'cymbals',
+'car',
+'dishrag',
+'ruler',
+'magpie',
+'candle',
+'carousel',
+'shark',
+'rye',
+'pastry',
+'brownie',
+'electric kettle',
+'playground',
+'tumbleweed',
+'joystick',
+'onions',
+'grape',
+'corn',
+'spice',
+'furniture',
+'skateboard',
+'grain',
+'greenhouse',
+'typewriter',
+'club (weapon)',
+'mug',
+'chinchilla',
+'sparrow',
+'fern',
+'snake',
+'file',
+'almond',
+'bullet',
+'nectarine',
+
+        ]
+        stimulus_list = stimulus_list.filter(function(el) {
+            return !blacklist.includes(el);
+        })
+        function shuffle(array) {
+            let currentIndex = array.length,  randomIndex;
+
+            // While there remain elements to shuffle...
+            while (currentIndex != 0) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex--;
+
+                // And swap it with the current element.
+                [array[currentIndex], array[randomIndex]] = [
+                array[randomIndex], array[currentIndex]];
+            }
+
+            return array;
+        }
+        timeline = [];
+        var informed_consent_msg = "Psychology Experiment - Informed Consent Form<br>You have been invited to take part in a research study.<br>TITLE OF RESEARCH: Dual-Task Semantic Judgements<br>INVESTIGATOR: Jonathan Cohen, Tyler Giallanza \
+        <br><br>The following informed consent is required by Princeton University for any person involved in a research study conducted by investigators at the University. This study has been approved by the University's Institutional Review Board for Human Subjects. \
+        <br><br>You will be asked to make judgements about objects. The study will take around 20 minutes to complete and \
+        you will be rewarded $4.00 for your participation. \
+        <b>This is the second round of the experiment, intended for participants who performed well on the first round only. \
+        You can complete this survey multiple times, conditional on continuing to have good performance.</b><br><br><br> \
+        <b>If you have any questions about this study, your payment, or the research being conducted, you may contact the research team at tylerg.research.experiments@gmail.com.</b> If you have questions regarding your rights as a research subject, or if problems arise which you do not feel you can discuss with the Investigator, please contact the Institutional Review Board at:<br> Office of Research Integrity and Assurance<br>Compliance Administrator<br>Phone: (609) 258-0865<br>Email: irb@princeton.edu<br><br> \
+        By continuing with the study, you affirm that: Your participation is voluntary, and you may withdraw your consent and discontinue participation in the project at any time. Your refusal to participate will not result in any penalty. \
+        By signing this agreement, you do not waive any legal rights or release Princeton University, its agents, or you from liability for negligence. There may be no direct benefit to you from participation in this study other than the monetary payment as described above, though there may be indirect benefits as a result of what we learn about the human mind from your participation. The information obtained from this study will be confidential. It will be available to the investigators performing the study. Your worker ID will be anonymized and your identity will remain anonymous in any publications resulting from this study. You are a legal adult at your jurisdiction. This means you are 21 or older if you are in Mississippi; 19 or older if you are in Alabama, Delaware, and Nebraska; 18 or older in another state, or an emancipated minor according to your local laws. This document and/or additional email communication with the investigators answered any questions that you have regarding the study. <br><br> \
+        If you understand and consent to these terms, press 'f' to continue with the experiment.";
+        var welcome = {
+        type: "html-keyboard-response",
+        stimulus: informed_consent_msg,
+        choices: ['f']
+        };
+
+        var instructions = {
+            type: "html-keyboard-response",
+            stimulus: "In this experiment, you will be shown a series of 10 words, one at a time. \
+                        For each word, we would like you to write down as many different features of that word as you can think of. \
+                        Try to give different sorts of features, \
+                        such as what it looks like, what it is used for, how it smells, etc. \
+                        For example, if the word is 'dog', you may give features like 'has ears', 'is cute', 'barks', 'plays in the park', etc.<br> \
+                        Please write your answers <b>with one feature per line</b>. Please write your features in a standard format: for example, 'has ears' instead of 'a dog is an animal that has ears'.\
+                        <br><br>\
+                       You will be given a bonus award based on the number of <b>legitimate</b> features that you list. \
+                       Duplicate features (for example, 'has legs' and 'has a leg') will \
+                       be removed, as will nonsense or unreasonable features. You will be given a bonus (within one week) if \
+                       you list an average of 10 features per object (100 features total). Each additional feature will be awarded \
+                       $0.03. For example, if you list 120 features total, you will be paid $4.60 ($4 in base pay and $0.60 in bonus pay). \
+                       The bonus will be capped at a maximum hourly pay of <b>$20/hr (which is $6.67 for this 20-minute HIT)</b>.<br><br> \
+                       During the experiment, you may be presented a word that you don't know. You are allowed to skip these words, \
+                       but do not skip more than <b>5 words</b> during the experiment. \
+                       When you skip a word we will give you a new word, so skipping a word will not make the experiment shorter. \
+                       <br><br> \
+                       Press 'f' to begin the experiment.",
+            choices: ['f'],
+            data: {show_stims:true, skipped:false, trials_done:0, finished_counter: 0, stimval:''}
+        }
+        var make_trial = function(p) {
+            var trial = {
+                timeline:[{
+                    type: "survey-text",
+                    preamble: jsPsych.timelineVariable('stimulus'),
+                    questions: [
+                        {prompt: p, rows: 20, required: true}
+                    ],
+                    on_finish: function(data) {
+                        var l = jsPsych.data.get().last(2).values()[0];
+                        data.finished_counter = l.finished_counter;
+                        if(JSON.parse(data.responses)['Q0']=='skip'){
+                            data.skipped = true;
+                        } else {
+                            data.skipped = false;
+                        }
+                        if(p.includes('Can') || data.skipped) {
+                            data.trials_done = l.trials_done;
+                        } else {
+                            data.trials_done = l.trials_done+1;
+                        }
+                        if(data.trials_done > MAX_TRIALS-1) {
+                            data.finished_counter = l.finished_counter+1;
+                        } else{
+                            data.finished_counter = l.finished_counter;
+                        }
+                    }
+                }],
+                conditional_function: function() {
+                    l = jsPsych.data.get().last(1).values()[0];
+                    if(l.finished_counter > NUM_PROMPTS || (p.includes('Can') && l.skipped)) {
+                        return false;
+                    }
+                    return true;
+                }
+            }
+            return trial;
+        }
+        var prompts = ['Can you think of any parts or components of the object?',
+                       'Can you think of any other visual properties of the object, such as what it looks like?',
+                       'Can you think of any functions of the object, such as what it does or what it is used for?',
+                       'Can you think of any sensory features of the object, such as what it smells like or sounds like?',
+                       'Can you think of ways you can interact with or use the object?',
+                       'Can you think of any abstract features of the object, such as how much it costs or how it makes you feel?'];
+
+        var make_trial_set = function() {
+            var t = [make_trial('Please list features of the word above, one per line. If you do not know what this word means, type "skip".')];
+            prompts = shuffle(prompts);
+            t.push(make_trial(prompts[0]));
+            t.push(make_trial(prompts[1]));
+            stimulus_list = shuffle(stimulus_list);
+            var s = stimulus_list[0].replaceAll('_',' ');
+            var trial_set = {
+                timeline: t,
+                timeline_variables: [{stimulus: s}],
+                data: {stimulus:s,prompts:[prompts[0],prompts[1]]}
+            }
+            return trial_set
+        }
+        var block = {
+            timeline:  [make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),
+                        make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),
+                        make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),
+                        make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),
+                        make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),
+                        make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),
+                        make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),
+                        make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),
+                        make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),
+                        make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),
+                        make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),
+                        make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),
+                        make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),
+                        make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),
+                        make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set(),make_trial_set()
+            ]
+        }
+
+        var exit = {
+            timeline:[
+                {
+                type: "survey-html-form",
+                preamble: "You have completed all of the tasks. Please enter the following information. Note that the mturk worker id is required for being invited to the next experiment.",
+                html: "Gender: <input name='gender' type='text' /><br>Age: <input name='age' type='num' /><br> \
+                        MTurk Worker ID (optional): <input name='workerid' type='text' /><br> \
+                        Comments (optional): <input name='comments' type='text' />",
+                on_finish: function(data) {handle_close(data)} 
+                },
+                {
+                    type: "html-keyboard-response",
+                    stimulus: "Thank you for your participation.<br><br>Your survey validation code is qr2-1g3-13c-9v.<br><br>If you qualified for the next experiment, it should be available for you to complete \
+                    within a week from today. \
+                    If you have any concerns about payment, please contact <b>tylerg.research.experiments@gmail.com</b> with any questions.",
+                    choices: jsPsych.NO_KEYS
+                }
+            ],
+
+        }
+
+        let bucket_name = "bhv-feature-data";
+        let aws_success = 0;
+        AWS.config.region = 'us-east-1';
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: 'us-east-1:0284783b-226e-4f9c-ad9e-bc1b553e5347',
+        });
+        var do_upload = function(s3,params) {
+            s3.upload(params, function(err,data) {
+                if(err){
+                console.log(err,err.stack);
+                } else {
+                console.log('success');
+                aws_success++;
+                }
+            });
+        }
+        var uploadS3 = function(id, metadata, data, blob) {
+            var s3 = new AWS.S3({params:{Bucket:bucket_name}});
+            var params = {
+                Bucket: bucket_name,
+                Key: id+'_STpilot-audio',
+                Body: blob
+            };
+            const first_part = parseInt(Math.random()*10000).toString();
+            const second_part = parseInt(Math.random()*10000).toString();
+            const third_part = parseInt(Math.random()*10000).toString();
+            var randval = first_part+'-'+second_part+'-'+third_part;
+            params.Key = id+'_STpilot-metadata_part2_'+randval;
+            params.Body = metadata;
+            do_upload(s3,params);
+            params.Key = id+'_STpilot-data_part2_'+randval;
+            params.Body = data;
+            do_upload(s3,params);
+        };
+
+        var handle_close = function(data){
+            participantID = JSON.parse(jsPsych.data.get().last(1).values()[0].responses).workerid;
+            metadata.participantid = participantID;
+            if(!participantID.length) {
+                const first_part = parseInt(Math.random()*10000).toString();
+                const second_part = parseInt(Math.random()*10000).toString();
+                const third_part = parseInt(Math.random()*10000).toString();
+                participantID = first_part+'-'+second_part+'-'+third_part;
+                metadata.participantid = participantID;
+            }
+            uploadS3(participantID,JSON.stringify(metadata),jsPsych.data.get().json(),'');
+            console.log('hc!');
+            console.log(jsPsych.data.get().last(1).values[0]);
+            participantID = JSON.parse(jsPsych.data.get().last(1).values()[0].responses).workerid;
+            metadata.participantid = participantID;
+            metadata.responses = JSON.parse(jsPsych.data.get().last(1).values()[0].responses);
+            console.log('set shouldStop to true.');
+            console.log(jsPsych.data.get().json());
+        }
+
+        timeline.push(welcome);
+        timeline.push(instructions);
+        timeline.push(block);
+        timeline.push(exit);
+
+        jsPsych.init({
+            timeline: timeline,
+            exclusions: {
+                min_width: 100,
+                min_height: 200
+            }
+        });
+      }
+      startJsPsych();
+  </script>
+</html>

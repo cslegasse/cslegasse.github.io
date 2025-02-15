@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Experiment</title>
+    <script src="jspsych-6.0.5/jspsych.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-survey-text.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-survey-html-form.js"></script>
+    <script src="aws-sdk-2.701.0.min.js"></script>
+    <link href="jspsych-6.0.5/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+  </head>
+  <body>Please wait while the experiment loads. If you continue to see this page, you may be experiencing an internet connectivity issue or our server may be overloaded with requests. Please wait a few more seconds while we continue loading the experiment data. If you see this page for longer than one minute, please try refreshing the page, or closing and re-opening your web browser.</body>
+  <script>
+
+        function binaryInsert(seq, x, less) {
+            let possiblePositions = Array.from({ length: seq.length + 1 }, (_, i) => i);
+            let L = 0;
+            let R = possiblePositions[possiblePositions.length - 1];
+
+            while (possiblePositions.length > 1) {
+                const m = Math.floor((L + R) / 2);
+                if (less(x, seq[m])) {
+                    R = m;
+                } else {
+                    L = m + 1;
+                }
+                possiblePositions = possiblePositions.filter(p => L <= p && p <= R);
+            }
+
+            return possiblePositions[0];
+        }
+
+        function mergeInsertion(seq, less) {
+            if (seq.length <= 1) {
+                return seq;
+            }
+
+            const pairs = [];
+            for (let i = 0; i < seq.length - seq.length%2; i += 2) {
+                const x1 = seq[i];
+                const x2 = seq[i + 1];
+
+                if (less(x2, x1)) {
+                    pairs.push([x2, x1]);
+                } else {
+                    pairs.push([x1, x2]);
+                }
+            }
+
+            // sort pairs by their large element
+            const sortedPairs = mergeInsertion(pairs, (a, b) => less(a[1], b[1]));
+
+            const out = sortedPairs.map(pair => pair[1]);
+
+            const remaining = sortedPairs.slice();
+
+            if (seq.length % 2 === 1) {
+                remaining.push([seq[seq.length - 1], "END"]);
+            }
+
+            out.unshift(remaining.shift()[0]);
+
+            // reorder remaining
+            const buckets = [2, 2];
+            let powerOf2 = 4;
+
+            while (buckets.reduce((sum, bucket) => sum + bucket, 0) < remaining.length) {
+                powerOf2 *= 2;
+                buckets.push(powerOf2 - buckets[buckets.length - 1]);
+            }
+
+            const reordered = [];
+            let lastIndex = 0;
+
+            for (const bucket of buckets) {
+                reordered.push(...remaining.slice(lastIndex, lastIndex + bucket).reverse());
+                lastIndex += bucket;
+            }
+
+            for (const [y, x] of reordered) {
+                if (x === "END") {
+                    // insert unpaired element
+                    out.splice(binaryInsert(out, y, less), 0, y);
+                } else {
+                    // insert y in out by binary search up to but not including out.index(x)
+                    const indexToInsert = out.slice(0, out.indexOf(x));
+                    out.splice(binaryInsert(indexToInsert, y, less), 0, y);
+                }
+            }
+
+            return out;
+        }
+ 
+        function humanLess(a, b, lessTable, lessQueue) {
+            if (a in lessTable && b in lessTable[a]) {
+                // we already know the answer
+                return lessTable[a][b];
+            } else {
+                // we don't know the answer yet
+                lessQueue.push([a, b]);
+                return true;
+            }
+        }
+
+        async function getObjectData(seed) {
+            return fetch('https://tylergiallanza.github.io/mturk-experiments/seed_data/'+seed+'_200_objects.json').then(response => response.json()).then(jsonResponse => {return jsonResponse});
+        }
+
+      async function startJsPsych() {      
+        var MAX_TRIALS = 100;
+        var seed_list = [1000];
+        stimulus_idx = 0;
+        var metadata = {};
+        var random_code = Math.floor(Math.random()*1000000).toString(36);
+        var seed = seed_list[Math.floor(Math.random()*seed_list.length)];
+        var lessTable = {};
+        var lessQueue = [];
+        var lessFunction = (a,b) => humanLess(a, b, lessTable, lessQueue);
+
+        var premise_list = ['hamsters','spiders','flies','monkeys','pigs','llamas','whales'];//['monkeys','salmon','crocodiles','parrots','dogs','hamsters','whales'];//['cows','gorillas','mice','squirrels','dolphins','seals','elephants']//['cats','dogs','donkeys','rabbits','bees','cows','giraffes']; // 7 premises
+        var conclusion = 'mice';//'dolphins';//'horses';//'elephants';
+        var arg_number_list = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21]; // 21 args + 1 attention check
+        var counter = 0;
+        var arg_list = [];
+        for (var i=0;i<premise_list.length;i++) {
+            for (var j=i+1;j<premise_list.length;j++) {
+                arg_list.push({Premise1:premise_list[i],Premise2:premise_list[j],Conclusion:conclusion,ArgNumber:counter});
+                counter++;
+            }
+        }
+        arg_list.push({Premise1:conclusion,Premise2:conclusion,Conclusion:conclusion,ArgNumber:counter});
+        console.log(arg_list);
+        
+        
+        timeline = [];
+        var informed_consent_msg = "Psychology Experiment - Informed Consent Form<br>You have been invited to take part in a research study.<br>TITLE OF RESEARCH: Semantic Judgements<br>INVESTIGATOR: Jonathan Cohen, Tyler Giallanza \
+        <br><br>The following informed consent is required by Princeton University for any person involved in a research study conducted by investigators at the University. This study has been approved by the University's Institutional Review Board for Human Subjects. \
+        <br><br>You will be asked to make judgements about objects. The study will take 6-8 minutes to complete and \
+        you will be rewarded $1.40 for your participation. You can complete this survey multiple times, conditional on continuing to have good performance.</b><br><br><br> \
+        <b>If you have any questions about this study, your payment, or the research being conducted, you may contact the research team at tylerg.research.experiments@gmail.com.</b> If you have questions regarding your rights as a research subject, or if problems arise which you do not feel you can discuss with the Investigator, please contact the Institutional Review Board at:<br> Office of Research Integrity and Assurance<br>Compliance Administrator<br>Phone: (609) 258-0865<br>Email: irb@princeton.edu<br><br> \
+        By continuing with the study, you affirm that: Your participation is voluntary, and you may withdraw your consent and discontinue participation in the project at any time. Your refusal to participate will not result in any penalty. \
+        By signing this agreement, you do not waive any legal rights or release Princeton University, its agents, or you from liability for negligence. There may be no direct benefit to you from participation in this study other than the monetary payment as described above, though there may be indirect benefits as a result of what we learn about the human mind from your participation. The information obtained from this study will be confidential. It will be available to the investigators performing the study. Your worker ID will be anonymized and your identity will remain anonymous in any publications resulting from this study. You are a legal adult at your jurisdiction. This means you are 21 or older if you are in Mississippi; 19 or older if you are in Alabama, Delaware, and Nebraska; 18 or older in another state, or an emancipated minor according to your local laws. This document and/or additional email communication with the investigators answered any questions that you have regarding the study. <br><br> \
+        If you understand and consent to these terms, press 'j' to continue with the experiment.";
+        var welcome = {
+        type: "html-keyboard-response",
+        stimulus: informed_consent_msg,
+        choices: ['j']
+        };
+
+        var instructions = {
+            type: "html-keyboard-response",
+            stimulus: `In this experiment, you will be asked to make judgments of the likelihood of something being true
+                on the basis of limited information. For example, consider the following two arguments:<br>
+                <div style="display:inline-block;margin-right:5rem;font-size:18pt;max-width:25%;">
+                    <p><b>Argument 1</b></p>
+                    <p><u>zebras</u> and
+                    <u>donkeys</u> have property X.</p>
+                    <p>Therefore, <u>horses</u> have property X.</p>
+                    </div>`+
+                    `<div style="display:inline-block;margin-left:5rem;font-size:18pt;max-width:25%;">
+                    <p><b>Argument 2</b></p>
+                    <p><u>racoons</u> and
+                    <u>badgers</u> have property X.</p>
+                    <p>Therefore, <u>horses</u> have property X.</p>
+                </div>
+                <br>You will be presented with a series of argument pairs like these, and you will be asked to choose which of the two
+                arguments is more likely to be true.
+                If you believe the statement on the left is more likely to be true, press 'f'.
+                If you believe the statement on the right is more likely to be true, press 'j'.<br><br>
+                On a small number of trials, you will be presented with an argument that must be true, such as
+                "Horses and zebras have property X. Therefore, horses have property X".
+                These trials will be used to
+                ensure that you are paying attention to the arguments.<br><br>
+                Press 'j' to begin the experiment.`,
+            choices: ['j'],
+            data: {show_stims:true, skipped:false, trials_done:0, stimval:''},
+            on_finish: function(data) {
+                lessQueue = []
+                mergeInsertion(arg_number_list, lessFunction);
+                data.next_arg1 = arg_list[lessQueue[0][0]];
+                data.next_arg2 = arg_list[lessQueue[0][1]];
+            }
+        }
+
+        var make_trial = function(p) {
+            var trial = {
+                timeline:[{
+                    type: "html-keyboard-response",
+                    stimulus: function() {
+                        var arg1 = jsPsych.data.get().last(1).values()[0].next_arg1;
+                        var arg2 = jsPsych.data.get().last(1).values()[0].next_arg2;
+                        return `<div style="display:inline-block;margin-right:5rem;font-size:24pt;max-width:25%;">
+                            <p><b>Argument 1</b></p>
+                            <p><u>`+arg1['Premise1']+`</u> and
+                            <u>`+arg1['Premise2']+`</u> have property X.</p>
+                            <p>Therefore, <u>`+arg1['Conclusion']+`</u> have property X.</p>
+                            </div>`+
+                            `<div style="display:inline-block;margin-left:5rem;font-size:24pt;max-width:25%;">
+                            <p><b>Argument 2</b></p>
+                            <p><u>`+arg2['Premise1']+`</u> and
+                            <u>`+arg2['Premise2']+`</u> have property X.</p>
+                            <p>Therefore, <u>`+arg2['Conclusion']+`</u> have property X.</p>
+                            </div>`
+                            
+                    },
+                    choices: ['f','j'],
+                    on_finish: function(data) {
+                        data.arg1 = jsPsych.data.get().last(2).values()[0].next_arg1;
+                        data.arg2 = jsPsych.data.get().last(2).values()[0].next_arg2;
+                        if (data.arg1['ArgNumber'] in lessTable) {
+                            lessTable[data.arg1['ArgNumber']][data.arg2['ArgNumber']] = data.key_press==74;
+                        } else {
+                            lessTable[data.arg1['ArgNumber']] = {};
+                            lessTable[data.arg1['ArgNumber']][data.arg2['ArgNumber']] = data.key_press==74;
+                        }
+                        console.log(lessTable)
+                        lessQueue = []
+                        mergeInsertion(arg_number_list, lessFunction);
+                        if(lessQueue.length==0 || jsPsych.data.get().last(2).values()[0].is_finished) {
+                            data.is_finished = true;
+                        } else {
+                            data.next_arg1 = arg_list[lessQueue[0][0]];
+                            data.next_arg2 = arg_list[lessQueue[0][1]];
+                        }
+                    }
+                }],
+                conditional_function: function() {
+                    return !jsPsych.data.get().last(1).values()[0].is_finished;
+                }
+            }
+            return trial;
+        }
+
+        var make_trial_set = function() {
+            var t = [make_trial()];
+            stimulus_idx++;
+            var trial_set = {
+                timeline: t,
+            }
+            return trial_set
+        }
+
+        block_timeline = []
+        for(var i=0;i<MAX_TRIALS;i++) {
+            block_timeline.push(make_trial_set());
+        }
+        var block = {
+            timeline:  block_timeline
+        }
+
+        var exit = {
+            timeline:[
+                {
+                type: "survey-html-form",
+                preamble: "You have completed all of the tasks. Please enter the following information.",
+                html: "Gender: <input name='gender' type='text' /><br> \
+                        Age: <input name='age' type='num' /><br> \
+                        Worker ID: <input name='workerid' type='text' /><br> \
+                        Comments (optional): <input name='comments' type='text' />",
+                on_finish: function(data) {data.sorted_order = mergeInsertion(arg_number_list, lessFunction); handle_close(data)} 
+                },
+                {
+                    type: "html-keyboard-response",
+                    stimulus: "Thank you for your participation.<br><br>Your survey validation code is qr2-1g3-13c-" + random_code + ".<br><br> \
+                    If you have any concerns about payment, please contact <b>tylerg.research.experiments@gmail.com</b> with any questions.",
+                    choices: jsPsych.NO_KEYS
+                }
+            ],
+
+        }
+
+        let bucket_name = "bhv-induction";
+        let aws_success = 0;
+        AWS.config.region = 'us-east-1';
+        AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+        IdentityPoolId: 'us-east-1:0284783b-226e-4f9c-ad9e-bc1b553e5347',
+        });
+        var do_upload = function(s3,params) {
+            s3.upload(params, function(err,data) {
+                if(err){
+                console.log(err,err.stack);
+                } else {
+                console.log('success');
+                aws_success++;
+                }
+            });
+        }
+        var uploadS3 = function(id, metadata, data, blob) {
+            var s3 = new AWS.S3({params:{Bucket:bucket_name}});
+            var params = {
+                Bucket: bucket_name,
+                Key: id+'_STpilot-audio',
+                Body: blob
+            };
+            const first_part = parseInt(Math.random()*10000).toString();
+            const second_part = parseInt(Math.random()*10000).toString();
+            const third_part = parseInt(Math.random()*10000).toString();
+            var randval = first_part+'-'+second_part+'-'+third_part;
+            params.Key = id+'_pilot-metadata_'+randval;
+            params.Body = metadata;
+            do_upload(s3,params);
+            params.Key = id+'_pilot-data_'+randval;
+            params.Body = data;
+            do_upload(s3,params);
+        };
+
+        var handle_close = function(data){
+            participantID = JSON.parse(jsPsych.data.get().last(1).values()[0].responses).workerid;
+            metadata.participantid = participantID;
+            metadata.code = random_code;
+            metadata.seed = seed;
+            if(!participantID.length) {
+                const first_part = parseInt(Math.random()*10000).toString();
+                const second_part = parseInt(Math.random()*10000).toString();
+                const third_part = parseInt(Math.random()*10000).toString();
+                participantID = first_part+'-'+second_part+'-'+third_part;
+                metadata.participantid = participantID;
+            }
+            uploadS3(participantID,JSON.stringify(metadata),jsPsych.data.get().json(),'');
+            console.log(jsPsych.data.get().json());
+        }
+
+        timeline.push(welcome);
+        timeline.push(instructions);
+        timeline.push(block);
+        timeline.push(exit);
+
+        jsPsych.init({
+            timeline: timeline,
+            exclusions: {
+                min_width: 100,
+                min_height: 200
+            }
+        });
+      }
+      window.onbeforeunload = function() {
+        return "Are you sure you want to refresh? You will lose your progress on this task.";
+      };
+      startJsPsych();
+  </script>
+</html>

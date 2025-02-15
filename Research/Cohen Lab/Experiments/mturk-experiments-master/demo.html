@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Demo for Elizabeth</title>
+    <script src="jspsych-6.0.5/jspsych.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-html-keyboard-response.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-image-keyboard-response.js"></script>
+    <script src="jspsych-6.0.5/plugins/jspsych-survey-html-form.js"></script>
+    <script src="aws-sdk-2.701.0.min.js"></script>
+    <link href="jspsych-6.0.5/css/jspsych.css" rel="stylesheet" type="text/css"></link>
+  </head>
+  <body></body>
+  <script>
+    var timeline = [];
+
+    var make_nested_plugins = function(pluginB_text, pluginB_choices) {
+        jsPsych.plugins['pluginA'] = (function() {
+            var plugin = {};
+            plugin.info = {
+                name:'pluginA',
+                parameters: {}
+            }
+            plugin.trial = function(display_element, trial) {
+                display_element.innerHTML = '<p>This is pluginA. It will go away in a few seconds.</p>';
+                jsPsych.pluginAPI.setTimeout(function() {
+                display_element.innerHTML = '';
+                jsPsych.finishTrial();
+                },2000);
+            }
+            return plugin;
+        })();
+        
+        var first = {
+        type: "html-keyboard-response",
+        stimulus: pluginB_text,
+        choices: pluginB_choices
+        };
+        var embedded_plugin = {
+        timeline: [{
+            type: "pluginA"
+        }],
+        conditional_function: function() {
+            return jsPsych.data.get().last(1).values()[0].key_press == 70;
+        }
+        }
+        var after_plugin = {
+        type:'html-keyboard-response',
+        stimulus:'You have finished with the task. Refresh the page to try again.',
+        choices: jsPsych.NO_KEYS
+        }
+        
+        return {timeline: [first, embedded_plugin, after_plugin]};
+    }
+    pluginB_text = "This is pluginB. Press 'f' to see plugin A. Press 'j' to skip plugin A and go to the end of the task.";
+    nested_plugins = make_nested_plugins(pluginB_text, ['f','j']);
+    timeline.push(nested_plugins);
+    
+    
+    
+
+    jsPsych.init({
+    timeline: timeline,
+    exclusions: {
+        min_width: 800,
+        min_height: 600
+    }
+    });
+  </script>
+</html>

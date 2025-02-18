@@ -10,12 +10,12 @@ import InteractiveLink from './InteractiveLink';
 const awards = [
     {
         name: "Benjamin A Gilman Award",
-        desc: "Awarded funding for research abroad by US Department of State.",
+        desc: "1 of 500 for $4,000 research funding abroad by US Department of State.",
         year: "2024",
     },
     {
       name: "Research Experience for Undergraduate (REU) Recipient",
-      desc: "Awarded summer research funding by the National Science Foundation.",
+      desc: "Awarded $15,000 in summer research funding by the National Science Foundation.",
       year: "2024",
     },
     {
@@ -59,7 +59,7 @@ const experiences = [
         number: "01",
         position: "CYBERSECURITY INTERN",
         year: "2025",
-        companyName: "Nvidia",
+        companyName: "NVIDIA",
         link: "https://nvidia.com/",
         imageName: "/projects/nvidia.jpg",
         roleDescription: "Soon."
@@ -129,17 +129,17 @@ const About = () => {
                   className="py-10"
                 />
                 <div className="w-full md:w-2/3 font-aeonik-thin tracking-[0.015em] space-y-10 items-center align-center justify-center text-[21px] md:text-[21px]">
-                  <p className="leading-[150%]">My journey in software and security started at age 14 utilizing a DLL injector <InteractiveLink href="https://x.synapse.to" event='synapse' underline={true} newTab={true}>Synapse X.</InteractiveLink> where I was a trainee scripter. Synapse Softworks was later <InteractiveLink href="https://devforum.roblox.com/t/exploit-prevention-update/2663101" event='synapse' underline={true} newTab={true}> acquired by ROBLOX</InteractiveLink> for millions.
+                  <p className="leading-[150%]">My journey in software and security started at age 14 utilizing a DLL injector <InteractiveLink href="https://x.synapse.to" event='synapse' underline={true} newTab={true}>Synapse X.</InteractiveLink> where I was a scripter. Synapse Softworks was later <InteractiveLink href="https://devforum.roblox.com/t/exploit-prevention-update/2663101" event='synapse' underline={true} newTab={true}> acquired by ROBLOX</InteractiveLink> for millions.
                   </p>
                   <p className="leading-[150%]">At 15, I became curious about computers and learned low-level programming languages, scripting, and Windows OS sys-internals. This hobby turned into a passion for SAAS development.
                   </p>
-                  <p className="leading-[150%]">At 18, I started research in phishing and deepfake detection systems at the <InteractiveLink href="https://ebnerlab.psych.ufl.edu/" event='synapse' underline={true} newTab={true}> University of Florida</InteractiveLink>. Later, focusing on cognitive control and cybersecurity at <InteractiveLink href="https://ncclab.princeton.edu" event='ncc' underline={true} newTab={true}> Princeton University</InteractiveLink>. I've co-published 4 papers and given dozens of talks.
+                  <p className="leading-[150%]">At 18, I started research in phishing and deepfake detection systems at the <InteractiveLink href="https://ebnerlab.psych.ufl.edu/" event='ebner' underline={true} newTab={true}> University of Florida</InteractiveLink>. Later, focusing on cognitive control and cybersecurity at <InteractiveLink href="https://ncclab.princeton.edu" event='ncc' underline={true} newTab={true}> Princeton University</InteractiveLink>. I've co-published 4 papers and given dozens of talks.
                   </p>
-                  <p className="leading-[150%]">At 19, I worked on <InteractiveLink href="https:/krop.store/" event='krop' underline={true} newTab={true}> Krop Fashion</InteractiveLink>, a Gen-Z focused fashion store with over 1M customers; and <InteractiveLink href="https://beacons.ai/legasse" event='legasse' underline={true} newTab={true}> RemonBiz</InteractiveLink>, my personal brand providing tech and entrepreneurship insight.
+                  <p className="leading-[150%]">At 19, I worked on <InteractiveLink href="https:/krop.store/" event='krop' underline={true} newTab={true}> Krop Fashion</InteractiveLink>, a Gen-Z focused fashion store with over 1M customers; scaled the social media presence of <InteractiveLink href="https://cal.ai/" event='cal' underline={true} newTab={true}> Cal AI</InteractiveLink>, <InteractiveLink href="https:/krop.store/" event='krop' underline={true} newTab={true}> Ryne AI</InteractiveLink>, and <InteractiveLink href="https:/krop.store/" event='krop' underline={true} newTab={true}> Gelrova </InteractiveLink> to 100k+ followers; and created <InteractiveLink href="https:/krop.store/" event='krop' underline={true} newTab={true}> RemonBiz</InteractiveLink>, my personal brand providing tech and entrepreneurship insight.
                   </p>
-                  <p className="leading-[150%]">I am a past board member of the <InteractiveLink href="https://www.shpeuf.com/" event='krop' underline={true} newTab={true}> Society of Hispanic Professional Engineers</InteractiveLink> and the <InteractiveLink href="https://theleadershipalliance.org/" event='leadership' underline={true} newTab={true}> Leadership Alliance</InteractiveLink>.
+                  <p className="leading-[150%]">I am a past board member of the <InteractiveLink href="https://www.shpeuf.com/" event='shpe' underline={true} newTab={true}> Society of Hispanic Professional Engineers</InteractiveLink> and the <InteractiveLink href="https://theleadershipalliance.org/" event='leadership' underline={true} newTab={true}> Leadership Alliance</InteractiveLink>.
                   </p>
-                  <p className="leading-[150%]">Today, I design growth architecture for ecommerce businesses and brands to drive sales. I provide the expertise of a software engineer and growth hacker.
+                  <p className="leading-[150%]">Today, I design growth architecture for ecommerce businesses and brands to drive sales. I provide the expertise of a software engineer, researcher, and growth hacker.
                   </p>
                   
                 </div>

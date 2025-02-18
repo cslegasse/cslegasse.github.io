@@ -1,8 +1,9 @@
-import React from "react"
+// app/page.tsx
+import React from "react";
 import dynamic from 'next/dynamic';
 
 const Navbar = dynamic(() => import("../components/Navbar"), { ssr: false });
-import Hero from "../components/Hero"
+import Hero from "../components/Hero";
 
 const Home = () => {
     return (
@@ -10,6 +11,7 @@ const Home = () => {
             <Navbar />
             <Hero />
         </div>
-    )
+    );
 };
+
 export default Home;

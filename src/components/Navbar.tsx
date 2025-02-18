@@ -47,6 +47,7 @@ export const navLinks = [
   },
   
   
+  
 ];
 
 const Navbar = ({ minimal }: { minimal?: boolean }) => {

@@ -9,7 +9,7 @@ import { TracingBeam } from "../../components/ui/tracing-beam";
 const projects =[
   {
     name: "Krop Store",
-    role: "Growth Team",
+    role: "Growth Lead",
     year: "2022",
     description: "Fashion and clothing by Gen-Z, for Gen-Z.",
     image: "/projects/krop.png",
@@ -36,13 +36,18 @@ const freelance = [
   {
     name: "Ryne AI",
     link: "https://ryne.ai/",
-    image: "/projects/ryne.webp"
+    image: ""
   },
   {
-    name: "CS TRH",
-    link: "https://github.com/cslegasse/CS-Tech-Resource-Hub",
+    name: "Cal AI",
+    link: "https://calai.app",
     image: ""
-  }
+  },
+  {
+    name: "Gelrova",
+    link: "https://gelrova.com",
+    image: ""
+  },
   
 ];
 

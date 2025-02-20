@@ -1,2 +1,9 @@
-#you should have one of these
-credits: carter cote [Site](https://github.com/CarterCote/cartercote.com/)
+# legasseremon.com
+credits: http://www.cartercote.com
+
+#Tech Stack
+* React
+* Next.js
+* Tailwind
+* Posthog
+* Vercel

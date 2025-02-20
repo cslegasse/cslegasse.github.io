@@ -45,6 +45,11 @@ export const navLinks = [
     text: "WORK",
     link: "/projects",
   },
+  {
+    text: "RESUME",
+    link: "https://drive.google.com/file/d/1n3OaNNIizRdNLpyC8d5o1QNNTNmUMtkF/view?usp=sharingf",
+    download: true
+  },
   
   
   
@@ -164,14 +169,25 @@ const Navbar = ({ minimal }: { minimal?: boolean }) => {
             ) : (
               <nav className="absolute right-8 top-8 flex flex-col items-end" ref={navRef}>
                 {navLinks.map((link) => (
-                  <Link
-                    className="text-center no-underline text-[#ffffff80] text-base font-graebenbach-mono-regular transition duration-200 ease-in-out hover:text-white tracking-normal"
-                    href={link.link}
-                    key={`${link.link} + ${link.text}`}
-                    onClick={() => handleNavClick(link.text)}
-                  >
-                    {link.text}
-                  </Link>
+                  link.download ? (
+                    <a
+                      className="text-center no-underline text-[#ffffff80] text-base font-graebenbach-mono-regular transition duration-200 ease-in-out hover:text-white tracking-normal"
+                      href={link.link}
+                      download
+                      key={link.text}
+                    >
+                      {link.text}
+                    </a>
+                  ) : (
+                    <Link
+                      className="text-center no-underline text-[#ffffff80] text-base font-graebenbach-mono-regular transition duration-200 ease-in-out hover:text-white tracking-normal"
+                      href={link.link}
+                      key={link.text}
+                      onClick={() => handleNavClick(link.text)}
+                    >
+                      {link.text}
+                    </Link>
+                  )
                 ))}
               </nav>
             )}

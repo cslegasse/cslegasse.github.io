@@ -112,9 +112,10 @@ const Hero = () => {
                 <h1 className="tracking-tight font-voyager-thin text-[38px] md:text-[32px] lg:text-[32px]">hi, i'm legasse.</h1>
               </div>
               <div className="w-full font-aeonik-regular space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px]">
-                <p>i'm Legasse. a 20yo security engineer + content creator studying CS at the University of Florida. i am hyper-focused on entrepreneurship, research, and technology.</p>
+                <p>i'm Legasse. a 20yo security engineer + content creator studying CS at the University of Florida. i am hyper-focused on entrepreneurship, research, and tech.</p>
                 <p>i conduct research on various topics at Princeton University. i study how human cognition and security enables decision making and create AI-driven solutions for critical societal functions.</p>
                 <p>i have designed growth architecture for ecommerce businesses and brands to drive sales through marketing, technology, and logistics since 2022. </p>
+                <p>my goal is to become a successful entrepreneur by combining content creation, tech, and ecommerce. </p>
                 <p>you can reach me via <Link className="italic border-b hover:text-blue-500 transition-all duration-400 hover:border-blue-500" href="https://instagram.com/remonbiz">instagram</Link> or email <Link href="mailto:legasse@legasseremon.com" className="border-b italic hover:text-blue-500 transition-all duration-400 hover:border-blue-500">legasse@legasseremon.com</Link>.</p>
               </div>
   

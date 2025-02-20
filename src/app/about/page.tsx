@@ -133,13 +133,13 @@ const About = () => {
                   </p>
                   <p className="leading-[150%]">At 15, I became curious about computers and learned low-level programming languages, scripting, and Windows OS sys-internals. This hobby turned into a passion for SAAS development.
                   </p>
-                  <p className="leading-[150%]">At 18, I started research in phishing and deepfake detection systems at the <InteractiveLink href="https://ebnerlab.psych.ufl.edu/" event='ebner' underline={true} newTab={true}> University of Florida</InteractiveLink>. Later, focusing on cognitive control and cybersecurity at <InteractiveLink href="https://ncclab.princeton.edu" event='ncc' underline={true} newTab={true}> Princeton University</InteractiveLink>. I've co-published 4 papers and given dozens of talks.
+                  <p className="leading-[150%]">At 18, I started research in phishing and deepfake detection systems at the <InteractiveLink href="https://ebnerlab.psych.ufl.edu/" event='ebner' underline={true} newTab={true}> University of Florida</InteractiveLink>. Later, focusing on cognitive control and cybersecurity at <InteractiveLink href="https://ncclab.princeton.edu" event='ncc' underline={true} newTab={true}> Princeton University</InteractiveLink>. I've co-published papers and given some talks.
                   </p>
                   <p className="leading-[150%]">At 19, I worked on <InteractiveLink href="https:/krop.store/" event='krop' underline={true} newTab={true}> Krop Fashion</InteractiveLink>, a Gen-Z focused fashion store with over 1M customers; scaled the social media presence of <InteractiveLink href="https://cal.ai/" event='cal' underline={true} newTab={true}> Cal AI</InteractiveLink>, <InteractiveLink href="https:/krop.store/" event='krop' underline={true} newTab={true}> Ryne AI</InteractiveLink>, and <InteractiveLink href="https:/krop.store/" event='krop' underline={true} newTab={true}> Gelrova </InteractiveLink> to 100k+ followers; and created <InteractiveLink href="https:/krop.store/" event='krop' underline={true} newTab={true}> RemonBiz</InteractiveLink>, my personal brand providing tech and entrepreneurship insight.
                   </p>
                   <p className="leading-[150%]">I am a past board member of the <InteractiveLink href="https://www.shpeuf.com/" event='shpe' underline={true} newTab={true}> Society of Hispanic Professional Engineers</InteractiveLink> and the <InteractiveLink href="https://theleadershipalliance.org/" event='leadership' underline={true} newTab={true}> Leadership Alliance</InteractiveLink>.
                   </p>
-                  <p className="leading-[150%]">Today, I design growth architecture for ecommerce businesses and brands to drive sales. I provide the expertise of a software engineer, researcher, and growth hacker.
+                  <p className="leading-[150%]">Today, I design architecture for ecommerce businesses and brands to drive sales. I provide the expertise of a software engineer, researcher, and growth hacker. I create content for brands and sell digital products.
                   </p>
                   
                 </div>

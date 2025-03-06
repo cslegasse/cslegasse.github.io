@@ -3,17 +3,22 @@ import { FaXTwitter } from "react-icons/fa6";
 import Link from 'next/link';
 
 const Footer = () => (
-  <>
-<footer className="flex flex-col px-8 lg:px-24 pb-5 lg:pb-10 mt-20 items-start">
-    <div className="flex flex-col gap-y-[0] w-full">
-        <h1 className="tracking-tight font-aeonik-bold text-[29px] md:text-[108px] leading-[110%]">LET'S BUILD.</h1>
-        <div className="flex justify-between px-4 md:px-10 w-full">
-          <h1 className="tracking-tight font-aeonik-bold text-[29px] md:text-[108px] leading-[70%]">SEND ME</h1>
-          <h1 className="tracking-tight font-aeonik-bold text-[29px] md:text-[108px] leading-[70%]">AN EMAIL</h1>
-        </div>
-        <h1 className="tracking-tight font-aeonik-bold text-[29px] md:text-[108px] text-end leading-none">LEGASSE@LEGASSEREMON.COM</h1>
+  <footer className="flex flex-col items-center text-center px-8 lg:px-24 pb-5 lg:pb-10 mt-20 max-w-[90%] mx-auto min-h-[30vh]">
+    <div className="flex flex-col gap-y-4 w-full">
+      <h1 className="tracking-tight font-aeonik-bold text-[29px] md:text-[72px] lg:text-[108px] leading-[110%]">
+        LET'S BUILD.
+      </h1>
+      <div className="flex flex-col md:flex-row justify-center md:justify-between px-4 md:px-10 w-full">
+        <h1 className="tracking-tight font-aeonik-bold text-[29px] md:text-[72px] lg:text-[108px] leading-[70%]">
+          EMAIL
+        </h1>
+        <h1 className="tracking-tight font-aeonik-bold text-[29px] md:text-[72px] lg:text-[108px] leading-[70%]">
+          ME
+        </h1>
       </div>
-    </footer>
-  </>
-)
-export default Footer
+   
+    </div>
+  </footer>
+);
+
+export default Footer;

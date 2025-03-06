@@ -137,15 +137,3 @@ const Projects = () => {
   );
 };
 export default Projects;
-
-// Sellraze
-// Crayo
-// Musicfy
-// Bedrock
-// Pathways
-// Six Feet Supplies
-// Startup Exchange
-
-// Honorable Mentions
-// flightCooked
-// bedtimeStories

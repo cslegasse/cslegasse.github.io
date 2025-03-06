@@ -50,7 +50,10 @@ export const navLinks = [
     link: "https://drive.google.com/file/d/1n3OaNNIizRdNLpyC8d5o1QNNTNmUMtkF/view?usp=sharingf",
     download: true
   },
-  
+  {
+    text: "SOCIAL MEDIA",
+    link: "/social",
+  },
   
   
 ];
@@ -204,12 +207,12 @@ const Navbar = ({ minimal }: { minimal?: boolean }) => {
                 <FaGithub/>
               </div>
             </Link>
-            <Link href="//www.instagram.com/remonbiz" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('Instagram', false)}>
+            <Link href="https://www.instagram.com/remonbiz" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('Instagram', false)}>
               <div className="text-[#ffffff80] text-xl pb-2 transition duration-200 ease-in-out hover:text-white">
                 <FaInstagram/>
               </div>
             </Link>
-            <Link href="//www.linkedin.com/in/legasse-remon" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('LinkedIn', false)}>
+            <Link href="https://www.linkedin.com/in/legasse-remon" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('LinkedIn', false)}>
               <div className="text-[#ffffff80] text-xl transition duration-200 ease-in-out hover:text-white">
                 <FaLinkedin/>
               </div>

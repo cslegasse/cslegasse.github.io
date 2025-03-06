@@ -20,7 +20,6 @@ interface ButtonProps {
 const Button: FC<ButtonProps> = ({text, link, newTab = false, className, event}) => {
     const handleClick = () => {
         if (typeof window !== "undefined" && event) {
-            // Assuming event is a string like 'eventName, {json}', you might need to parse it if it's not being handled correctly
             const [eventName, eventProperties] = event.split(',').map(item => item.trim().replace(/(^'|'$)/g, ''));
             posthog.capture(eventName, JSON.parse(eventProperties));
         }

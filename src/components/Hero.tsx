@@ -4,7 +4,6 @@ import React, { useEffect, FC, useRef, useState } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
 import Button from './Button';
-import Marquee from "react-fast-marquee";
 import { HoverBorderGradient } from "./ui/hover-border-gradient";
 import posthog from 'posthog-js';
 import { CardSpotlight } from "@/src/components/ui/card-spotlight";
@@ -81,8 +80,17 @@ const Hero = () => {
 
   const blur = 5;
   const videoSource = "home/static.mp4";
+
+  useEffect(() => {
+    const script = document.createElement("script");
+    script.src = "https://assets.calendly.com/assets/external/widget.js";
+    script.async = true;
+    document.body.appendChild(script);
+  }, []);
   
   return (
+
+    
     <>
       <main className="flex min-h-screen w-full flex-col items-center justify-center py-8 md:py-12 lg:py-16">
         <div className="z-[-1] w-full h-full bg-black flex items-center justify-center absolute top-0">
@@ -112,15 +120,77 @@ const Hero = () => {
                 <h1 className="tracking-tight font-voyager-thin text-[38px] md:text-[32px] lg:text-[32px]">hi, i'm legasse.</h1>
               </div>
               <div className="w-full font-aeonik-regular space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px]">
-                <p>i'm Legasse. a 20yo security engineer + content creator studying CS at the University of Florida. i am hyper-focused on entrepreneurship, research, and tech.</p>
+                <p>i'm Legasse. a 20yo security engineer + content creator studying CS at the University of Florida. i am focused on entrepreneurship, research, and tech.</p>
                 <p>i conduct research on various topics at Princeton University. i study how human cognition and security enables decision making and create AI-driven solutions for critical societal functions.</p>
-                <p>i have designed growth architecture for ecommerce businesses and brands to drive sales through marketing, technology, and logistics since 2022. </p>
+                <p>i have experience in various forms of ecommerce dealing with marketing, sales, coding, and management. </p>
                 <p>my goal is to become a successful entrepreneur by combining content creation, tech, and ecommerce. </p>
                 <p>you can reach me via <Link className="italic border-b hover:text-blue-500 transition-all duration-400 hover:border-blue-500" href="https://instagram.com/remonbiz">instagram</Link> or email <Link href="mailto:legasse@legasseremon.com" className="border-b italic hover:text-blue-500 transition-all duration-400 hover:border-blue-500">legasse@legasseremon.com</Link>.</p>
               </div>
-  
+              <div className="w-full flex justify-center py-6">
+              <p>book a call with me.</p>
+
+            <div
+              className="calendly-inline-widget"
+              data-url="https://calendly.com/legasse"
+              style={{ minWidth: "320px", height: "500px" }} 
+            >
+
             </div>
           </div>
+        </div>
+      </div>
+      <div className="flex flex-col space-y-4 px-5">
+            <h1 className="tracking-tight font-voyager-thin text-[21px]">projects</h1>
+            <div className="flex flex-col pb-40 md:pb-20 pt-6 md:pt-0 lg:pt-0 sm:flex-row w-full space-y-3 md:space-y-0 md:space-x-4">
+            <div className="flex flex-row space-x-4 w-full">
+                <CardSpotlight 
+                  href="https://krop.store/"
+                  className="flex-1 opacity-80 hover:opacity-100 transition-all duration-400 rounded-xl border border-[#ffffff33] p-4 space-y-2 bg-black">
+                  <div className="flex flex-row w-full justify-between items-center">
+                    <p className="font-aeonik-medium text-[18px]">krop.store</p>
+                    <Image
+                      priority
+                      src="/home/iconArrowUprightWhite.png"
+                      height={100}
+                      width={100}
+                      alt="White arrow icon"
+                      className={`w-3 h-3 transition-opacity duration-200
+                        opacity-100
+                      }`}
+                    />
+                  </div>
+                  <p className="opacity-70 font-aeonik-regular text-[14px] leading-[130%]">
+                    fashion made by gen-z, for gen-z. custom fashion products from around the world. 1M happy customers.
+                    <br/><br/>
+                    featured on TikTok.
+                  </p>
+                </CardSpotlight>
+                <CardSpotlight 
+                  href="https://x.synapse.to"
+                  className="flex-1 opacity-80 hover:opacity-100 transition-all duration-400 rounded-xl border border-[#ffffff33] p-4 space-y-2 bg-black">
+                  <div className="flex flex-row w-full justify-between items-center">
+                    <p className="font-aeonik-medium text-[18px]">synapse x</p>
+                    <Image
+                      priority
+                      src="/home/iconArrowUprightWhite.png"
+                      height={100}
+                      width={100}
+                      alt="White arrow icon"
+                      className={`w-3 h-3 transition-opacity duration-200
+                        opacity-100
+                      }`}
+                    />
+                  </div>
+                  <p className="opacity-70 font-aeonik-regular text-[14px] leading-[130%]">
+                        2-step injection method to hack your favorite games with custom scripts. 34,000 happy coders.
+                    <br/><br/>
+                    featured on V3rmillion, SlurpTech.
+                  </p>
+                </CardSpotlight>
+              </div>
+            </div>
+          </div>
+
           <div className="flex flex-col w-full space-y-3 px-5">
             {/* <p className="font-aeonik-regular text-[21px] md:text-[18px] lg:text-[18px]">previously, I've design + build products:</p> */}
             <div className="flex flex-col space-y-20">
@@ -172,58 +242,7 @@ const Hero = () => {
             </div>
 
           </div>
-          <div className="flex flex-col space-y-4 px-5">
-            <h1 className="tracking-tight font-voyager-thin text-[21px]">projects</h1>
-            <div className="flex flex-col pb-40 md:pb-20 pt-6 md:pt-0 lg:pt-0 sm:flex-row w-full space-y-3 md:space-y-0 md:space-x-4">
-            <div className="flex flex-row space-x-4 w-full">
-                <CardSpotlight 
-                  href="https://krop.store/"
-                  className="flex-1 opacity-80 hover:opacity-100 transition-all duration-400 rounded-xl border border-[#ffffff33] p-4 space-y-2 bg-black">
-                  <div className="flex flex-row w-full justify-between items-center">
-                    <p className="font-aeonik-medium text-[18px]">krop.store</p>
-                    <Image
-                      priority
-                      src="/home/iconArrowUprightWhite.png"
-                      height={100}
-                      width={100}
-                      alt="White arrow icon"
-                      className={`w-3 h-3 transition-opacity duration-200
-                        opacity-100
-                      }`}
-                    />
-                  </div>
-                  <p className="opacity-70 font-aeonik-regular text-[14px] leading-[130%]">
-                    fashion made by gen-z, for gen-z. custom fashion products from around the world. 1M happy customers.
-                    <br/><br/>
-                    featured on TikTok.
-                  </p>
-                </CardSpotlight>
-                <CardSpotlight 
-                  href="https://x.synapse.to"
-                  className="flex-1 opacity-80 hover:opacity-100 transition-all duration-400 rounded-xl border border-[#ffffff33] p-4 space-y-2 bg-black">
-                  <div className="flex flex-row w-full justify-between items-center">
-                    <p className="font-aeonik-medium text-[18px]">synapse x</p>
-                    <Image
-                      priority
-                      src="/home/iconArrowUprightWhite.png"
-                      height={100}
-                      width={100}
-                      alt="White arrow icon"
-                      className={`w-3 h-3 transition-opacity duration-200
-                        opacity-100
-                      }`}
-                    />
-                  </div>
-                  <p className="opacity-70 font-aeonik-regular text-[14px] leading-[130%]">
-                        2-step injection method to hack your favorite games with custom scripts. 34,000 happy coders.
-                    <br/><br/>
-                    featured on V3rmillion, SlurpTech.
-                  </p>
-                </CardSpotlight>
-              </div>
-            </div>
-        
-          </div>
+    
           <div className="flex flex-col space-y-4 px-5">
             <h1 className="tracking-tight font-voyager-thin text-[21px]">see more</h1>
             <div className="flex flex-col pb-20 md:pb-0 pt-6 md:pt-0 lg:pt-0 sm:flex-row w-full space-y-3 md:space-y-0 md:space-x-4">
@@ -247,8 +266,6 @@ const Hero = () => {
           </div>
         </div>
         <Footer>
-
-          
         </Footer>
       </main>
     </>

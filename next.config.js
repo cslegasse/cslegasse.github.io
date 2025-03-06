@@ -1,5 +1,5 @@
 
-// deploy
+deploy
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -11,7 +11,7 @@ const nextConfig = {
 module.exports = nextConfig;
 
 
-// local
+local
 
 // /** @type {import('next').NextConfig} */
 // const nextConfig = {

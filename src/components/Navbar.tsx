@@ -7,7 +7,7 @@ import posthog from 'posthog-js';
 
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
-import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa'
+import { FaGithub, FaInstagram, FaLinkedin, FaTiktok, FaDiscord, FaYoutube} from 'react-icons/fa'
 import { FaXTwitter } from "react-icons/fa6";
 import {
   Sheet,
@@ -144,11 +144,6 @@ const Navbar = ({ minimal }: { minimal?: boolean }) => {
                         </Link>
                       ))}
                       <div className="flex flex-row space-x-4 pt-4 items-start">
-                        <Link href="https://twitter.com/remonbiz" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('Twitter', true)}>
-                          <div className="text-white text-2xl pb-2 transition duration-200 ease-in-out hover:text-white">
-                            <FaXTwitter />
-                          </div>
-                        </Link>
                         <Link href="https://github.com/cslegasse" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('GitHub', true)}>
                           <div className="text-white text-2xl pb-2 transition duration-200 ease-in-out hover:text-white">
                             <FaGithub/>
@@ -162,6 +157,11 @@ const Navbar = ({ minimal }: { minimal?: boolean }) => {
                         <Link href="//www.linkedin.com/in/legasse-remon" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('LinkedIn', true)}>
                           <div className="text-white text-2xl transition duration-200 ease-in-out hover:text-white">
                             <FaLinkedin/>
+                          </div>
+                        </Link>
+                        <Link href="https://tiktok.com/@remonbiz" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('TikTok', true)}>
+                          <div className="text-white text-2xl pb-2 transition duration-200 ease-in-out hover:text-white">
+                            <FaTiktok />
                           </div>
                         </Link>
                       </div>
@@ -197,11 +197,6 @@ const Navbar = ({ minimal }: { minimal?: boolean }) => {
           </header>
         {isMobile ? null : (
           <div className="flex flex-col space-y-3.5 fixed right-8 bottom-8 items-end">
-            <Link href="https://twitter.com/remonbiz" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('Twitter', false)}>
-              <div className="text-[#ffffff80] text-xl pb-2 transition duration-200 ease-in-out hover:text-white">
-                <FaXTwitter />
-              </div>
-            </Link>
             <Link href="https://github.com/cslegasse" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('GitHub', false)}>
               <div className="text-[#ffffff80] text-xl pb-2 transition duration-200 ease-in-out hover:text-white">
                 <FaGithub/>
@@ -215,6 +210,11 @@ const Navbar = ({ minimal }: { minimal?: boolean }) => {
             <Link href="https://www.linkedin.com/in/legasse-remon" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('LinkedIn', false)}>
               <div className="text-[#ffffff80] text-xl transition duration-200 ease-in-out hover:text-white">
                 <FaLinkedin/>
+              </div>
+            </Link>
+            <Link href="https://tiktok.com/@remonbiz" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('TikTok', true)}>
+              <div className="text-[#ffffff80] text-xl transition duration-200 ease-in-out hover:text-white">
+              <FaTiktok />
               </div>
             </Link>
           </div>

@@ -30,7 +30,6 @@ const handleProjButtomClick = () => {
 
 const nowProjects = [
   { name: "by gen-z for the fashionable", link: "https://krop.store/" },
-
 ];
 
 const prevProjects = [
@@ -110,7 +109,7 @@ const Hero = () => {
             </video>
             )}
         </div>
-        <div className="flex flex-col w-full max-w-[600px] mx-auto mt-14 md:mt-0 lg:pt-0 p-4 md:p-0 lg:p-0 justify-center text-6xl font-bold gap-y-32">
+        <div className="flex flex-col w-full max-w-[600px] mx-auto mt-14 md:mt-0 lg:pt-0 p-4 md:p-0 lg:p-0 justify-center text-6xl font-bold gap-y-8">
           <div className="flex flex-row w-full space-x-1 mt-24">
             <div className="self-start mt-3">
               <h1 className="tracking-tight font-voyager-thin text-[16px] md:text-[14px] lg:text-[14px] mr-1">►</h1>
@@ -121,7 +120,7 @@ const Hero = () => {
               </div>
               <div className="w-full font-aeonik-regular space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px]">
                 <p>i'm Legasse. a 20yo security engineer + content creator studying CS at the University of Florida. i am focused on entrepreneurship, research, and tech.</p>
-                <p>i conduct research on various topics at Princeton University. i study how human cognition and security enables decision making and create AI-driven solutions for critical societal functions.</p>
+                <p>i conduct research on AI and security at Princeton University. </p>
                 <p>i have experience in various forms of ecommerce dealing with marketing, sales, coding, and management. </p>
                 <p>my goal is to become a successful entrepreneur by combining content creation, tech, and ecommerce. </p>
                 <p>you can reach me via <Link className="italic border-b hover:text-blue-500 transition-all duration-400 hover:border-blue-500" href="https://instagram.com/remonbiz">instagram</Link> or email <Link href="mailto:legasse@legasseremon.com" className="border-b italic hover:text-blue-500 transition-all duration-400 hover:border-blue-500">legasse@legasseremon.com</Link>.</p>
@@ -134,7 +133,6 @@ const Hero = () => {
               data-url="https://calendly.com/legasse"
               style={{ minWidth: "320px", height: "500px" }} 
             >
-
             </div>
           </div>
         </div>
@@ -262,6 +260,12 @@ const Hero = () => {
                 className="w-full text-center md:text-left sm:w-auto"
                 event={`'aboutClicked', {property: 'value'}`}
               ></Button>
+              <Button 
+                text="SOCIAL MEDIA"
+                link="/social"
+                className="w-full text-center md:text-left sm:w-auto"
+                event={`'aboutClicked', {property: 'value'}`}
+              ></Button>
             </div>
           </div>
         </div>
@@ -271,6 +275,4 @@ const Hero = () => {
     </>
   );
 };
-
-
 export default Hero;

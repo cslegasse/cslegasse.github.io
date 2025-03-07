@@ -4,7 +4,10 @@ import Link from 'next/link';
 import Button from '../../components/Button';
 import Navbar from "../../components/Navbar"
 import Footer from "../../components/Footer"
+import Footer2 from "../../components/Footer-2"
 import { TracingBeam } from "../../components/ui/tracing-beam";
+import Marquee from "react-fast-marquee";
+
 
 const projects =[
   {
@@ -57,7 +60,7 @@ const Projects = () => {
       <Navbar />
       <div className="flex w-full flex-col pt-32 items-start">
         <div className="flex flex-col w-full px-8 sm:px-8 md:px-16 lg:px-20 items-start justify-start text-6xl font-bold gap-y-4 ">
-        <TracingBeam className="px-0 md:px-2">
+        <TracingBeam className="px-0 md:px-2 mb-1">
           <div
             className="flex flex-col w-full md:justify-center space-y-4 items-start">
             <Link href="/" className="w-full font-aeonik-thin tracking-regular space-y-3 text-sm mb-4">
@@ -101,7 +104,7 @@ const Projects = () => {
                 </div>
               </div>
             ))}
-            <div className='flex flex-col justify-end w-full pt-5 pb-20'>
+            <div className='flex flex-col justify-end w-full pt-5 pb-0 mt-0'>
               <p className="font-aeonik-thin border-b border-gray-400 pb-3 tracking-widest text-[18px]">FREELANCE WORK</p>
               <div className="flex flex-row items-start w-full">
                 <div className="w-2/3 pt-10 pr-20 items-start">
@@ -132,7 +135,16 @@ const Projects = () => {
           </TracingBeam>
         </div>
       </div>
-      <Footer/>
+      <div className="w-full flex flex-row py-20 overflow-hidden">
+                <Marquee gradient gradientColor="#000" gradientWidth={25} className="w-full" speed={85} autoFill loop={0}>
+                  {["LETS", "BUILD",].map((word, index) => (
+                    <p key={index} className="font-voyager-thin tracking-tight leading-[100%] text-[54px] mr-8">
+                      {word}
+                    </p>
+                  ))}
+                </Marquee>
+                </div>
+      <Footer2/>
     </>
   );
 };

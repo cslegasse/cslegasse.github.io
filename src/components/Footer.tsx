@@ -9,14 +9,12 @@ const Footer = () => (
         LET'S BUILD.
       </h1>
       <div className="flex flex-col md:flex-row justify-center md:justify-between px-4 md:px-10 w-full">
-        <h1 className="tracking-tight font-aeonik-bold text-[29px] md:text-[72px] lg:text-[108px] leading-[70%]">
-          EMAIL
+        <h1 className="tracking-tight font-aeonik-bold text-[29px] md:text-[72px] lg:text-[72px] leading-[70%]">
+          LEGASSE@LEGASSEREMON.COM
         </h1>
-        <h1 className="tracking-tight font-aeonik-bold text-[29px] md:text-[72px] lg:text-[108px] leading-[70%]">
-          ME
-        </h1>
+
       </div>
-   
+  
     </div>
   </footer>
 );

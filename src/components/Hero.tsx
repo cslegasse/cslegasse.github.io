@@ -110,23 +110,28 @@ const Hero = () => {
             )}
         </div>
         <div className="flex flex-col w-full max-w-[600px] mx-auto mt-14 md:mt-0 lg:pt-0 p-4 md:p-0 lg:p-0 justify-center text-6xl font-bold gap-y-8">
-          <div className="flex flex-row w-full space-x-1 mt-24">
-            <div className="self-start mt-3">
-              <h1 className="tracking-tight font-voyager-thin text-[16px] md:text-[14px] lg:text-[14px] mr-1">►</h1>
-            </div>
-            <div className="flex flex-col w-full align-center justify-center space-y-6 md:space-y-6 items-start">
-              <div className="flex flex-row w-full mb-3 items-center">
-                <h1 className="tracking-tight font-voyager-thin text-[38px] md:text-[32px] lg:text-[32px]">hi, i'm legasse.</h1>
-              </div>
-              <div className="w-full font-aeonik-regular space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px]">
-                <p>i'm Legasse. a 20yo security engineer + content creator studying CS at the University of Florida. i am focused on entrepreneurship, research, and tech.</p>
-                <p>i conduct research on AI and security at Princeton University. </p>
-                <p>i have experience in various forms of ecommerce dealing with marketing, sales, coding, and management. </p>
-                <p>my goal is to become a successful entrepreneur by combining content creation, tech, and ecommerce. </p>
-                <p>you can reach me via <Link className="italic border-b hover:text-blue-500 transition-all duration-400 hover:border-blue-500" href="https://instagram.com/remonbiz">instagram</Link> or email <Link href="mailto:legasse@legasseremon.com" className="border-b italic hover:text-blue-500 transition-all duration-400 hover:border-blue-500">legasse@legasseremon.com</Link>.</p>
-              </div>
-              <div className="w-full flex justify-center py-6">
-              <p>book a call with me.</p>
+  <div className="flex flex-row w-full space-x-1 mt-24">
+    <div className="self-start mt-3">
+      <h1 className="tracking-tight font-voyager-thin text-[16px] md:text-[14px] lg:text-[14px] mr-1">►</h1>
+    </div>
+    <div className="flex flex-col w-full align-center justify-center space-y-6 md:space-y-6 items-start">
+      <div className="flex flex-row w-full mb-3 items-center">
+        <h1 className="tracking-tight font-voyager-thin text-[38px] md:text-[32px] lg:text-[32px]">hi, i'm legasse.</h1>
+      </div>
+      <div className="w-full font-aeonik-regular space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px]">
+        <p>i'm Legasse. a 20yo security engineer + content creator studying CS at the University of Florida. i am focused on entrepreneurship, research, and tech.</p>
+        <p>i conduct research on AI and security at the University of Florida and Princeton University. </p>
+        <p>i have experience in various forms of ecommerce dealing with marketing, sales, coding, and management. </p>
+        <p>you can reach me via <Link className="italic border-b hover:text-blue-500 transition-all duration-400 hover:border-blue-500" href="https://instagram.com/remonbiz">instagram</Link> or email <Link href="mailto:legasse@legasseremon.com" className="border-b italic hover:text-blue-500 transition-all duration-400 hover:border-blue-500">legasse@legasseremon.com</Link>.</p>
+      </div>
+
+      {/* {}
+      <div className="w-full text-[20px] font-voyager-thin text-[#FFD700] py-6">
+        <p></p>
+      </div> */}
+
+      <div className="w-full flex justify-center py-6">
+        <p>book a call with me.</p>
 
             <div
               className="calendly-inline-widget"
@@ -180,7 +185,7 @@ const Hero = () => {
                     />
                   </div>
                   <p className="opacity-70 font-aeonik-regular text-[14px] leading-[130%]">
-                        2-step injection method to hack your favorite games with custom scripts. 34,000 happy coders.
+                        2-step injection method to hack your favorite games with custom scripts. 34,000 happy hackers.
                     <br/><br/>
                     featured on V3rmillion, SlurpTech.
                   </p>

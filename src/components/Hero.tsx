@@ -122,7 +122,7 @@ const Hero = () => {
         <p>i'm Legasse. a 20yo security engineer + content creator studying CS at the University of Florida. i am focused on entrepreneurship, research, and tech.</p>
         <p>i conduct research on AI and security at the University of Florida and Princeton University. </p>
         <p>i have experience in various forms of ecommerce dealing with marketing, sales, coding, and management. </p>
-        <p>you can reach me via <Link className="italic border-b hover:text-blue-500 transition-all duration-400 hover:border-blue-500" href="https://instagram.com/remonbiz">instagram</Link> or email <Link href="mailto:legasse@legasseremon.com" className="border-b italic hover:text-blue-500 transition-all duration-400 hover:border-blue-500">legasse@legasseremon.com</Link>.</p>
+        <p>you can reach me via <Link className="italic border-b hover:text-blue-500 transition-all duration-400 hover:border-blue-500" href="https://instagram.com/remonbiz">instagram</Link> or email <Link href="mailto:null@legasseremon.com" className="border-b italic hover:text-blue-500 transition-all duration-400 hover:border-blue-500">null@legasseremon.com</Link>.</p>
       </div>
 
       {/* {}

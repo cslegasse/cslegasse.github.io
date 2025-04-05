@@ -4,7 +4,7 @@ export const metadata = {
       template: "%s | legasseremon.com",
     },
     description:
-    "I'm Legasse, a 20yo security engineer + content creator studying CS at the University of Florida. i also do AI and cognitive science research at Princeton University. i study how human cognition and security enables decision making and create AI-driven solutions for critical societal functions.",
+    "I'm Legasse, a 20yo security engineer + content creator. i also do AI and cognitive science research at Princeton University. i study how human cognition and security enables decision making and create AI-driven solutions for critical societal functions.",
     keywords: [],
     robots: {
       index: true,
@@ -25,7 +25,7 @@ export const metadata = {
         template: "%s | legasseremon.com",
       },
       description:
-      "I'm Legasse, a 20yo security engineer + content creator studying CS at the University of Florida. i also do AI and cognitive science research at Princeton University. i study how human cognition and security enables decision making and create AI-driven solutions for critical societal functions.",
+      "I'm Legasse, a 20yo security engineer + content creator. i also do AI and cognitive science research at Princeton University. i study how human cognition and security enables decision making and create AI-driven solutions for critical societal functions.",
     },
     openGraph: {
       url: "https://legasseremon.com/",
@@ -37,7 +37,7 @@ export const metadata = {
         template: "%s | legasseremon.com",
       },
       description:
-      "I'm Legasse, a 20yo security engineer + content creator studying CS at the University of Florida. i also do AI and cognitive science research at Princeton University. i study how human cognition and security enables decision making and create AI-driven solutions for critical societal functions.",
+      "I'm Legasse, a 20yo security engineer + content creator. i also do AI and cognitive science research at Princeton University. i study how human cognition and security enables decision making and create AI-driven solutions for critical societal functions.",
       images: [
         {
           url: "https://legasseremon.com/",

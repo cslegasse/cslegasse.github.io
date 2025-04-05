@@ -15,7 +15,7 @@ const projects =[
     role: "Founder",
     year: "2024",
     description: "Home decor & fashion trends from around the world.",
-    image: "/projects/momentum.jpg",
+    image: "/projects/momentum.png",
     link: "https://www.instagram.com/momentumhouse.co/",
     linkText: "VIEW LANDING PAGE",
     secondLink: false,

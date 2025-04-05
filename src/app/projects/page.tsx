@@ -11,6 +11,17 @@ import Marquee from "react-fast-marquee";
 
 const projects =[
   {
+    name: "Momentum House",
+    role: "Founder",
+    year: "2024",
+    description: "Home decor & fashion trends from around the world.",
+    image: "/projects/momentum.jpg",
+    link: "https://www.instagram.com/momentumhouse.co/",
+    linkText: "VIEW LANDING PAGE",
+    secondLink: false,
+    linkText2: "VIEW MOBILE APP"
+  },
+  {
     name: "Krop Store",
     role: "Growth Lead",
     year: "2022",

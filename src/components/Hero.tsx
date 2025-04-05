@@ -29,10 +29,18 @@ const handleProjButtomClick = () => {
 };
 
 const nowProjects = [
+
+  {name: "globally sourced fashion & decor", link: "https://www.instagram.com/momentumhouse.co/"},
   { name: "by gen-z for the fashionable", link: "https://krop.store/" },
 ];
 
 const prevProjects = [
+  { 
+    name: "momentum house",
+    role: "founder",
+    desc: "home decor & fashion; globally sourced. WIP.", 
+    link: "https://www.instagram.com/momentumhouse.co/",
+  },
   { 
     name: "krop fashion",
     role: "growth team",
@@ -88,8 +96,6 @@ const Hero = () => {
   }, []);
   
   return (
-
-    
     <>
       <main className="flex min-h-screen w-full flex-col items-center justify-center py-8 md:py-12 lg:py-16">
         <div className="z-[-1] w-full h-full bg-black flex items-center justify-center absolute top-0">
@@ -119,7 +125,7 @@ const Hero = () => {
         <h1 className="tracking-tight font-voyager-thin text-[38px] md:text-[32px] lg:text-[32px]">hi, i'm legasse.</h1>
       </div>
       <div className="w-full font-aeonik-regular space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px]">
-        <p>i'm Legasse. a 20yo security engineer + content creator studying CS at the University of Florida. i am focused on entrepreneurship, research, and tech.</p>
+        <p>i'm Legasse. a 20yo security engineer + content creator. i am focused on entrepreneurship, research, and tech.</p>
         <p>i conduct research on AI and security at the University of Florida and Princeton University. </p>
         <p>i have experience in various forms of ecommerce dealing with marketing, sales, coding, and management. </p>
         <p>you can reach me via <Link className="italic border-b hover:text-blue-500 transition-all duration-400 hover:border-blue-500" href="https://instagram.com/remonbiz">instagram</Link> or email <Link href="mailto:null@legasseremon.com" className="border-b italic hover:text-blue-500 transition-all duration-400 hover:border-blue-500">null@legasseremon.com</Link>.</p>

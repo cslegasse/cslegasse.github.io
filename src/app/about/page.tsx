@@ -41,18 +41,18 @@ const awards = [
     
 ];
 
-const education = [
-  {
-    name: "BS Computer Science",
-    desc: "University of Florida",
-    year: "2022-2026",
-  },
-  {
-    name: "Exchange Student",
-    desc: "Kyoto University",
-    year: "2025",
-  },
-]
+// const education = [
+//   {
+//     name: "BS Computer Science",
+//     desc: "University of Florida",
+//     year: "2022-2026",
+//   },
+//   {
+//     name: "Exchange Student",
+//     desc: "Kyoto University",
+//     year: "2025",
+//   },
+// ]
 
 const experiences = [
     {
@@ -185,7 +185,7 @@ const About = () => {
           </div>
           <div className="w-full py-20">
               <p className="font-aeonik-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">EDUCATION</p>
-              {education.map((education) => (
+              {/* {education.map((education) => (
                   <div className="flex flex-col md:flex-row justify-between md:items-end w-full border-b border-gray-800 pt-10">
                       <div>
                           <p className="font-voyager-thin tracking-tight text-[36px] mb-3">{education.name}</p>
@@ -193,7 +193,7 @@ const About = () => {
                       </div>
                       <p className="font-aeonik-thin tracking-tight text-[18px] md:text-[21px] mb-3">{education.year}</p>
                   </div>
-              ))}
+              ))} */}
           </div>
           <div className="w-full py-20">
               <p className="font-aeonik-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">AWARDS</p>

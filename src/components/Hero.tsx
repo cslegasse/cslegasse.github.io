@@ -29,7 +29,6 @@ const handleProjButtomClick = () => {
 };
 
 const nowProjects = [
-
   {name: "globally sourced fashion & decor", link: "https://www.instagram.com/momentumhouse.co/"},
   { name: "by gen-z for the fashionable", link: "https://krop.store/" },
 ];
@@ -53,7 +52,6 @@ const prevProjects = [
     desc: "inject scripts in seconds. 0 -> 175k arr.", 
     link: "https://x.synapse.to/",
   },
- 
 
 ];
 

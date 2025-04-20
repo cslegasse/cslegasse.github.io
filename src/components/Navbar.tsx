@@ -46,13 +46,9 @@ export const navLinks = [
     link: "/projects",
   },
   {
-    text: "RESUME",
-    link: "https://drive.google.com/file/d/1n3OaNNIizRdNLpyC8d5o1QNNTNmUMtkF/view?usp=sharingf",
-    download: true
-  },
-  {
     text: "SOCIAL MEDIA",
     link: "/social",
+    download: "",
   },
   
   
@@ -154,11 +150,6 @@ const Navbar = ({ minimal }: { minimal?: boolean }) => {
                             <FaInstagram/>
                           </div>
                         </Link>
-                        <Link href="//www.linkedin.com/in/legasse-remon" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('LinkedIn', true)}>
-                          <div className="text-white text-2xl transition duration-200 ease-in-out hover:text-white">
-                            <FaLinkedin/>
-                          </div>
-                        </Link>
                         <Link href="https://tiktok.com/@remonbiz" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('TikTok', true)}>
                           <div className="text-white text-2xl pb-2 transition duration-200 ease-in-out hover:text-white">
                             <FaTiktok />
@@ -205,11 +196,6 @@ const Navbar = ({ minimal }: { minimal?: boolean }) => {
             <Link href="https://www.instagram.com/remonbiz" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('Instagram', false)}>
               <div className="text-[#ffffff80] text-xl pb-2 transition duration-200 ease-in-out hover:text-white">
                 <FaInstagram/>
-              </div>
-            </Link>
-            <Link href="https://www.linkedin.com/in/legasse-remon" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('LinkedIn', false)}>
-              <div className="text-[#ffffff80] text-xl transition duration-200 ease-in-out hover:text-white">
-                <FaLinkedin/>
               </div>
             </Link>
             <Link href="https://tiktok.com/@remonbiz" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('TikTok', true)}>

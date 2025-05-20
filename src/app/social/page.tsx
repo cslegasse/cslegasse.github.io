@@ -186,9 +186,6 @@ const Social = () => {
               ))}
             </div>
           </div>
-
-
-
             {}
               <div className="w-full flex flex-row py-20 overflow-hidden">
                 <Marquee gradient gradientColor="#000" gradientWidth={25} className="w-full" speed={85} autoFill loop={0}>

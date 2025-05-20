@@ -41,31 +41,22 @@ const awards = [
     
 ];
 
-// const education = [
-//   {
-//     name: "BS Computer Science",
-//     desc: "University of Florida",
-//     year: "2022-2026",
-//   },
-//   {
-//     name: "Exchange Student",
-//     desc: "Kyoto University",
-//     year: "2025",
-//   },
-// ]
+const education = [
+  {
+    name: "BS Computer Science",
+    desc: "University of Florida",
+    year: "2022-2026",
+  },
+  {
+    name: "Exchange Student",
+    desc: "Kyoto University",
+    year: "2025",
+  },
+]
 
 const experiences = [
     {
         number: "01",
-        position: "CYBERSECURITY INTERN",
-        year: "2025",
-        companyName: "NVIDIA",
-        link: "https://nvidia.com/",
-        imageName: "/projects/nvidia.jpg",
-        roleDescription: "Soon."
-    },
-    {
-        number: "02",
         position: "ML ENGINEER INTERN",
         year: "2024",
         companyName: "IBM",
@@ -74,7 +65,7 @@ const experiences = [
         roleDescription: "IBM Watson."
     },
     {
-        number: "03",
+        number: "02",
         position: "AI RESEARCH INTERN",
         year: "2024",
         companyName: "Princeton University",
@@ -83,7 +74,7 @@ const experiences = [
         roleDescription: "VLMs for cognitive control research."
     },
     {
-        number: "04",
+        number: "03",
         position: "SECURITY ENGINEER INTERN",
         year: "2024",
         companyName: "Mastercard",
@@ -92,7 +83,7 @@ const experiences = [
         roleDescription: "Insider Threat and Intelligence."
     },
     {
-      number: "05",
+      number: "04",
       position: "CYBERSECURITY INTERN",
       year: "2024",
       companyName: "Raymond James Financial",
@@ -135,14 +126,13 @@ const About = () => {
 
                   <p className="leading-[150%]">At 18, I started research in phishing and deepfake detection systems at the <InteractiveLink href="https://ebnerlab.psych.ufl.edu/" event='ebner' underline={true} newTab={true}> University of Florida</InteractiveLink>. Later, focusing on AI and cybersecurity at <InteractiveLink href="https://ncclab.princeton.edu" event='ncc' underline={true} newTab={true}> Princeton University</InteractiveLink>.
                   </p>
-                  <p className="leading-[150%]">At 19, I worked on <InteractiveLink href="https://krop.store/" event='krop' underline={true} newTab={true}> Krop Fashion</InteractiveLink>, a Gen-Z focused white-labeled fashion store with over 1M customers; helped scale the social media presence of <InteractiveLink href="https://gelrova.com/" event='gelrova' underline={true} newTab={true}> Gelrova </InteractiveLink> to 100k+ customers; and created <InteractiveLink href="https://beacons.ai/legasse" event='beacons' underline={true} newTab={true}> RemonBiz</InteractiveLink>, my personal brand providing tech, entrepreneurship, travel, and lifestyle insight.
+                  <p className="leading-[150%]">At 19, I worked on <InteractiveLink href="https://krop.store/" event='krop' underline={true} newTab={true}> Krop Fashion</InteractiveLink>, a Gen-Z focused white-labeled fashion store with over 1M customers and created <InteractiveLink href="https://beacons.ai/legasse" event='beacons' underline={true} newTab={true}> RemonBiz</InteractiveLink>, my personal brand providing tech, entrepreneurship, travel, and lifestyle insight.
                   </p>
                   <p className="leading-[150%]">At 20, I created <InteractiveLink href="https://beacons.ai/legasse/" event='beacons_link' underline={true} newTab={true}> AI-generated/automated shorts </InteractiveLink> on <InteractiveLink href="https://youtube.com/" event='yt' underline={true} newTab={true}> Youtube </InteractiveLink> and <InteractiveLink href="https://tiktok.com/" event='tt' underline={true} newTab={true}> TikTok </InteractiveLink>, grossing 18k MRR across 25 channels and sold them to <InteractiveLink href="https://www.forbes.com/profile/pubity-group/" event='pubity' underline={true} newTab={true}> Pubity Group </InteractiveLink>. </p>
                 
-                  <p className="leading-[150%]">Today, I design architecture for ecommerce businesses and brands to drive sales. I run affiliate dropshipping stores and create content for brands and sell digital products.
+                  <p className="leading-[150%]">Today, I'm working on building a tech startup and ecommerce brands. I run affiliate dropshipping stores and create content for brands to sell digital products.
                   </p>
           
-                  
                 </div>
               </div>
             {}

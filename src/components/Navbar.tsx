@@ -7,7 +7,7 @@ import posthog from 'posthog-js';
 
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoMdClose } from "react-icons/io";
-import { FaGithub, FaInstagram, FaLinkedin, FaTiktok, FaDiscord, FaYoutube} from 'react-icons/fa'
+import { FaGithub, FaInstagram, FaLinkedin, FaTiktok, FaDiscord, FaYoutube, FaLink} from 'react-icons/fa'
 import { FaXTwitter } from "react-icons/fa6";
 import {
   Sheet,
@@ -48,6 +48,11 @@ export const navLinks = [
   {
     text: "SOCIAL MEDIA",
     link: "/social",
+    download: "",
+  },
+   {
+    text: "RESEARCH",
+    link: "/research",
     download: "",
   },
   
@@ -201,6 +206,16 @@ const Navbar = ({ minimal }: { minimal?: boolean }) => {
             <Link href="https://tiktok.com/@remonbiz" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('TikTok', true)}>
               <div className="text-[#ffffff80] text-xl transition duration-200 ease-in-out hover:text-white">
               <FaTiktok />
+              </div>
+            </Link>
+             <Link href="https://youtube.com/@remonbiz" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('Youtube', true)}>
+              <div className="text-[#ffffff80] text-xl transition duration-200 ease-in-out hover:text-white">
+              <FaYoutube/>
+              </div>
+            </Link>
+             <Link href="https://linkedin.com/in/legasse-remon/" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('LinkedIn', true)}>
+              <div className="text-[#ffffff80] text-xl transition duration-200 ease-in-out hover:text-white">
+              <FaLinkedin />
               </div>
             </Link>
           </div>

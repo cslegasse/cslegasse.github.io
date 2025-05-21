@@ -29,20 +29,13 @@ const handleProjButtomClick = () => {
 };
 
 const nowProjects = [
-  {name: "globally sourced fashion & decor", link: "https://www.instagram.com/momentumhouse.co/"},
   { name: "by gen-z for the fashionable", link: "https://krop.store/" },
 ];
 
 const prevProjects = [
   { 
-    name: "momentum house",
-    role: "founder",
-    desc: "home decor & fashion; globally sourced. WIP.", 
-    link: "https://www.instagram.com/momentumhouse.co/",
-  },
-  { 
     name: "krop fashion",
-    role: "growth team",
+    role: "growth lead",
     desc: "by gen-z for the fashionable. 0 -> 500k arr. 1M customers.", 
     link: "https://krop.store/",
   },
@@ -125,7 +118,7 @@ const Hero = () => {
       <div className="w-full font-aeonik-regular space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px]">
         <p>a 21yo security engineer + content creator. i am focused on entrepreneurship, research, and tech.</p>
         <p>i have experience with various forms of ecommerce dealing with marketing, sales, coding, and management. </p>
-        <p>i'm currently building a startup and working on fashion ecommerce brands. </p>
+        <p>i'm currently figuring out what to build alongside a fashion ecommerce brand. </p>
 
         <p>you can reach me via <Link className="italic border-b hover:text-blue-500 transition-all duration-400 hover:border-blue-500" href="https://instagram.com/remonbiz">instagram</Link> or email <Link href="mailto:null@legasseremon.com" className="border-b italic hover:text-blue-500 transition-all duration-400 hover:border-blue-500">null@legasseremon.com</Link>.</p>
       </div>
@@ -168,7 +161,7 @@ const Hero = () => {
                     />
                   </div>
                   <p className="opacity-70 font-aeonik-regular text-[14px] leading-[130%]">
-                    fashion made by gen-z, for gen-z. custom fashion products from around the world. 1M happy customers.
+                    fashion made by gen-z, for gen-z. custom fashion products from around the world. 1M+ happy customers.
                     <br/><br/>
                     featured on TikTok.
                   </p>

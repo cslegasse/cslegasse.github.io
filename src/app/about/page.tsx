@@ -130,7 +130,7 @@ const About = () => {
                   </p>
                   <p className="leading-[150%]">At 20, I created <InteractiveLink href="https://beacons.ai/legasse/" event='beacons_link' underline={true} newTab={true}> AI-generated/automated shorts </InteractiveLink> on <InteractiveLink href="https://youtube.com/" event='yt' underline={true} newTab={true}> Youtube </InteractiveLink> and <InteractiveLink href="https://tiktok.com/" event='tt' underline={true} newTab={true}> TikTok </InteractiveLink>, grossing 18k MRR across 25 channels and sold them to <InteractiveLink href="https://www.forbes.com/profile/pubity-group/" event='pubity' underline={true} newTab={true}> Pubity Group </InteractiveLink>. </p>
                 
-                  <p className="leading-[150%]">Today, I'm working on building a tech startup and ecommerce brands. I run affiliate dropshipping stores and create content for brands to sell digital products.
+                  <p className="leading-[150%]">Today, I'm working on building a tech startup and ecommerce brands.
                   </p>
           
                 </div>

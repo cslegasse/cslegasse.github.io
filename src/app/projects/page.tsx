@@ -10,17 +10,7 @@ import Marquee from "react-fast-marquee";
 
 
 const projects =[
-  {
-    name: "Momentum House",
-    role: "Founder",
-    year: "2024",
-    description: "Home decor & fashion trends from around the world.",
-    image: "/projects/momentum.png",
-    link: "https://www.instagram.com/momentumhouse.co/",
-    linkText: "VIEW LANDING PAGE",
-    secondLink: false,
-    linkText2: "VIEW MOBILE APP"
-  },
+
   {
     name: "Krop Store",
     role: "Growth Lead",
@@ -53,11 +43,6 @@ const freelance = [
     image: ""
   },
   {
-    name: "Cal AI",
-    link: "https://calai.app",
-    image: ""
-  },
-  {
     name: "Gelrova",
     link: "https://gelrova.com",
     image: ""
@@ -81,7 +66,7 @@ const Projects = () => {
           <div
             className="flex flex-col w-full align-center justify-center space-y-4 items-start">
               <p className="w-full font-aeonik-bold tracking-tight text-center leading-[100%] text-[21px] mb-3">PROJECTS </p>
-              <h1 className="w-full font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">Here are some projects I've worked on:</h1>
+              <h1 className="w-full font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">some things i've worked on:</h1>
               {projects.map((project) => (
               <div key={project.name} className="w-full flex flex-col md:flex-row md:space-x-5 py-6 md:py-10 items-start font-aeonik-thin tracking-regular space-y-3 text-sm">
                 <div className="flex flex-col md:flex-row w-full md:w-1/2 lg:w-1/2">

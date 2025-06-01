@@ -50,11 +50,6 @@ export const navLinks = [
     link: "/social",
     download: "",
   },
-  //  {
-  //   text: "RESEARCH",
-  //   link: "/research",
-  //   download: "",
-  // },
   
   
 ];

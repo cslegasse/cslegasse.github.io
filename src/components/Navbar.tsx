@@ -50,6 +50,14 @@ export const navLinks = [
     link: "/social",
     download: "",
   },
+   {
+    text: "RESEARCH",
+    link: "/research",
+  },
+   {
+    text: "CV",
+    link: "https://drive.google.com/file/d/1G7DR2mGY8hRCb_T_lcNDt_d6-vCx9QeB/view?usp=sharing",
+  },
   
   
 ];

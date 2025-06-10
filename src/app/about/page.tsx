@@ -173,7 +173,8 @@ const About = () => {
             </div>
             ))}
           </div>
-          <div className="w-full py-20">
+          
+          <div className="w-full py-10">
               <p className="font-aeonik-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">AWARDS</p>
               {awards.map((award) => (
                   <div className="flex flex-col md:flex-row justify-between md:items-end w-full border-b border-gray-800 pt-10">
@@ -185,6 +186,53 @@ const About = () => {
                   </div>
               ))}
           </div>
+
+             <div className="w-full py-2">
+              <p className="font-aeonik-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">TECH EVENTS</p>
+                <p className="font-voyager-thin tracking-tight text-[36px] mb-3"> I've been to a lot of tech events in undergrad.</p>
+                      <div>
+  <ul className="list-disc list-inside font-aeonik-thin text-gray-400 tracking-tight text-[18px] md:text-[21px] mb-3">
+    <li>
+      10 hackathons attended, 5 collegiate hacking competitions, 11 tech conferences
+    </li>
+    <li>
+      <InteractiveLink 
+        href="https://www.uber.com/us/en/careers/teams/university/" 
+        event="uber" 
+        underline={true} 
+        newTab={true}
+      >
+        Uber UCP Fellow
+      </InteractiveLink>
+    </li>
+    <li>
+      Stanford's 
+      <InteractiveLink 
+        href="https://engineering.stanford.edu/serge" 
+        event="serge" 
+        underline={true} 
+        newTab={true}
+      >
+        {' '}SERGE
+      </InteractiveLink> 
+      & UMich's 
+      <InteractiveLink 
+        href="https://emerge.engin.umich.edu/" 
+        event="emerge" 
+        underline={true} 
+        newTab={true}
+      >
+        {' '}EMERGE
+      </InteractiveLink> 
+      program(s).
+    </li>
+  </ul>
+</div>
+<p className="font-voyager-thin tracking-tight text-[36px] mb-3"> You can find my resources <InteractiveLink href="https://github.com/cslegasse/CS-Tech-Resource-Hub" event='here' underline={true} newTab={true}> here</InteractiveLink> </p>
+              
+          </div>
+           
+
         </TracingBeam>
         </div>
       </div>

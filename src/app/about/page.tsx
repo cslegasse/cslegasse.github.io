@@ -137,7 +137,7 @@ const About = () => {
               </div>
             {}
             </div>
-          <div className="flex flex-col w-full py-20">
+          <div className="flex flex-col w-full py-10">
             <p className="font-aeonik-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">EXPERIENCE</p>
             {groupedExperiences.map((group, index) => (
             <div key={index} className="flex flex-col md:flex-row w-full justify-between md:space-x-10 border-b pb-10 border-gray-800">

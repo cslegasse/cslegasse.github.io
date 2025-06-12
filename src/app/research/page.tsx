@@ -12,18 +12,18 @@ import Marquee from "react-fast-marquee";
 import InteractiveLink from '../about/InteractiveLink';
 
 
-const education = [
-  {
-    name: "B.S. Computer Science",
-    desc: "University of Florida",
-    year: "2022-2026",
-  },
-  {
-    name: "Exchange Student",
-    desc: "Kyoto University",
-    year: "2025",
-  },
-]
+// const education = [
+//   {
+//     name: "B.S. Computer Science",
+//     desc: "University of Florida",
+//     year: "2022-2026",
+//   },
+//   {
+//     name: "Exchange Student",
+//     desc: "Kyoto University",
+//     year: "2025",
+//   },
+// ]
 
 
 
@@ -59,9 +59,9 @@ export default function Research() {
                   />
                   <div className="space-y-2 text-sm text-slate-100">
                     <p>
-                      <a href="lr0077@princeton.edu">legasseremon@ufl.edu</a>
+                      <a href="lr0077@princeton.edu">lr0077@princeton.edu</a>
                     </p>
-                    <p>University of Florida</p>
+                    <p>Research Inquiries</p>
                   </div>
 
                   {/* Social Links */}
@@ -83,7 +83,7 @@ export default function Research() {
                     <p className="text-slate-100 leading-relaxed text-[18px]">
                     </p>
                   </div>
-                  {/* ✅ Education Section */}
+                  {/* ✅ Education Section
                 <div>
                     <h2 className="text-2xl font-semibold mb-2">Education</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -95,7 +95,7 @@ export default function Research() {
                         </div>
                     ))}
                     </div>
-                </div>
+                </div> */}
   
            
         

@@ -7,58 +7,58 @@ import Footer from "../../components/Footer"
 import { TracingBeam } from "../../components/ui/tracing-beam";
 import InteractiveLink from './InteractiveLink';
 
-const awards = [
-    {
-        name: "Benjamin A Gilman Award",
-        desc: "1 of 500 for $4,000 research funding abroad by US Department of State.",
-        year: "2024",
-    },
-    {
-      name: "Research Experience for Undergraduate (REU) Recipient",
-      desc: "Awarded $15,000 in summer research funding by the National Science Foundation.",
-      year: "2024",
-    },
-    {
-      name: "Ronald E McNair Post-baccalaurete Achievement Award",
-      desc: "Recognized for graduate studies and research efforts to support students.",
-      year: "2024",
-    },
-    {
-      name: "AI Across the Statewide Curriculum Award",
-      desc: "AI research funding through UF-FAMU NSF Award #2123440.",
-      year: "2023",
-    },
-    {
-      name: "Cambridge International Merit Award",
-      desc: "Recognized for perfect scores on Cambridge University entrance assessments.",
-      year: "2022",
-    },
-    {
-      name: "Sunshine Opportunity Scholar",
-      desc: "1 of 10 for $25,000 scholarship for disadvantaged students in Florida.",
-      year: "2022",
-    },
+// const awards = [
+//     {
+//         name: "Benjamin A Gilman Award",
+//         desc: "1 of 500 for $4,000 research funding abroad by US Department of State.",
+//         year: "2024",
+//     },
+//     {
+//       name: "Research Experience for Undergraduate (REU) Recipient",
+//       desc: "Awarded $15,000 in summer research funding by the National Science Foundation.",
+//       year: "2024",
+//     },
+//     {
+//       name: "Ronald E McNair Post-baccalaurete Achievement Award",
+//       desc: "Recognized for graduate studies and research efforts to support students.",
+//       year: "2024",
+//     },
+//     {
+//       name: "AI Across the Statewide Curriculum Award",
+//       desc: "AI research funding through UF-FAMU NSF Award #2123440.",
+//       year: "2023",
+//     },
+//     {
+//       name: "Cambridge International Merit Award",
+//       desc: "Recognized for perfect scores on Cambridge University entrance assessments.",
+//       year: "2022",
+//     },
+//     {
+//       name: "Sunshine Opportunity Scholar",
+//       desc: "1 of 10 for $25,000 scholarship for disadvantaged students in Florida.",
+//       year: "2022",
+//     },
     
-];
+// ];
 
-const education = [
-  {
-    name: "BS Computer Science",
-    desc: "University of Florida",
-    year: "2022-2026",
-  },
-  {
-    name: "Exchange Student",
-    desc: "Kyoto University",
-    year: "2025",
-  },
-]
+// const education = [
+//   {
+//     name: "BS Computer Science",
+//     desc: "University of Florida",
+//     year: "2022-2026",
+//   },
+//   {
+//     name: "Exchange Student",
+//     desc: "Kyoto University",
+//     year: "2025",
+//   },
+// ]
 
 const experiences = [
     {
         number: "01",
         position: "ML ENGINEER INTERN",
-        year: "2024",
+        year: "2025",
         companyName: "IBM",
         link: "https://www.ibm.com/",
         imageName: "/projects/ibm.jpg",
@@ -85,7 +85,7 @@ const experiences = [
     {
       number: "04",
       position: "CYBERSECURITY INTERN",
-      year: "2024",
+      year: "2023",
       companyName: "Raymond James Financial",
       link: "https://www.raymondjames.com/",
       imageName: "/projects/raymondjames.png",
@@ -110,15 +110,15 @@ const About = () => {
               </Link>
               <div className="flex flex-col w-full align-center justify-center space-y-4 items-center">
                 <p className="w-full font-aeonik-bold tracking-tight text-center leading-[100%] text-[21px] mb-3">ABOUT </p>
-                <h1 className="font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">I'm Legasse, a Cuban-American security engineer, researcher, and content creator.</h1>
-                <Image
+                <h1 className="font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">be yourself.</h1>
+                {/* <Image
                   priority
                   src="/about/me.JPEG"
                   height={600}
                   width={481}
                   alt="Descriptive Text"
                   className="py-10"
-                />
+                /> */}
                 <div className="w-full md:w-2/3 font-aeonik-thin tracking-[0.015em] space-y-10 items-center align-center justify-center text-[21px] md:text-[21px]">
                   <p className="leading-[150%]">My journey in software and security started at age 14 utilizing a DLL injector <InteractiveLink href="https://x.synapse.to" event='synapse' underline={true} newTab={true}>Synapse X.</InteractiveLink> where I was a scripter. Synapse Softworks was later <InteractiveLink href="https://devforum.roblox.com/t/exploit-prevention-update/2663101" event='synapse' underline={true} newTab={true}> acquired by ROBLOX</InteractiveLink> for millions.
                   </p>
@@ -174,7 +174,7 @@ const About = () => {
             ))}
           </div>
           
-          <div className="w-full py-10">
+          {/* <div className="w-full py-10">
               <p className="font-aeonik-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">AWARDS</p>
               {awards.map((award) => (
                   <div className="flex flex-col md:flex-row justify-between md:items-end w-full border-b border-gray-800 pt-10">
@@ -185,54 +185,64 @@ const About = () => {
                       <p className="font-aeonik-thin tracking-tight text-[18px] md:text-[21px] mb-3">{award.year}</p>
                   </div>
               ))}
-          </div>
+          </div> */}
+          <div className="w-full pt-4 pb-6">
+            {/* Section Header */}
+            <p className="font-aeonik-thin tracking-wide text-[16px] text-gray-400 uppercase border-b border-gray-600 pb-2 mb-2">
+              Tech Events
+            </p>
 
-             <div className="w-full py-2">
-              <p className="font-aeonik-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">TECH EVENTS</p>
-                <p className="font-voyager-thin tracking-tight text-[36px] mb-3"> I've been to a lot of tech events in undergrad.</p>
-                      <div>
-  <ul className="list-disc list-inside font-aeonik-thin text-gray-400 tracking-tight text-[18px] md:text-[21px] mb-3">
-    <li>
-      10 hackathons attended, 5 collegiate hacking competitions, 11 tech conferences
-    </li>
-    <li>
-      <InteractiveLink 
-        href="https://www.uber.com/us/en/careers/teams/university/" 
-        event="uber" 
-        underline={true} 
-        newTab={true}
-      >
-        Uber UCP Fellow
-      </InteractiveLink>
-    </li>
-    <li>
-      Stanford's 
-      <InteractiveLink 
-        href="https://engineering.stanford.edu/serge" 
-        event="serge" 
-        underline={true} 
-        newTab={true}
-      >
-        {' '}SERGE
-      </InteractiveLink> 
-      & UMich's 
-      <InteractiveLink 
-        href="https://emerge.engin.umich.edu/" 
-        event="emerge" 
-        underline={true} 
-        newTab={true}
-      >
-        {' '}EMERGE
-      </InteractiveLink> 
-      program(s).
-    </li>
-  </ul>
-</div>
-<p className="font-voyager-thin tracking-tight text-[36px] mb-3"> You can find my resources <InteractiveLink href="https://github.com/cslegasse/CS-Tech-Resource-Hub" event='here' underline={true} newTab={true}> here</InteractiveLink> </p>
-              
-          </div>
-           
+            {/* Intro Text */}
+            <p className="font-voyager-thin text-[32px] text-white mb-3 leading-snug">
+              I’ve attended numerous tech events during undergrad.
+            </p>
 
+            {/* Event List */}
+            <ul className="list-disc list-inside text-gray-400 font-aeonik-thin text-[17px] leading-relaxed space-y-2 mb-5">
+              <li>10 hackathons, 5 collegiate hacking competitions, 11 tech conferences</li>
+              <li>
+                <InteractiveLink 
+                  href="https://www.uber.com/us/en/careers/teams/university/" 
+                  event="uber" 
+                  underline={true} 
+                  newTab={true}
+                >
+                  Uber UCP Fellow
+                </InteractiveLink>
+              </li>
+              <li>
+                Stanford’s 
+                <InteractiveLink 
+                  href="https://engineering.stanford.edu/serge" 
+                  event="serge" 
+                  underline={true} 
+                  newTab={true}
+                > SERGE </InteractiveLink>
+                & UMich’s 
+                <InteractiveLink 
+                  href="https://emerge.engin.umich.edu/" 
+                  event="emerge" 
+                  underline={true} 
+                  newTab={true}
+                > EMERGE </InteractiveLink>
+                programs.
+              </li>
+            </ul>
+
+            {/* Resource Link */}
+            <p className="font-voyager-thin text-[24px] text-white leading-snug">
+              You can find my resources 
+              <InteractiveLink 
+                href="https://github.com/cslegasse/CS-Tech-Resource-Hub" 
+                event='here' 
+                underline={true} 
+                newTab={true}
+              >
+                {' '}here
+              </InteractiveLink>.
+            </p>
+
+          </div>
         </TracingBeam>
         </div>
       </div>

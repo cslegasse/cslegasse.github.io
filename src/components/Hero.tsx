@@ -118,7 +118,7 @@ const Hero = () => {
       <div className="w-full font-aeonik-regular space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px]">
         <p>a 21yo security engineer + content creator. i am focused on entrepreneurship, research, and tech.</p>
         <p>i have experience with various forms of ecommerce dealing with marketing, sales, coding, and management. </p>
-        <p>i'm currently building a brainrot SAAS product with ai automation. </p>
+        <p>i'm currently building a SAAS product with AI.</p>
 
         <p>you can reach me via <Link className="italic border-b hover:text-blue-500 transition-all duration-400 hover:border-blue-500" href="https://instagram.com/remonbiz">instagram</Link> or email <Link href="mailto:null@legasseremon.com" className="border-b italic hover:text-blue-500 transition-all duration-400 hover:border-blue-500">null@legasseremon.com</Link>.</p>
       </div>

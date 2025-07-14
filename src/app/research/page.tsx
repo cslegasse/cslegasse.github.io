@@ -12,18 +12,18 @@ import Marquee from "react-fast-marquee";
 import InteractiveLink from '../about/InteractiveLink';
 
 
-// const education = [
-//   {
-//     name: "B.S. Computer Science",
-//     desc: "University of Florida",
-//     year: "2022-2026",
-//   },
-//   {
-//     name: "Exchange Student",
-//     desc: "Kyoto University",
-//     year: "2025",
-//   },
-// ]
+const education = [
+  {
+    name: "B.S. Computer Science",
+    desc: "University of Florida",
+    year: "2022-2026",
+  },
+  {
+    name: "Exchange Student",
+    desc: "Kyoto University",
+    year: "2025",
+  },
+]
 
 
 
@@ -44,7 +44,7 @@ export default function Research() {
                 <p className="w-full font-aeonik-bold tracking-tight text-center leading-[100%] text-[21px] mb-3">
                   RESEARCH
                 </p>
-                <h1 className="font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">knowledge is power</h1>
+                <h1 className="font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">knowledge is power.</h1>
               </div>
 
               {/* MAIN PROFILE SECTION */}
@@ -72,39 +72,74 @@ export default function Research() {
                   </div>
                 </aside>
 
-                {/* Bio & Content */}
+                  {/* Bio & Content */}
                 <main className="md:col-span-2 space-y-8">
                   <div>
                     <h1 className="text-4xl font-bold mb-2">Legasse Remon</h1>
                     <p className="text-lg text-slate-100 mb-4">
-                    I am a 3rd year Computer Science undergraduate interested in cybersecurity and cognition. Specifically: social engineering and behavioral penetration testing.
-                    I am a part of Ebner Lab at the <InteractiveLink href="https://ebnerlab.psych.ufl.edu/" event='ebner' underline={true} newTab={true}> University of Florida</InteractiveLink> and the Princeton Neuroscience Institute at <InteractiveLink href="https://ncclab.princeton.edu" event='ncc' underline={true} newTab={true}> Princeton University</InteractiveLink>.
-                    </p>
-                    <p className="text-slate-100 leading-relaxed text-[18px]">
+                      I am a 3rd year Computer Science undergraduate interested in cybersecurity and human cognition. Specifically: social engineering and behavioral penetration testing.
+                      I am a part of Ebner Lab at the <InteractiveLink href="https://ebnerlab.psych.ufl.edu/" event='ebner' underline={true} newTab={true}>University of Florida</InteractiveLink> and the Princeton Neuroscience Institute at <InteractiveLink href="https://ncclab.princeton.edu" event='ncc' underline={true} newTab={true}>Princeton University</InteractiveLink>.
                     </p>
                   </div>
-                  {/* ✅ Education Section
-                <div>
+
+                  <div>
                     <h2 className="text-2xl font-semibold mb-2">Education</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    {education.map((edu, idx) => (
+                      {education.map((edu, idx) => (
                         <div key={idx} className="border border-slate-700 p-4 rounded-lg shadow-md">
-                        <p className="text-lg font-semibold text-white">{edu.name}</p>
-                        <p className="text-slate-300 text-[15px]">{edu.desc}</p>
-                        <p className="text-slate-500 text-sm">{edu.year}</p>
+                          <p className="text-lg font-semibold text-white">{edu.name}</p>
+                          <p className="text-slate-300 text-[15px]">{edu.desc}</p>
+                          <p className="text-slate-500 text-sm">{edu.year}</p>
                         </div>
-                    ))}
+                      ))}
                     </div>
-                </div> */}
-  
-           
-        
+                  </div>
+
                   <div>
-                    <h2 className="text-4xl font-bold mb-2">Research Questions</h2>
+                    <h2 className="text-2xl font-semibold mb-2">Research Questions</h2>
                     <ul className="list-disc list-inside text-slate-100 text-[16px]">
                       <li>How can we detect the intent of social engineering attacks?</li>
                       <li>Can we model individual differences in decision-making to predict cognitive vulnerabilities?</li>
-                      <li>What is the information-theoretic limit of detecting intent in ambiguous human communications?</li>
+                    </ul>
+                  </div>
+
+                  <div>
+                  <h2 className="text-2xl font-semibold mb-2">Awards</h2>
+                    <ul className="space-y-1 text-slate-100 text-[16px]">
+                      <li>
+                        <span className="font-semibold text-white">Benjamin A. Gilman Scholarship</span> — U.S. Department of State, 2024
+                      </li>
+                      <li>
+                        <span className="font-semibold text-white">NSF REU Recipient</span> — Princeton University, 2024
+                      </li>
+                      <li>
+                        <span className="font-semibold text-white">Barry M. Goldwater Scholarship Finalist</span> — University of Florida, 2024
+                      </li>
+                      <li>
+                        <span className="font-semibold text-white">Ronald E. McNair Post-baccalaureate Achievement Award</span> — University of Florida, 2024
+                      </li>
+                      <li>
+                        <span className="font-semibold text-white">Global Collegiate Penetration Testing Competition</span> — Regional 1st (2022), Global 2nd (2024)
+                      </li>
+                      <li>
+                        <span className="font-semibold text-white">BlackHat USA Undergraduate Award</span> — BlackHat USA, 2023
+                      </li>
+                    </ul>
+                  </div>
+
+                  <div>
+                  <h2 className="text-2xl font-semibold mb-2">Teaching</h2>
+                    <ul className="space-y-1 text-slate-100 text-[16px]">
+                      <li>
+                        <span className="font-semibold text-white">PSY2012 - Psychology I </span> — Teresa Vasquez (Fall 2025)
+                      </li>
+                      <li>
+                        <span className="font-semibold text-white">CIS6930 - Security & Marginalization</span> — Dr. Kevin Butler (Fall 2025)
+                      </li>
+                      <li>
+                        <span className="font-semibold text-white">COP3503C - Programming Fundamentals II</span> — Dr. Joshua Fox (2023-2024)
+                      </li>
+                    
                     </ul>
                   </div>
 
@@ -114,6 +149,7 @@ export default function Research() {
                       <li>None...</li>
                     </ul>
                   </div>
+
                 </main>
               </div>
             </div>

@@ -1,15 +1,23 @@
 //research page outline code
 
 import React, { FC } from 'react';
-import Image from "next/image";
 import Link from 'next/link';
-import Button from '../../components/Button';
 import Navbar from "../../components/Navbar"
-import Footer from "../../components/Footer"
 import { TracingBeam } from "../../components/ui/tracing-beam";
-import Footer2 from "../../components/Footer-2"
-import Marquee from "react-fast-marquee";
 import InteractiveLink from '../about/InteractiveLink';
+import { Inter, Manrope } from 'next/font/google';
+
+export const inter = Inter({
+  subsets: ['latin'],
+  weight: ['100'], // Thin
+  display: 'swap',
+});
+
+export const manrope = Manrope({
+  subsets: ['latin'],
+  weight: ['200'], 
+  display: 'swap',
+});
 
 
 const education = [
@@ -36,12 +44,12 @@ export default function Research() {
         <div className="flex flex-col w-full px-8 sm:px-8 md:px-16 lg:px-20 items-start justify-center gap-y-4">
           <TracingBeam className="px-0 md:px-2">
             <div className="flex flex-col w-full">
-              <Link href="/" className="w-full font-aeonik-thin tracking-regular text-sm mb-4">
-                <p>← BACK TO HOME</p>
-              </Link>
+                  <Link href="/" className={`w-full ${inter.className} tracking-normal text-sm mb-4`}>
+                    <p>← BACK TO HOME</p>
+                  </Link>
 
               <div className="flex flex-col w-full align-center justify-center space-y-4 items-center">
-                <p className="w-full font-aeonik-bold tracking-tight text-center leading-[100%] text-[21px] mb-3">
+               <p className={`w-full ${inter.className} tracking-tight text-center leading-[100%] text-[21px] mb-3`}>
                   RESEARCH
                 </p>
                 <h1 className="font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">knowledge is power.</h1>
@@ -99,6 +107,7 @@ export default function Research() {
                     <h2 className="text-2xl font-semibold mb-2">Research Questions</h2>
                     <ul className="list-disc list-inside text-slate-100 text-[16px]">
                       <li>How can we detect the intent of social engineering attacks?</li>
+                      <li>How can we develop and safegaurd AI-assisted cyberattacks?</li>
                       <li>Can we model individual differences in decision-making to predict cognitive vulnerabilities?</li>
                     </ul>
                   </div>

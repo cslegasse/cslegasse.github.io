@@ -55,8 +55,18 @@ import InteractiveLink from './InteractiveLink';
 // ]
 
 const experiences = [
+
     {
-        number: "01",
+      number: "01",
+      position: "RESEARCH COLLABORATOR",
+      year: "2025",
+      companyName: "Harvard University",
+      link: "https://www.harvard.edu/",
+      imageName: "/projects/harvard.png",
+      roleDescription: "AI cyberattacks."
+    },
+    {
+        number: "02",
         position: "ML ENGINEER INTERN",
         year: "2025",
         companyName: "IBM",
@@ -65,7 +75,7 @@ const experiences = [
         roleDescription: "IBM Watson."
     },
     {
-        number: "02",
+        number: "03",
         position: "AI RESEARCH INTERN",
         year: "2024",
         companyName: "Princeton University",
@@ -74,7 +84,7 @@ const experiences = [
         roleDescription: "VLMs for cognitive control research."
     },
     {
-        number: "03",
+        number: "04",
         position: "SECURITY ENGINEER INTERN",
         year: "2024",
         companyName: "Mastercard",
@@ -83,7 +93,7 @@ const experiences = [
         roleDescription: "Insider Threat and Intelligence."
     },
     {
-      number: "04",
+      number: "05",
       position: "CYBERSECURITY INTERN",
       year: "2023",
       companyName: "Raymond James Financial",
@@ -93,11 +103,60 @@ const experiences = [
   },
 ];
 
+const leadership = [
+
+    {
+      number: "01",
+      position: "BOOTCAMP DIRECTOR",
+      year: "2025",
+      companyName: "Society of Hispanic Prof. Eng.",
+      link: "https://www.shpeuf.com/",
+      imageName: "/projects/shpe.jpg",
+      roleDescription: "Professionalism."
+    },
+    {
+      number: "02",
+      position: "GRADUATE COORDINATOR",
+      year: "2024",
+      companyName: "Society of Hispanic Prof. Eng.",
+      link: "https://www.shpeuf.com/",
+      imageName: "/projects/shpe.jpg",
+      roleDescription: "Executive board."
+    },
+    {
+      number: "03",
+      position: "RED TEAM",
+      year: "2023-2024",
+      companyName: "UF Security Information Team",
+      link: "https://www.ufsit.club/",
+      imageName: "/projects/sit.webp",
+      roleDescription: "Did some trolling."
+    },
+    {
+      number: "04",
+      position: "RESEARCH DIRECTOR",
+      year: "2022-2023",
+      companyName: "Society of Hispanic Prof. Eng.",
+      link: "https://www.shpeuf.com/",
+      imageName: "/projects/shpe.jpg",
+      roleDescription: "Guided research."
+    },
+  
+
+ 
+];
+
 const About = () => {
     const groupedExperiences = [];
     for (let i = 0; i < experiences.length; i += 2) {
       groupedExperiences.push(experiences.slice(i, i + 2));
     }
+
+    const leadershipExperiences = [];
+    for (let i = 0; i < leadership.length; i += 2) {
+      leadershipExperiences.push(leadership.slice(i, i + 2));
+    }
+
   return (
     <>
       <Navbar />
@@ -172,6 +231,42 @@ const About = () => {
               ))}
             </div>
             ))}
+
+            <p className="font-aeonik-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">LEADERSHIP</p>
+
+             {leadershipExperiences.map((group, index) => (
+            <div key={index} className="flex flex-col md:flex-row w-full justify-between md:space-x-10 border-b pb-10 border-gray-800">
+              {group.map((exp, idx) => (
+                <div key={idx} className="w-full py-10 font-aeonik-regular">
+                  <InteractiveLink 
+                    href={exp.link as string}
+                    event={'aboutExperienceClicked'}
+                  >
+                    <div className="flex flex-row items-start align-start ">
+                      <div className="flex flex-col w-1/6">
+                        <p className="text-sm pb-5 text-gray-500">{exp.number}</p>
+                        <Image
+                          priority
+                          src={exp.imageName}
+                          height={118}
+                          width={118}
+                          alt="Descriptive Text"
+                        />
+                      </div>
+                      <div className="ml-10 w-9/12 items-start">
+                        <p className="text-sm pb-5 text-gray-500">{exp.position}</p>
+                        <p className="font-voyager-thin tracking-tight text-[36px] mb-3">{exp.companyName}</p>
+                        <p className="text-[18px] mt-4 leading-[150%] text-gray-400">{exp.roleDescription}</p>
+                      </div>
+                      <div className="flex flex-col w-1/12 items-end">
+                        <p className="text-sm pb-5 text-gray-500">{exp.year}</p>
+                      </div>
+                    </div>
+                  </InteractiveLink>
+                </div>
+              ))}
+            </div>
+            ))}
           </div>
           
           {/* <div className="w-full py-10">
@@ -188,9 +283,8 @@ const About = () => {
           </div> */}
           <div className="w-full pt-4 pb-6">
             {/* Section Header */}
-            <p className="font-aeonik-thin tracking-wide text-[16px] text-gray-400 uppercase border-b border-gray-600 pb-2 mb-2">
-              Tech Events
-            </p>
+            <p className="font-aeonik-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">TECH EVENTS</p>
+
 
             {/* Intro Text */}
             <p className="font-voyager-thin text-[32px] text-white mb-3 leading-snug">

@@ -85,7 +85,7 @@ export default function Research() {
                   <div>
                     <h1 className="text-4xl font-bold mb-2">Legasse Remon</h1>
                     <p className="text-lg text-slate-100 mb-4">
-                      I am a 3rd year Computer Science undergraduate interested in cybersecurity and human cognition. Specifically: social engineering and behavioral penetration testing.
+                      I am a 4th year Computer Science undergraduate interested in cybersecurity and human cognition. Specifically: social engineering and behavioral penetration testing.
                       I am a part of Ebner Lab at the <InteractiveLink href="https://ebnerlab.psych.ufl.edu/" event='ebner' underline={true} newTab={true}>University of Florida</InteractiveLink> and the Princeton Neuroscience Institute at <InteractiveLink href="https://ncclab.princeton.edu" event='ncc' underline={true} newTab={true}>Princeton University</InteractiveLink>.
                     </p>
                   </div>

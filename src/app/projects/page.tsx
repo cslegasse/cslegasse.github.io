@@ -1,9 +1,7 @@
-import React, { FC } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
 import Button from '../../components/Button';
 import Navbar from "../../components/Navbar"
-import Footer from "../../components/Footer"
 import Footer2 from "../../components/Footer-2"
 import { TracingBeam } from "../../components/ui/tracing-beam";
 import Marquee from "react-fast-marquee";
@@ -13,21 +11,43 @@ const projects =[
 
   {
     name: "Krop Store",
-    role: "Growth Lead",
-    year: "2022",
+    role: "Growth Engineer",
+    year: "2022-Now",
     description: "Fashion and clothing by Gen-Z, for Gen-Z.",
-    image: "/projects/krop.png",
+    image: "/projects/krop8.jpg",
     link: "https://krop.store",
+    linkText: "VIEW LANDING PAGE",
+    secondLink: false,
+    linkText2: "VIEW MOBILE APP"
+  },
+    {
+    name: "Wally Hub",
+    role: "Developer",
+    year: "2021",
+    description: "A ROBLOX scripting hub.",
+    image: "/projects/wrdwally.png",
+    link: "https://github.com/PitchyATree/roblox-exploit-library/blob/main/wally%20v3%20library",
+    linkText: "VIEW LANDING PAGE",
+    secondLink: false,
+    linkText2: "VIEW MOBILE APP"
+  },
+    {
+    name: "Incognito Client",
+    role: "Developer",
+    year: "2020-2021",
+    description: "A Minecraft hack client.",
+    image: "/projects/incognito.png",
+    link: "https://builtbybit.com/",
     linkText: "VIEW LANDING PAGE",
     secondLink: false,
     linkText2: "VIEW MOBILE APP"
   },
   {
     name: "Synapse X",
-    role: "Scripter",
-    year: "2018",
+    role: "Script Developer",
+    year: "2018-2022",
     description: "DLL injection stub for serverside script execution in ROBLOX",
-    image: "/projects/synapsebanner.jpg",
+    image: "/projects/synapsex.jpg",
     link: "http://x.synapse.to",
     linkText: "VIEW LANDING PAGE",
     secondLink: false,
@@ -73,8 +93,8 @@ const Projects = () => {
                   <Image
                     priority
                     src={project.image}
-                    height={700}
-                    width={600}
+                    height={400}
+                    width={300}
                     alt={project.name}
                   />
                 </div>

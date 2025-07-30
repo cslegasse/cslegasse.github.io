@@ -116,9 +116,10 @@ const Hero = () => {
         <h1 className="tracking-tight font-voyager-thin text-[38px] md:text-[32px] lg:text-[32px]">hi, i'm legasse.</h1>
       </div>
       <div className="w-full font-aeonik-regular space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px]">
-        <p>a 21yo security engineer + content creator. i am focused on entrepreneurship, research, and tech.</p>
+        <p>21yo security engineer + content creator. i am focused on entrepreneurship, research, and tech.</p>
         <p>i have experience with various forms of ecommerce dealing with marketing, sales, coding, and management. </p>
         <p>i'm currently building a SAAS product with AI.</p>
+        <p>i'm based in kyoto, japan (March 2025).</p>
 
         <p>you can reach me via <Link className="italic border-b hover:text-blue-500 transition-all duration-400 hover:border-blue-500" href="https://instagram.com/remonbiz">instagram</Link> or email <Link href="mailto:null@legasseremon.com" className="border-b italic hover:text-blue-500 transition-all duration-400 hover:border-blue-500">null@legasseremon.com</Link>.</p>
       </div>
@@ -191,59 +192,6 @@ const Hero = () => {
               </div>
             </div>
           </div>
-
-          <div className="flex flex-col w-full space-y-3 px-5">
-            {/* <p className="font-aeonik-regular text-[21px] md:text-[18px] lg:text-[18px]">previously, I've design + build products:</p> */}
-            <div className="flex flex-col space-y-20">
-              {prevProjects.map((project, index) => (
-                <div key={index} className='flex flex-col space-y-6'>
-                  <div key={index} className='flex flex-col space-y-2'>
-                    <Link 
-                      key={index} 
-                      href={project.link || '#'} 
-                      onClick={() => project.link && handleProjClick(project.name, project.link, 'prevProjectsClicked')}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex flex-row space-x-1 group"
-                      onMouseEnter={() => setHoveredProject(project.name)}
-                      onMouseLeave={() => setHoveredProject(null)}
-                    >
-                      <p className="font-aeonik-bold text-[18px] group-hover:text-blue-600 transition duration-200 ease-in-out">
-                        {project.name}
-                      </p>
-                      <div className="relative w-2 h-2 mt-1">
-                        <Image
-                          priority
-                          src="/home/iconArrowUprightWhite.png"
-                          height={100}
-                          width={100}
-                          alt="White arrow icon"
-                          className={`absolute top-0 left-0 transition-opacity duration-200 ${
-                            hoveredProject === project.name ? 'opacity-0' : 'opacity-100'
-                          }`}
-                        />
-                        <Image
-                          priority
-                          src="/home/iconArrowUprightBlue.png"
-                          height={100}
-                          width={100}
-                          alt="Blue arrow icon"
-                          className={`absolute top-0 left-0 transition-opacity duration-200 ${
-                            hoveredProject === project.name ? 'opacity-100' : 'opacity-0'
-                          }`}
-                        />
-                      </div>
-                    </Link>
-                    {/* <p className="opacity-70 font-aeonik-thin text-[18px]">{project.role}</p> */}
-                  </div>
-                  <p className="opacity-90 font-aeonik-regular text-[18px] leading-[140%]">{project.desc}</p>
-                </div>
-
-              ))}
-            </div>
-
-          </div>
-    
           <div className="flex flex-col space-y-4 px-5">
             <h1 className="tracking-tight font-voyager-thin text-[21px]">see more</h1>
             <div className="flex flex-col pb-20 md:pb-0 pt-6 md:pt-0 lg:pt-0 sm:flex-row w-full space-y-3 md:space-y-0 md:space-x-4">

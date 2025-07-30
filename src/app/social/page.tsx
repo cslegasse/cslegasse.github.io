@@ -3,7 +3,6 @@
 import React, { useEffect } from "react";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
-import Footer from "../../components/Footer";
 import Footer2 from "../../components/Footer-2";
 import Marquee from "react-fast-marquee";
 import { CardSpotlight } from "../../components/ui/card-spotlight";

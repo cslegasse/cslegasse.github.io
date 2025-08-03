@@ -54,6 +54,74 @@ import InteractiveLink from './InteractiveLink';
 //   },
 // ]
 
+
+const programmes = [
+
+    {
+      number: "01",
+      position: "GILMAN ALUMNI",
+      year: "2025",
+      companyName: "Gilman Scholarship",
+      link: "https://www.gilmanscholarship.org/",
+      imageName: "/projects/gilman.png",
+      roleDescription: "US gov scholarship to study abroad."
+    },
+    {
+      number: "02",
+      position: "SERGE & EMERGE ALUMNI",
+      year: "2024",
+      companyName: "Stanford SERGE",
+      link: "https://engineering.stanford.edu/SERGE",
+      imageName: "/projects/stanford.png",
+      roleDescription: "Graduate exposure program at Stanford."
+    },
+    {
+      number: "03",
+      position: "UBER UCP ALUMNI",
+      year: "2024",
+      companyName: "Uber UCP",
+      link: "https://www.uber.com/",
+      imageName: "/projects/uber.png",
+      roleDescription: "A competitive Uber SWE prep program."
+    },
+    {
+      number: "04",
+      position: "MCNAIR SCHOLAR",
+      year: "2024",
+      companyName: "McNair Scholar",
+      link: "https://mcnairscholars.com/about/",
+      imageName: "/projects/mcnair.png",
+      roleDescription: "PhD prep program."
+    },
+    {
+      number: "05",
+      position: "MLT SCHOLAR",
+      year: "2024",
+      companyName: "MLT Career Prep",
+      link: "https://mlt.org/",
+      imageName: "/projects/mlt.png",
+      roleDescription: "Tech prep program."
+    },
+    {
+      number: "06",
+      position: "UF PROGRAM ALUMNI",
+      year: "2022-2025",
+      companyName: "ISP, REPU, & AI Scholar",
+      link: "https://ai.ufl.edu/for-our-students/meet-scholars/",
+      imageName: "/projects/uf.png",
+      roleDescription: "International, AI, and research scholar programs."
+    },
+       {
+      number: "07",
+      position: "HSF SCHOLAR",
+      year: "2022-2025",
+      companyName: "Hispanic Scholarship Fund",
+      link: "https://www.hsf.org/",
+      imageName: "/projects/hsf.jpg",
+      roleDescription: "Hispanics for higher education."
+    }
+];
+
 const experiences = [
 
     {
@@ -63,7 +131,7 @@ const experiences = [
       companyName: "Harvard University",
       link: "https://www.harvard.edu/",
       imageName: "/projects/harvard.png",
-      roleDescription: "AI cyberattacks."
+      roleDescription: "AI cyberattack research."
     },
     {
         number: "02",
@@ -155,6 +223,11 @@ const About = () => {
     const leadershipExperiences = [];
     for (let i = 0; i < leadership.length; i += 2) {
       leadershipExperiences.push(leadership.slice(i, i + 2));
+    }
+
+    const  programExperiences = [];
+    for (let i = 0; i < programmes.length; i+= 2){
+      programExperiences.push(programmes.slice(i,i+2));
     }
 
   return (
@@ -267,72 +340,56 @@ const About = () => {
               ))}
             </div>
             ))}
-          </div>
-          
-          {/* <div className="w-full py-10">
-              <p className="font-aeonik-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">AWARDS</p>
-              {awards.map((award) => (
-                  <div className="flex flex-col md:flex-row justify-between md:items-end w-full border-b border-gray-800 pt-10">
-                      <div>
-                          <p className="font-voyager-thin tracking-tight text-[36px] mb-3">{award.name}</p>
-                          <p className="font-aeonik-thin text-gray-400 tracking-tight text-[18px] md:text-[21px] mb-3">{award.desc}</p>
+            <p className="font-aeonik-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">PROGRAMS</p>
+
+             {programExperiences.map((group, index) => (
+            <div key={index} className="flex flex-col md:flex-row w-full justify-between md:space-x-10 border-b pb-10 border-gray-800">
+              {group.map((exp, idx) => (
+                <div key={idx} className="w-full py-10 font-aeonik-regular">
+                  <InteractiveLink 
+                    href={exp.link as string}
+                    event={'aboutExperienceClicked'}
+                  >
+                    <div className="flex flex-row items-start align-start ">
+                      <div className="flex flex-col w-1/6">
+                        <p className="text-sm pb-5 text-gray-500">{exp.number}</p>
+                        <Image
+                          priority
+                          src={exp.imageName}
+                          height={118}
+                          width={118}
+                          alt="Descriptive Text"
+                        />
                       </div>
-                      <p className="font-aeonik-thin tracking-tight text-[18px] md:text-[21px] mb-3">{award.year}</p>
-                  </div>
+                      <div className="ml-10 w-9/12 items-start">
+                        <p className="text-sm pb-5 text-gray-500">{exp.position}</p>
+                        <p className="font-voyager-thin tracking-tight text-[36px] mb-3">{exp.companyName}</p>
+                        <p className="text-[18px] mt-4 leading-[150%] text-gray-400">{exp.roleDescription}</p>
+                      </div>
+                      <div className="flex flex-col w-1/12 items-end">
+                        <p className="text-sm pb-5 text-gray-500">{exp.year}</p>
+                      </div>
+                    </div>
+                  </InteractiveLink>
+                </div>
               ))}
-          </div> */}
-          <div className="w-full pt-4 pb-6">
-            {/* Section Header */}
-            <p className="font-aeonik-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">TECH EVENTS</p>
+            </div>
+            ))}
+          </div>
 
-
-            {/* Intro Text */}
-            <p className="font-voyager-thin text-[32px] text-white mb-3 leading-snug">
-              I’ve attended numerous tech events during undergrad.
-            </p>
-
-            {/* Event List */}
-            <ul className="list-disc list-inside text-gray-400 font-aeonik-thin text-[17px] leading-relaxed space-y-2 mb-5">
-              <li>10 hackathons, 5 collegiate hacking competitions, 11 tech conferences</li>
-              <li>
-                <InteractiveLink 
-                  href="https://www.uber.com/us/en/careers/teams/university/" 
-                  event="uber" 
-                  underline={true} 
-                  newTab={true}
-                >
-                  Uber UCP Fellow
-                </InteractiveLink>
-              </li>
-              <li>
-                Stanford’s 
-                <InteractiveLink 
-                  href="https://engineering.stanford.edu/serge" 
-                  event="serge" 
-                  underline={true} 
-                  newTab={true}
-                > SERGE </InteractiveLink>
-                & UMich’s 
-                <InteractiveLink 
-                  href="https://emerge.engin.umich.edu/" 
-                  event="emerge" 
-                  underline={true} 
-                  newTab={true}
-                > EMERGE </InteractiveLink>
-                programs.
-              </li>
-            </ul>
-
-            {/* Resource Link */}
+          
+      
+          <div className="w-full pt-1 pb-1">            
             <p className="font-voyager-thin text-[24px] text-white leading-snug">
-              You can find my resources 
+              You can find my industry resources 
+              {' '}
               <InteractiveLink 
                 href="https://github.com/cslegasse/CS-Tech-Resource-Hub" 
                 event='here' 
                 underline={true} 
                 newTab={true}
               >
-                {' '}here
+                here
               </InteractiveLink>.
             </p>
 

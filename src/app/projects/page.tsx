@@ -53,7 +53,6 @@ const projects =[
     secondLink: false,
     linkText2: "VIEW MOBILE APP"
   },
-  
 ];
 
 const freelance = [
@@ -67,7 +66,6 @@ const freelance = [
     link: "https://gelrova.com",
     image: ""
   },
-  
 ];
 
 const Projects = () => {

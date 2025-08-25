@@ -1,45 +1,10 @@
 import React, { FC } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
-import Button from '../../components/Button';
 import Navbar from "../../components/Navbar"
 import Footer from "../../components/Footer"
 import { TracingBeam } from "../../components/ui/tracing-beam";
 import InteractiveLink from './InteractiveLink';
-
-// const awards = [
-//     {
-//         name: "Benjamin A Gilman Award",
-//         desc: "1 of 500 for $4,000 research funding abroad by US Department of State.",
-//         year: "2024",
-//     },
-//     {
-//       name: "Research Experience for Undergraduate (REU) Recipient",
-//       desc: "Awarded $15,000 in summer research funding by the National Science Foundation.",
-//       year: "2024",
-//     },
-//     {
-//       name: "Ronald E McNair Post-baccalaurete Achievement Award",
-//       desc: "Recognized for graduate studies and research efforts to support students.",
-//       year: "2024",
-//     },
-//     {
-//       name: "AI Across the Statewide Curriculum Award",
-//       desc: "AI research funding through UF-FAMU NSF Award #2123440.",
-//       year: "2023",
-//     },
-//     {
-//       name: "Cambridge International Merit Award",
-//       desc: "Recognized for perfect scores on Cambridge University entrance assessments.",
-//       year: "2022",
-//     },
-//     {
-//       name: "Sunshine Opportunity Scholar",
-//       desc: "1 of 10 for $25,000 scholarship for disadvantaged students in Florida.",
-//       year: "2022",
-//     },
-    
-// ];
 
 // const education = [
 //   {
@@ -56,7 +21,6 @@ import InteractiveLink from './InteractiveLink';
 
 
 const programmes = [
-
     {
       number: "01",
       position: "GILMAN ALUMNI",
@@ -123,7 +87,6 @@ const programmes = [
 ];
 
 const experiences = [
-
     {
       number: "01",
       position: "RESEARCH COLLABORATOR",
@@ -243,14 +206,6 @@ const About = () => {
               <div className="flex flex-col w-full align-center justify-center space-y-4 items-center">
                 <p className="w-full font-aeonik-bold tracking-tight text-center leading-[100%] text-[21px] mb-3">ABOUT </p>
                 <h1 className="font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">be yourself.</h1>
-                {/* <Image
-                  priority
-                  src="/about/me.JPEG"
-                  height={600}
-                  width={481}
-                  alt="Descriptive Text"
-                  className="py-10"
-                /> */}
                 <div className="w-full md:w-2/3 font-aeonik-thin tracking-[0.015em] space-y-10 items-center align-center justify-center text-[21px] md:text-[21px]">
                   <p className="leading-[150%]">My journey in software and security started at age 14 utilizing a DLL injector <InteractiveLink href="https://x.synapse.to" event='synapse' underline={true} newTab={true}>Synapse X.</InteractiveLink> where I was a scripter. Synapse Softworks was later <InteractiveLink href="https://devforum.roblox.com/t/exploit-prevention-update/2663101" event='synapse' underline={true} newTab={true}> acquired by ROBLOX</InteractiveLink> for millions.
                   </p>
@@ -262,7 +217,7 @@ const About = () => {
                   </p>
                   <p className="leading-[150%]">At 20, I created <InteractiveLink href="https://beacons.ai/legasse/" event='beacons_link' underline={true} newTab={true}> AI-generated/automated shorts </InteractiveLink> on <InteractiveLink href="https://youtube.com/" event='yt' underline={true} newTab={true}> Youtube </InteractiveLink> and <InteractiveLink href="https://tiktok.com/" event='tt' underline={true} newTab={true}> TikTok </InteractiveLink>, grossing 18k MRR across 25 channels and sold them to <InteractiveLink href="https://www.forbes.com/profile/pubity-group/" event='pubity' underline={true} newTab={true}> Pubity Group </InteractiveLink>. </p>
                 
-                  <p className="leading-[150%]">Today, I'm working on building a tech startup and ecommerce brands.
+                  <p className="leading-[150%]">Today, I'm working on consumer tech apps.
                   </p>
           
                 </div>

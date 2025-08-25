@@ -6,7 +6,6 @@ import Link from "next/link";
 import posthog from 'posthog-js';
 
 import { RxHamburgerMenu } from "react-icons/rx";
-import { IoMdClose } from "react-icons/io";
 import { FaGithub, FaInstagram, FaLinkedin, FaTiktok, FaDiscord, FaYoutube, FaLink} from 'react-icons/fa'
 import { FaXTwitter } from "react-icons/fa6";
 import {
@@ -35,7 +34,6 @@ const handleSocialClick = (socialName: string, mobile: boolean = false) => {
   }
 };
 
-
 export const navLinks = [
   {
     text: "ABOUT",
@@ -50,11 +48,14 @@ export const navLinks = [
     link: "/social",
     download: "",
   },
-   {
+  {
     text: "RESEARCH",
     link: "/research",
+  },
+  {
+    text: "INTERNATIONAL",
+    link: "/abroad",
   }
-  
   
 ];
 

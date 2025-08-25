@@ -5,22 +5,6 @@ import { TracingBeam } from "../../components/ui/tracing-beam";
 import InteractiveLink from '../about/InteractiveLink';
 
 
-
-const education = [
-  {
-    name: "B.S. Computer Science",
-    desc: "University of Florida",
-    year: "2022-2026",
-  },
-  {
-    name: "Exchange Student",
-    desc: "Kyoto University",
-    year: "2025",
-  },
-]
-
-
-
 export default function Research() {
 
   return (
@@ -77,19 +61,6 @@ export default function Research() {
                   </div>
 
                   <div>
-                    <h2 className="text-2xl font-semibold mb-2">Education</h2>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                      {education.map((edu, idx) => (
-                        <div key={idx} className="border border-slate-700 p-4 rounded-lg shadow-md">
-                          <p className="text-lg font-semibold text-white">{edu.name}</p>
-                          <p className="text-slate-300 text-[15px]">{edu.desc}</p>
-                          <p className="text-slate-500 text-sm">{edu.year}</p>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-
-                  <div>
                     <h2 className="text-2xl font-semibold mb-2">Research Questions</h2>
                     <ul className="list-disc list-inside text-slate-100 text-[16px]">
                       <li>How can we detect the intent of social engineering attacks?</li>
@@ -127,9 +98,6 @@ export default function Research() {
                     <ul className="space-y-1 text-slate-100 text-[16px]">
                       <li>
                         <span className="font-semibold text-white">PSY2012 - Psychology I </span> — Teresa Vasquez (Fall 2025)
-                      </li>
-                      <li>
-                        <span className="font-semibold text-white">CIS6930 - Security & Marginalization</span> — Dr. Kevin Butler (Fall 2025)
                       </li>
                       <li>
                         <span className="font-semibold text-white">COP3503C - Programming Fundamentals II</span> — Dr. Joshua Fox (2023-2024)

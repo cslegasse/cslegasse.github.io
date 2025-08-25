@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Button from './Button';
 import { HoverBorderGradient } from "./ui/hover-border-gradient";
 import posthog from 'posthog-js';
+
 import { CardSpotlight } from "@/src/components/ui/card-spotlight";
 import Footer from './Footer';
 
@@ -118,16 +119,9 @@ const Hero = () => {
       <div className="w-full font-aeonik-regular space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px]">
         <p>21yo security engineer + content creator. i am focused on entrepreneurship, research, and tech.</p>
         <p>i have experience with various forms of ecommerce dealing with marketing, sales, coding, and management. </p>
-        <p>i'm currently building a SAAS product with AI.</p>
-        <p>i'm based in kyoto, japan (March 2025).</p>
-
+        <p>i'm currently building consumer apps with AI.</p>
         <p>you can reach me via <Link className="italic border-b hover:text-blue-500 transition-all duration-400 hover:border-blue-500" href="https://instagram.com/remonbiz">instagram</Link> or email <Link href="mailto:null@legasseremon.com" className="border-b italic hover:text-blue-500 transition-all duration-400 hover:border-blue-500">null@legasseremon.com</Link>.</p>
       </div>
-
-      {/* {}
-      <div className="w-full text-[20px] font-voyager-thin text-[#FFD700] py-6">
-        <p></p>
-      </div> */}
 
       <div className="w-full flex justify-center py-6">
         <p>book a call with me.</p>

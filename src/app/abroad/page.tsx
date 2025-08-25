@@ -1,13 +1,15 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import { TracingBeam } from "../../components/ui/tracing-beam";
 import React, { useState } from "react";
-import InteractiveLink from "../about/InteractiveLink";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import InteractiveMap from "./Map";
-import { Inter } from "next/font/google";
+
+const InteractiveMap = dynamic(() => import("../../components/Map"), {
+  ssr: false, 
+});
 
 const experiences = [
   {

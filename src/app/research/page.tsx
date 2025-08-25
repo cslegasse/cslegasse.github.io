@@ -69,6 +69,52 @@ export default function Research() {
                     </ul>
                   </div>
 
+                <div>
+                  <h2 className="text-2xl font-semibold mb-4">Research Experience</h2>
+                  <div className="space-y-2 text-slate-100 text-[16px]">
+
+                  {/* <div>
+                      <span className="font-semibold text-white">Harvard University</span>
+                      <div className="flex justify-between">
+                        <div className="italic">Research Collaborator</div>
+                        <span className="text-sm text-slate-400">Aug 2025 - Present</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <div className="text-slate-300">Advisor: Dr. Fredrik Heiding </div>
+                        <div className="text-slate-300">AI Security Lab</div>
+                      </div>
+                  </div> */}
+
+                  <div>
+                      <span className="font-semibold text-white">University of Florida</span>
+                      <div className="flex justify-between">
+                        <div className="italic">Research Assistant</div>
+                        <span className="text-sm text-slate-400">Dec 2022 - Present</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <div className="text-slate-300">Advisor: Dr. Natalie Ebner</div>
+                        <div className="text-slate-300">Ebner Lab</div>
+                      </div>
+                  </div>
+                  
+                  <div>
+                      <span className="font-semibold text-white">Princeton University</span>
+                      <div className="flex justify-between">
+                        <div className="italic">Research Assistant</div>
+                        <span className="text-sm text-slate-400">Aug 2024 – Aug 2025</span>
+                      </div>
+                       <div className="flex justify-between">
+                        <div className="italic">AI Research Intern</div>
+                        <span className="text-sm text-slate-400">Summer 2024</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <div className="text-slate-300">Advisor: Dr. Jonathan Cohen</div>
+                        <div className="text-slate-300">NCC Lab</div>
+                      </div>
+                    </div>
+                  </div>
+                </div> 
+
                   <div>
                   <h2 className="text-2xl font-semibold mb-2">Awards</h2>
                     <ul className="space-y-1 text-slate-100 text-[16px]">

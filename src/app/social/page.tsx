@@ -54,20 +54,20 @@ const Social = () => {
                   SOCIAL MEDIA
                 </p>
                 <p className="w-full md:w-2/3 font-voyager-thin tracking-tight text-center leading-[100%] text-[44px] md:text-[54px] mb-3">
-                  A portfolio of my UGC videos and interests.
+                  ugc portfolio & interests
                 </p>
               </div>
 
               {}
-              <div className="flex flex-col w-full max-w-[600px] mx-auto mt-14 p-4 justify-center text-6xl font-bold gap-y-8">
+              <div className="flex flex-col w-full max-w-[600px] mx-auto mt-3 p-4 justify-center text-6xl font-bold gap-y-2">
                 <div className="flex flex-row w-full space-x-1">
                   <div className="self-start mt-3">
                     <h1 className="tracking-tight font-voyager-thin text-[16px] md:text-[14px] lg:text-[14px] mr-1">►</h1>
                   </div>
                   <div className="flex flex-col w-full align-center justify-center space-y-6 items-start">
                   <p className="w-full font-aeonik-regular leading-[1.5] text-[28px] md:text-[24px] lg:text-[24px]">
-                      I create high quality content that authentically speaks to your brand's story and brings you conversions. 
-                      I work with all brands in all niches, dedicating my time to pursure content creation.
+                      I create high quality content that authentically speaks to your brand's story and convert users. 
+
                     </p>
                   </div>
                 </div>
@@ -122,12 +122,12 @@ const Social = () => {
     PORTFOLIO
   </p>          <div className="grid grid-cols-1 min-h-screen md:grid-cols-3 gap-x-8 gap-y-10 pt-10 w-full">
             {[
-              { src: "https://www.instagram.com/p/DEaRLpAO-Ma/embed", title: "RYNE AI" },
+              { src: "https://www.instagram.com/p/DEaRLpAO-Ma/embed", title: "AI PARTNERSHIP" },
               { src: "https://www.instagram.com/p/DBmFg0yONq1/embed", title: "CODING" },
               { src: "https://www.instagram.com/p/DDXrUmWyE1G/embed", title: "STUDY METHODS" },
               { src: "https://www.instagram.com/p/C96Q26wAR1H/embed", title: "FITNESS" },
-              { src: "https://www.instagram.com/p/C9LkU_KgJyj/embed", title: "TECH MEMES" },
-              { src: "https://www.instagram.com/p/C88Jgmpg6Mm/embed", title: "TECH MEMES" },
+              { src: "https://www.instagram.com/p/DMImtVgTHM3/embed", title: "JAPAN LIFE" },
+              { src: "https://www.instagram.com/p/DMSijmYsvlR/embed", title: "JAPAN LIFE" },
               { src: "https://www.instagram.com/p/C_qdNqwPiVy/embed", title: "TECH MEMES" },
               { src: "https://www.instagram.com/p/C_lXVarvdRA/embed", title: "TECH MEMES" },
               { src: "https://www.instagram.com/p/DAOfNGjuhtB/embed", title: "TECH" },
@@ -145,9 +145,9 @@ const Social = () => {
             ))}
        </div>
           </div>
-            <div className="flex flex-col w-full max-w-[400px] mx-auto mt-0 md:mt-14 lg:pt-3 p-3 md:p-0 lg:p-0 justify-center text-6xl font-bold gap-y-32">
+            <div className="flex flex-col w-full max-w-[400px] mx-auto mt-0 md:mt-7 lg:pt-3 p-3 md:p-0 lg:p-0 justify-center text-6xl font-bold gap-y-2">
               <div className="w-full flex flex-col items-center justify-center">
-                <div className="w-full flex justify-center py-6">
+                <div className="w-full flex justify-center">
                       book a call with me.
                       <div
                         className="calendly-inline-widget"
@@ -159,7 +159,7 @@ const Social = () => {
             </div>
 
             {/* TIMELINE SECTION */}
-            <div className="w-full mt-0">
+            <div className="w-full mt-2">
             <p className="w-full font-aeonik-bold tracking-tight text-left leading-[100%] text-[21px] mb-4">
               TIMELINE
             </p>

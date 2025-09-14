@@ -1,19 +1,19 @@
 
-// /** @type {import('next').NextConfig} */
-// const nextConfig = {
-//   output: "export", 
-//   reactStrictMode: true,
-//   basePath: "/cslegassse.github.io",
-// };
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  output: "export", 
+  reactStrictMode: true,
+  basePath: "/cslegassse.github.io",
+};
 
-// module.exports = nextConfig;
+module.exports = nextConfig;
 
 
 // local
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-};
+// /** @type {import('next').NextConfig} */
+// const nextConfig = {
+//   reactStrictMode: true,
+// };
 
-module.exports = nextConfig;
+// module.exports = nextConfig;

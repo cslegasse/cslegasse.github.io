@@ -26,8 +26,7 @@ export default function Research() {
               </div>
 
                <div>
-                <h1>Research</h1>
-                <a href="/research/cv">Download CV</a>
+                <a href="/research/cv" download="cv.pdf">CV</a>
               </div>
 
               {/* MAIN PROFILE SECTION */}

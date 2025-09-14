@@ -25,9 +25,9 @@ export default function Research() {
                 <h1 className="font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">knowledge is power.</h1>
               </div>
 
-               <div>
-                <a href="/research/cv" download="cv.pdf">CV</a>
-              </div>
+               <a href="/research/cv.pdf" download="cv.pdf">
+                CV
+              </a>
 
               {/* MAIN PROFILE SECTION */}
               <div className="w-full mt-16 grid grid-cols-1 md:grid-cols-3 gap-10">

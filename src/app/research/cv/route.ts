@@ -1,15 +1,5 @@
 import { NextResponse } from "next/server";
-import path from "path";
-import fs from "fs";
 
 export async function GET() {
-  const filePath = path.join(process.cwd(), "public", "about", "afile.pdf");
-  const fileBuffer = fs.readFileSync(filePath);
-
-  return new NextResponse(fileBuffer, {
-    headers: {
-      "Content-Type": "application/pdf",
-      "Content-Disposition": "attachment; filename=cv.pdf",
-    },
-  });
+  return NextResponse.redirect("/research/afile.pdf", 302);
 }

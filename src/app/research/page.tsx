@@ -25,7 +25,7 @@ export default function Research() {
                 <h1 className="font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">knowledge is power.</h1>
               </div>
 
-               <a href="/research/afile.pdf" download="cv.pdf">
+               <a href="https://drive.google.com/file/d/1MgBJ-6VZQ_7lOih_kZCEEldOp7u98yEK/view?usp=sharing" download="cv.pdf">
                 CV
               </a>
 
@@ -59,7 +59,7 @@ export default function Research() {
                   <div>
                     <h1 className="text-4xl font-bold mb-2">Legasse Remon</h1>
                     <p className="text-lg text-slate-100 mb-4">
-                      I am a 4th year Computer Science undergraduate interested in cybersecurity and human cognition. Specifically: social engineering and behavioral penetration testing.
+                      I am a 4th year Computer Science undergraduate interested in cybersecurity and human cognition. Specifically, social engineering and behavioral penetration testing.
                       I am a part of Ebner Lab at the <InteractiveLink href="https://ebnerlab.psych.ufl.edu/" event='ebner' underline={true} newTab={true}>University of Florida</InteractiveLink> and the Princeton Neuroscience Institute at <InteractiveLink href="https://ncclab.princeton.edu" event='ncc' underline={true} newTab={true}>Princeton University</InteractiveLink>.
                     </p>
                   </div>
@@ -68,8 +68,8 @@ export default function Research() {
                     <h2 className="text-2xl font-semibold mb-2">Research Questions</h2>
                     <ul className="list-disc list-inside text-slate-100 text-[16px]">
                       <li>How can we detect the intent of social engineering attacks?</li>
-                      <li>How can we develop and safegaurd AI-assisted cyberattacks?</li>
-                      <li>Can we model individual differences in decision-making to predict cognitive vulnerabilities?</li>
+                      <li>How can we develop and safegaurd from AI-assisted cyberattacks?</li>
+                      <li>How can we model individual differences in decision-making to predict cognitive vulnerabilities?</li>
                     </ul>
                   </div>
 
@@ -97,15 +97,26 @@ export default function Research() {
                       </div>
                       <div className="flex justify-between">
                         <div className="text-slate-300">Advisor: Dr. Natalie Ebner</div>
-                        <div className="text-slate-300">Ebner Lab</div>
+                        <Link href="ebnerlab.psych.ufl.edu" className="text-slate-300 hover:underline"> Ebner Lab</Link>
                       </div>
                   </div>
-                  
+
+                  <div>
+                       <span className="font-semibold text-white">Harvard University</span>
+                      <div className="flex justify-between">
+                        <div className="italic">Research Collaborator</div>
+                        <span className="text-sm text-slate-400">Aug 2025 - Present</span>
+                      </div>
+                      <div className="flex justify-between">
+                        <div className="text-slate-300">Advisor: Dr. Fredrik Heiding</div>
+                        <Link href="https://aisecurityresearch.com/" className="text-slate-300 hover:underline"> AI Security Lab </Link>
+                      </div>
+                      </div>
                   <div>
                       <span className="font-semibold text-white">Princeton University</span>
                       <div className="flex justify-between">
                         <div className="italic">Research Assistant</div>
-                        <span className="text-sm text-slate-400">Aug 2024 – Aug 2025</span>
+                        <span className="text-sm text-slate-400">Aug 2024 – Present</span>
                       </div>
                        <div className="flex justify-between">
                         <div className="italic">AI Research Intern</div>
@@ -113,7 +124,7 @@ export default function Research() {
                       </div>
                       <div className="flex justify-between">
                         <div className="text-slate-300">Advisor: Dr. Jonathan Cohen</div>
-                        <div className="text-slate-300">NCC Lab</div>
+                        <Link href="ncclab.princeton.edu" className="text-slate-300 hover:underline"> NCC Lab</Link>
                       </div>
                     </div>
                   </div>

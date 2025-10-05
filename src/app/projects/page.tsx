@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from 'next/link';
-import Button from '../../components/Button';
-import Navbar from "../../components/Navbar"
-import Footer2 from "../../components/Footer-2"
-import { TracingBeam } from "../../components/ui/tracing-beam";
+import Button from '@components/Button';
+import Navbar from "@components/Navbar"
+import Footer2 from "@components/Footer-2"
+import { TracingBeam } from "@components/ui/tracing-beam";
 import Marquee from "react-fast-marquee";
 
 

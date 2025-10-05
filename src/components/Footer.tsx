@@ -1,7 +1,3 @@
-import { FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa'
-import { FaXTwitter } from "react-icons/fa6";
-import Link from 'next/link';
-
 const Footer = () => (
   <footer className="flex flex-col items-center text-center px-8 lg:px-24 pb-5 lg:pb-10 mt-20 max-w-[90%] mx-auto min-h-[30vh]">
     <div className="flex flex-col gap-y-4 w-full">

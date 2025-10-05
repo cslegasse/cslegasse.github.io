@@ -1,7 +1,7 @@
 import React, { FC } from 'react';
 import Link from 'next/link';
-import Navbar from "../../components/Navbar"
-import { TracingBeam } from "../../components/ui/tracing-beam";
+import Navbar from "@components/Navbar"
+import { TracingBeam } from "@components/ui/tracing-beam";
 import InteractiveLink from '../about/InteractiveLink';
 
 

@@ -6,10 +6,10 @@ import Link from 'next/link';
 import Button from './Button';
 import { HoverBorderGradient } from "./ui/hover-border-gradient";
 import posthog from 'posthog-js';
-import CalEmbed from "../components/CalEmbed";
+import CalEmbed from "@components/CalEmbed";
 import { usePostHog } from 'posthog-js/react';
 
-import { CardSpotlight } from "components/ui/card-spotlight";
+import { CardSpotlight } from "@components/ui/card-spotlight";
 import Footer from './Footer';
 
 if (typeof window !== "undefined") {

@@ -1,14 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import Navbar from "../../components/Navbar";
-import Footer2 from "../../components/Footer-2";
+import Navbar from "@components/Navbar";
+import Footer2 from "@components/Footer-2";
 import Marquee from "react-fast-marquee";
-import { CardSpotlight } from "../../components/ui/card-spotlight";
-import { TracingBeam } from "../../components/ui/tracing-beam";
-import CalEmbed from "@/src/components/CalEmbed";
-import Brands from "@/src/components/Brands";
-import Stats from "@/src/components/Stats";
+import { CardSpotlight } from "@components/ui/card-spotlight";
+import { TracingBeam } from "@components/ui/tracing-beam";
+import CalEmbed from "@components/CalEmbed";
+import Brands from "@components/Brands";
+import Stats from "@components/Stats";
 
 
 const Social = () => {

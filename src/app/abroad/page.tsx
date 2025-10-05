@@ -2,8 +2,8 @@
 
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import Navbar from "../../components/Navbar";
-import { TracingBeam } from "../../components/ui/tracing-beam";
+import Navbar from "@components/Navbar";
+import { TracingBeam } from "@components/ui/tracing-beam";
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import experiencesData from "@data/experiences.json";

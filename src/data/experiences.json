@@ -1,0 +1,33 @@
+[
+  {
+    "country": "Japan",
+    "city": "Kyoto",
+    "latitude": 35.0116,
+    "longitude": 135.7681,
+    "image": "abroad/kyoto_default.jpg",
+    "title": "Study Abroad",
+    "description": "Spent a semester at Kyoto University, learned Japanese, joined a soccer team, attended cultural events and made international friends.",
+    "tags": ["Study Abroad", "Japan", "Asia"]
+  },
+  {
+    "country": "Ecuador",
+    "city": "Cuenca",
+    "latitude": -2.9006,
+    "longitude": -79.0043,
+    "image": "abroad/cuenca_default.jpg",
+    "title": "Cultural Study",
+    "description": "Spent 1 month living and working, hiking the Andes, and refining my Spanish.",
+    "tags": ["South America", "Culture", "Spanish"]
+  },
+  { 
+    "country": "South Korea", 
+    "city": "Seoul", 
+    "latitude": 37.5326,
+    "longitude": 127.0246,
+    "image": "abroad/seoul_default.jpg", 
+    "title": "Cultural Study", 
+    "description": "Spent 2 weeks exploring social customs, learning Korean, and normal tourist things.", 
+    "tags": ["Asia", "Culture", "Tourism"]
+  }
+
+]

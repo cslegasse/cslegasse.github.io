@@ -9,7 +9,6 @@ const nextConfig = {
 module.exports = nextConfig;
 
 
-// local
 
 // /** @type {import('next').NextConfig} */
 // const nextConfig = {

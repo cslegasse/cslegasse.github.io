@@ -6,6 +6,8 @@ import Link from 'next/link';
 import Button from './Button';
 import { HoverBorderGradient } from "./ui/hover-border-gradient";
 import posthog from 'posthog-js';
+import CalEmbed from "../components/CalEmbed";
+import { usePostHog } from 'posthog-js/react';
 
 import { CardSpotlight } from "@/src/components/ui/card-spotlight";
 import Footer from './Footer';
@@ -14,19 +16,18 @@ if (typeof window !== "undefined") {
   posthog.init(process.env.NEXT_PUBLIC_POSTHOG_API_KEY!, { api_host: 'https://us.i.posthog.com' });
 }
 
-const handleProjClick = (projectName: string, projectLink: string, eventType: string) => {
-  if (typeof window !== "undefined") {
-    posthog.capture(eventType, {
-      name: projectName,
-      url: projectLink
-    });
-  }
-};
 
 const handleProjButtomClick = () => {
   if (typeof window !== "undefined") {
     posthog.capture('viewProjectsClicked', {property: 'value'});
   }
+};
+
+const handleProjClick = (projectName: string, projectLink: string) => {
+  posthog?.capture('project_clicked', {
+    name: projectName,
+    url: projectLink,
+  });
 };
 
 const nowProjects = [
@@ -52,7 +53,8 @@ const prevProjects = [
 const Hero = () => {
   const [isMounted, setIsMounted] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
-  const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const posthog = usePostHog();
+
 
   useEffect(() => {
     setIsMounted(true);
@@ -75,17 +77,11 @@ const Hero = () => {
         videoElement.removeEventListener('canplay', handleCanPlay);
       }
     };
-  }, []);
+  }, [posthog]);
 
   const blur = 5;
   const videoSource = "home/static.mp4";
 
-  useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://assets.calendly.com/assets/external/widget.js";
-    script.async = true;
-    document.body.appendChild(script);
-  }, []);
   
   return (
     <>
@@ -122,25 +118,29 @@ const Hero = () => {
         <p>i'm currently building consumer apps with AI.</p>
         <p>you can reach me via <Link className="italic border-b hover:text-blue-500 transition-all duration-400 hover:border-blue-500" href="https://instagram.com/remonbiz">instagram</Link> or email <Link href="mailto:null@legasseremon.com" className="border-b italic hover:text-blue-500 transition-all duration-400 hover:border-blue-500">null@legasseremon.com</Link>.</p>
       </div>
-
-      <div className="w-full flex justify-center py-6">
-        <p>book a call with me.</p>
-
-            <div
-              className="calendly-inline-widget"
-              data-url="https://calendly.com/legasse"
-              style={{ minWidth: "320px", height: "500px" }} 
-            >
-            </div>
-          </div>
-        </div>
       </div>
+      </div>
+      <div>
+              <div className="flex flex-col w-full max-w-6xl mx-auto mt-0 md:mt-7 lg:pt-3 p-3 md:p-0 lg:p-0 justify-center text-6xl font-bold gap-y-6">
+                <div className="w-full flex flex-col items-center justify-center text-center">
+                  <div className="w-full flex flex-col items-center justify-center">
+                    <div className="text-6xl font-bold mb-6">book a call with me.</div>
+                    
+                  
+                    <div className="w-full md:w-[90%] lg:w-[80%] xl:w-[70%] mx-auto">
+                      <CalEmbed/>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
       <div className="flex flex-col space-y-4 px-5">
             <h1 className="tracking-tight font-voyager-thin text-[21px]">projects</h1>
             <div className="flex flex-col pb-40 md:pb-20 pt-6 md:pt-0 lg:pt-0 sm:flex-row w-full space-y-3 md:space-y-0 md:space-x-4">
             <div className="flex flex-row space-x-4 w-full">
                 <CardSpotlight 
                   href="https://krop.store/"
+                  onClick={() => handleProjClick('krop.store', 'https://krop.store/')}
                   className="flex-1 opacity-80 hover:opacity-100 transition-all duration-400 rounded-xl border border-[#ffffff33] p-4 space-y-2 bg-black">
                   <div className="flex flex-row w-full justify-between items-center">
                     <p className="font-aeonik-medium text-[18px]">krop.store</p>
@@ -163,6 +163,7 @@ const Hero = () => {
                 </CardSpotlight>
                 <CardSpotlight 
                   href="https://x.synapse.to"
+                  onClick={() => handleProjClick('x.synapse.to', 'https://x.synapse.to')}
                   className="flex-1 opacity-80 hover:opacity-100 transition-all duration-400 rounded-xl border border-[#ffffff33] p-4 space-y-2 bg-black">
                   <div className="flex flex-row w-full justify-between items-center">
                     <p className="font-aeonik-medium text-[18px]">synapse x</p>
@@ -198,7 +199,7 @@ const Hero = () => {
               >
                 <p className="font-graebenbach-mono-regular">VIEW PROJECTS</p>
               </HoverBorderGradient>
-              {/* <Button text="VIEW PROJECTS" link="/projects" className="w-full text-center md:text-left sm:w-auto"></Button> */}
+              {}
               <Button 
                 text="ABOUT ME"
                 link="/about"

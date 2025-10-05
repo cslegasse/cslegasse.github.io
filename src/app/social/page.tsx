@@ -1,42 +1,31 @@
 "use client";
 
-import React, { useEffect } from "react";
 import Link from "next/link";
 import Navbar from "../../components/Navbar";
 import Footer2 from "../../components/Footer-2";
 import Marquee from "react-fast-marquee";
 import { CardSpotlight } from "../../components/ui/card-spotlight";
 import { TracingBeam } from "../../components/ui/tracing-beam";
+import CalEmbed from "@/src/components/CalEmbed";
+import Brands from "@/src/components/Brands";
+import Stats from "@/src/components/Stats";
+
 
 const Social = () => {
-  const brandImages = [
-    "dubbygg.png",
-    "ryneai.webp"
+  const stats = [
+    { label: "Likes", value: "124K+" },
+    { label: "Views", value: "17M+" },
+    { label: "Attention Rate", value: "73%" },
+    { label: "Avg. Engagement", value: "6.98%" },
   ];
 
-  const stats = [
+  const statImages = [
     "analytic_1.png",
     "analytic_2.png",
     "analytic_3.png",
     "prof_dashboard.png",
-    // "video_1_analytics.png"
-    // "avg_age_range.png",
-    // "engagement.png",
-  ]
+  ];
 
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const script = document.createElement("script");
-      script.src = "https://assets.calendly.com/assets/external/widget.js";
-      script.async = true;
-      document.body.appendChild(script);
-      return () => {
-        document.body.removeChild(script);
-      };
-    }
-  }, []);
-  
   return (
     <>
       <Navbar />
@@ -54,11 +43,11 @@ const Social = () => {
                   SOCIAL MEDIA
                 </p>
                 <p className="w-full md:w-2/3 font-voyager-thin tracking-tight text-center leading-[100%] text-[44px] md:text-[54px] mb-3">
-                  ugc portfolio & interests
+                  ugc portfolio
                 </p>
               </div>
 
-              {}
+            
               <div className="flex flex-col w-full max-w-[600px] mx-auto mt-3 p-4 justify-center text-6xl font-bold gap-y-2">
                 <div className="flex flex-row w-full space-x-1">
                   <div className="self-start mt-3">
@@ -66,61 +55,49 @@ const Social = () => {
                   </div>
                   <div className="flex flex-col w-full align-center justify-center space-y-6 items-start">
                   <p className="w-full font-aeonik-regular leading-[1.5] text-[28px] md:text-[24px] lg:text-[24px]">
-                      I create high quality content that authentically speaks to your brand's story and convert users. 
+                      I create high quality content that authentically speaks to your brand's story and convert users
 
                     </p>
                   </div>
                 </div>
               </div>
 
+              <div className="w-full mt-8">
+                <p className="font-aeonik-bold text-[21px] mb-4">ANALYTICS</p>
+                <p className="font-aeonik-regular text-[18px] mb-8 text-gray-300">
+                  Performance from the last 30 days
+                </p>
 
-        {/* STATS SECTION */}
-        <div className="w-full mt-16">
-          {/* Title */}
-          <p className="w-full font-aeonik-bold tracking-tight text-left leading-[100%] text-[21px] mb-4">
-            ANALYTICS
-          </p>
-
-          {/* Description */}
-          <p className="w-full font-aeonik-regular leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px] mb-8">
-            Recent stats from my social media profiles
-          </p>
-
-          {/* Stats Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 w-full mb-8">            {stats.map((image, index) => (
-            <div key={index} className="w-full h-[250px] bg-gray-300 rounded-lg overflow-hidden mb-4"> {/* Adjusted inner mb */}
-                <img
-                  src={`/stats/${image}`}
-                  alt={`Stat ${index + 1}`}
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {}
-          <div className="w-full">
-            <p className="w-full font-aeonik-bold tracking-tight text-left leading-[100%] text-[21px] mb-8">
-              BRANDS I'VE WORKED WITH
-                  </p>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 w-full">
-                  {brandImages.map((image, index) => (
-                  <div key={index} className="w-full h-[250px] bg-gray-300 rounded-lg overflow-hidden mb-10"> {/* Adjusted inner mb */}
+                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 w-full mb-8">
+                  {statImages.map((image, index) => (
+                    <div
+                      key={index}
+                      className="relative w-full h-[250px] bg-gray-300 rounded-lg overflow-hidden"
+                    >
                       <img
-                        src={`/ugc/${image}`}
-                        alt={`Brand ${index + 1}`}
+                        src={`/stats/${image}`}
+                        alt={`Stat ${index + 1}`}
                         className="w-full h-full object-cover"
                       />
                     </div>
                   ))}
                 </div>
               </div>
-        {}
-        <div>
-        <p className="w-full font-aeonik-bold tracking-tight text-center leading-[100%] text-[36px] mb-8">
-    PORTFOLIO
-  </p>          <div className="grid grid-cols-1 min-h-screen md:grid-cols-3 gap-x-8 gap-y-10 pt-10 w-full">
+
+              <Stats
+              stats={[
+                { label: "Likes", value: "454K+" },
+                { label: "Views", value: "17M+" },
+                { label: "Attention Rate", value: "73%" },
+                { label: "Avg. Engagement", value: "6.98%" },
+              ]}
+            />
+                
+ <div className="w-full relative py-8">
+  <Brands brandImages={[   "dubbygg.png","ryneai.webp","cluely.jpg","vibecodeapp.png","fig.avif","ohara.avif"]} />
+
+  <p className="w-full font-aeonik-bold tracking-tight text-center leading-[100%] text-[36px]"> PORTFOLIO </p>          
+  <div className="grid grid-cols-1 min-h-screen md:grid-cols-3 gap-x-8 gap-y-6 pt-10 w-full overflow-hidden">
             {[
               { src: "https://www.instagram.com/p/DEaRLpAO-Ma/embed", title: "AI PARTNERSHIP" },
               { src: "https://www.instagram.com/p/DBmFg0yONq1/embed", title: "CODING" },
@@ -131,34 +108,40 @@ const Social = () => {
               { src: "https://www.instagram.com/p/C_qdNqwPiVy/embed", title: "TECH MEMES" },
               { src: "https://www.instagram.com/p/C_lXVarvdRA/embed", title: "TECH MEMES" },
               { src: "https://www.instagram.com/p/DAOfNGjuhtB/embed", title: "TECH" },
-            ].map((video, index) => (
-              <div key={index} className="w-full font-aeonik-regular space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px] items-center">
-                <iframe
-                  src={video.src}
-                  className="w-full sm:w-[350px] h-[438px] rounded-lg shadow-md"
-                  allowFullScreen
-                />
-                <p className="text-center font-aeonik-bold text-sm tracking-tight mt-3">
-                  {video.title}
-                </p>
-              </div>
-            ))}
-       </div>
-          </div>
-            <div className="flex flex-col w-full max-w-[400px] mx-auto mt-0 md:mt-7 lg:pt-3 p-3 md:p-0 lg:p-0 justify-center text-6xl font-bold gap-y-2">
-              <div className="w-full flex flex-col items-center justify-center">
-                <div className="w-full flex justify-center">
-                      book a call with me.
-                      <div
-                        className="calendly-inline-widget"
-                        data-url="https://calendly.com/legasse"
-                        style={{ minWidth: "320px", height: "480px", marginRight: "-110px"}}
-                      ></div>
-                </div>
+              ].map((video, index) => (
+        <div
+          key={index}
+          className="w-full font-aeonik-regular space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px] items-center overflow-hidden"
+        >
+          <iframe
+            src={video.src}
+            className="w-full sm:w-[350px] h-[438px] rounded-lg shadow-md"
+            allowFullScreen
+            style={{
+              scrollbarWidth: "none",
+            }}
+            scrolling="no" 
+          />
+          <p className="text-center font-aeonik-bold text-sm tracking-tight mt-3">
+            {video.title}
+          </p>
+        </div>
+      ))}
+    </div>
+        <div className="flex flex-col w-full max-w-6xl mx-auto mt-0 md:mt-7 lg:pt-3 p-3 md:p-0 lg:p-0 justify-center text-6xl font-bold gap-y-6">
+          <div className="w-full flex flex-col items-center justify-center text-center">
+            <div className="w-full flex flex-col items-center justify-center">
+              <div className="text-6xl font-bold mb-6">book a call with me.</div>
+              
+            
+              <div className="w-full md:w-[90%] lg:w-[80%] xl:w-[70%] mx-auto">
+                <CalEmbed/>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
 
-            {/* TIMELINE SECTION */}
             <div className="w-full mt-2">
             <p className="w-full font-aeonik-bold tracking-tight text-left leading-[100%] text-[21px] mb-4">
               TIMELINE
@@ -167,8 +150,7 @@ const Social = () => {
               Relatable content delivered to your audience.
             </p>
 
-            {/* Timeline */}
-            <div className="w-full flex flex-col space-y-144">
+            <div className="w-full flex flex-col space-y-8">
               {[
                 { title: "Discussion", description: "Create ideas and logistics of media proposal." },
                 { title: "Develop", description: "Editing, scripting, content creation, & draft feedback." },
@@ -186,19 +168,25 @@ const Social = () => {
             </div>
           </div>
             {}
-              <div className="w-full flex flex-row py-20 overflow-hidden">
-                <Marquee gradient gradientColor="#000" gradientWidth={25} className="w-full" speed={85} autoFill loop={0}>
-                  {["BRANDS", "EMAIL", "ME"].map((word, index) => (
-                    <p key={index} className="font-voyager-thin tracking-tight leading-[100%] text-[54px] mr-8">
-                      {word}
-                    </p>
-                  ))}
-                </Marquee>
-              </div>
+            <div className="w-full flex flex-row py-8 overflow-hidden">
+            <Marquee
+              gradient={false}
+              className="w-full"
+              speed={85}
+              autoFill
+              loop={0}
+            >
+              {["BRANDS", "EMAIL", "ME"].map((word, index) => (
+                <p key={index} className="font-voyager-thin tracking-tight leading-[100%] text-[54px] mr-6">
+                  {word}
+                </p>
+              ))}
+            </Marquee>
+          </div>
+
             </div>
             </TracingBeam>
-          <Footer2>
-        </Footer2>
+          <Footer2></Footer2>
       </div>
     </div>
   

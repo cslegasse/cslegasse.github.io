@@ -55,18 +55,6 @@ const projects =[
   },
 ];
 
-const freelance = [
-  {
-    name: "Ryne AI",
-    link: "https://ryne.ai/",
-    image: ""
-  },
-  {
-    name: "Gelrova",
-    link: "https://gelrova.com",
-    image: ""
-  },
-];
 
 const Projects = () => {
   return (
@@ -118,46 +106,30 @@ const Projects = () => {
                 </div>
               </div>
             ))}
-            <div className='flex flex-col justify-end w-full pt-5 pb-0 mt-0'>
-              <p className="font-aeonik-thin border-b border-gray-400 pb-3 tracking-widest text-[18px]">FREELANCE WORK</p>
-              <div className="flex flex-row items-start w-full">
-                <div className="w-2/3 pt-10 pr-20 items-start">
-                  {freelance.map((item, index) => (
-                    <div key={index} className="hidden group-hover:block">
-                      <Image
-                        priority
-                        src={item.image}
-                        height={700}
-                        width={600}
-                        alt="hi"
-                      />
-                    </div>
-                  ))}
-                </div>
-                <div className='w-full'>
-                  {freelance.map((item, index) => (
-                    <Link href={item.link as string} key={index} target="_blank" rel="noopener noreferrer">
-                      <div className="w-full border-b border-gray-400 pt-10 group">
-                        <p className="font-voyager-thin tracking-tight text-[36px] mb-3">{item.name}</p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
+
           </div>
           </TracingBeam>
         </div>
       </div>
-      <div className="w-full flex flex-row py-20 overflow-hidden">
-                <Marquee gradient gradientColor="#000" gradientWidth={25} className="w-full" speed={85} autoFill loop={0}>
-                  {["LETS", "BUILD",].map((word, index) => (
-                    <p key={index} className="font-voyager-thin tracking-tight leading-[100%] text-[54px] mr-8">
-                      {word}
-                    </p>
-                  ))}
-                </Marquee>
-                </div>
+      <div className="w-full overflow-x-hidden"> {}
+        <Marquee
+          gradient={false} 
+          speed={85}
+          autoFill
+          loop={0}
+          className="w-[100vw]"
+        >
+          {["LETS", "BUILD"].map((word, index) => (
+            <p
+              key={index}
+              className="font-voyager-thin tracking-tight leading-[100%] text-[54px] mr-8"
+            >
+              {word}
+            </p>
+          ))}
+        </Marquee>
+      </div>
+
       <Footer2/>
     </>
   );

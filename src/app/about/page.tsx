@@ -2,9 +2,10 @@ import React, { FC } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
 import Navbar from "../../components/Navbar"
-import Footer from "../../components/Footer"
 import { TracingBeam } from "../../components/ui/tracing-beam";
 import InteractiveLink from './InteractiveLink';
+import Footer2 from '@/src/components/Footer-2';
+
 
 // const education = [
 //   {
@@ -332,8 +333,6 @@ const About = () => {
             ))}
           </div>
 
-          
-      
           <div className="w-full pt-1 pb-1">            
             <p className="font-voyager-thin text-[24px] text-white leading-snug">
               You can find my industry resources 
@@ -351,8 +350,9 @@ const About = () => {
           </div>
         </TracingBeam>
         </div>
+      
       </div>
-      <Footer/>
+      <Footer2/>
     </>
   );
 };

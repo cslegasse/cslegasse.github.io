@@ -6,90 +6,15 @@ import Navbar from "../../components/Navbar";
 import { TracingBeam } from "../../components/ui/tracing-beam";
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
+import experiencesData from "../../data/experiences.json";
+import subItemsData from "../../data/subItems.json";
 
 const InteractiveMap = dynamic(() => import("../../components/Map"), {
   ssr: false, 
 });
 
-const experiences = [
-  {
-    country: "Japan",
-    city: "Kyoto",
-    image: "abroad/kyoto_default.jpg",
-    title: "Study Abroad Semester",
-    description:
-      "Spent a semester at Kyoto University, learned Japanese, joined a soccer team, attended cultural events and made international friends.",
-    tags: ["Study Abroad", "Japan", "Asia"],
-  },
-  {
-    country: "Ecuador",
-    city: "Cuenca",
-    image: "abroad/cuenca_default.jpg",
-    title: "Cultural Study",
-    description:
-      "Spent 1 month living and working, hiking the Andes, and refining my Spanish.",
-    tags: ["South America", "Culture", "Spanish"],
-  },
-  {
-    country: "South Korea",
-    city: "Seoul",
-    image: "abroad/seoul_default.jpg",
-    title: "Cultural Study",
-    description:
-      "Spent 2 weeks exploring social customs, learning Korean, and normal tourist things.",
-    tags: ["Asia", "Culture", "Tourism"],
-  },
-  
-];
-
-
-const subItems = [
-  {
-  title: "MUL2010 - Experiencing Music",
-  content:
-  "Analyzes contemporary music genres from different eras through a global lense.",
-  },
-  {
-  title: "ENY1001 - Bugs & People",
-  content:
-  "Explores the development and interactions of bugs throughout history in the world.",
-  },
-  {
-  title: "JPN1130/JPN1131 - Beginning Japanese 1 & 2",
-  content:
-  "Kyoto University N5 qualifying course for learning kanji, speaking, reading, grammar, and writing.",
-  },
-  {
-  title: "PSY4956 - Mental & Social Isolation in Japan",
-  content:
-  "Explores the social phenomenon and history of Hikikomori.",
-  },
-  {
-  title: "PSY4956 - Physiological Neuroscience",
-  content:
-  "Discusses the fundamentals of neuroscience from a biological standpoint.",
-  },
-  {
-  title: "CIS4956 - Information & Society",
-  content:
-  "Explores the social impact of information and technology on society.",
-  },
-  {
-  title: "CAI4101 - Fundamentals of AI",
-  content:
-  "Introduces AI through applied machine learning techniques.",
-  },
-  {
-  title: "PSY4956 - Health Psychology",
-  content:
-  "The principle concepts of health psychology and its research basis.",
-  },
-  {
-  title: "PSY2012 - Psychology",
-  content:
-  "Introduces the study of psychology and its research basis.",
-  },
-];
+const experiences = experiencesData;
+const subItems = subItemsData;
 
 export default function Abroad() {
   const [openMain, setOpenMain] = useState(false);
@@ -101,7 +26,6 @@ export default function Abroad() {
         <div className="flex flex-col w-full px-8 sm:px-8 md:px-16 lg:px-20 items-start justify-center gap-y-4">
           <TracingBeam className="px-0 md:px-2">
             <div className="flex flex-col w-full">
-              {/* Back Link */}
               <Link
                 href="/"
                 className="w-full font-aeonik-thin tracking-regular space-y-3 text-sm mb-4"
@@ -109,7 +33,6 @@ export default function Abroad() {
                 <p>← BACK TO HOME</p>
               </Link>
 
-              {/* Header Section */}
               <div className="flex flex-col w-full align-center justify-center space-y-4 items-center">
                 <p
                   className={
@@ -126,7 +49,6 @@ export default function Abroad() {
                 </p>
               </div>
 
-              {/* Experiences Grid */}
               <div className="mt-12 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                 {experiences.map((exp, i) => (
                   <div
@@ -162,26 +84,23 @@ export default function Abroad() {
                   </div>
                 ))}
                 
-              </div> {/* <-- close grid here */}
+              </div>
 
              
 
                 <div className="mt-10 w-full max-w-5xl mx-auto">
-                {/* Map and descriptor side by side */}
                    <h1 className="font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">
                   around the globe.
                 </h1>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
-                  {/* Map */}
                   <div className="rounded-2xl shadow overflow-hidden">
-                    {/* Replace with your actual map component */}
                     
                     <div className="w-full h-80 bg-gray-200 flex items-center justify-center">
-                      <InteractiveMap/>
+                      <InteractiveMap locations={experiences} />
+
                     </div>
                   </div>
 
-                  {/* Descriptor text box */}
                   <div className="rounded-2xl bg-white-100 shadow p-6">
                     <h2 className="text-xl font-aeonik-bold mb-2">About This Map</h2>
                     <p className="text-gray-700 font-aeonik-thin leading-relaxed">
@@ -192,7 +111,6 @@ export default function Abroad() {
                   </div>
                 </div>
 
-                {/* International Coursework Section - moved below map */}
                 <div className="mt-10 w-full max-w-2xl mx-auto">
                   <button
                     onClick={() => setOpenMain(!openMain)}
@@ -224,7 +142,6 @@ export default function Abroad() {
                     </div>
                   )}
                 </div>
-
                 </div>
             </div>
           </TracingBeam>

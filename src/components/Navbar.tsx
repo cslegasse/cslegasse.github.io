@@ -1,13 +1,11 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from 'react';
-import Image from "next/image";
 import Link from "next/link";
 import posthog from 'posthog-js';
 
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaGithub, FaInstagram, FaLinkedin, FaTiktok, FaDiscord, FaYoutube, FaLink} from 'react-icons/fa'
-import { FaXTwitter } from "react-icons/fa6";
 import {
   Sheet,
   SheetContent,

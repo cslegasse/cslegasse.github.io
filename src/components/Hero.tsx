@@ -9,7 +9,7 @@ import posthog from 'posthog-js';
 import CalEmbed from "../components/CalEmbed";
 import { usePostHog } from 'posthog-js/react';
 
-import { CardSpotlight } from "@/src/components/ui/card-spotlight";
+import { CardSpotlight } from "components/ui/card-spotlight";
 import Footer from './Footer';
 
 if (typeof window !== "undefined") {

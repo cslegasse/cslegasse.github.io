@@ -6,8 +6,8 @@ import Navbar from "../../components/Navbar";
 import { TracingBeam } from "../../components/ui/tracing-beam";
 import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
-import experiencesData from "../../data/experiences.json";
-import subItemsData from "../../data/subItems.json";
+import experiencesData from "@data/experiences.json";
+import subItemsData from "@data/subItems.json";
 
 const InteractiveMap = dynamic(() => import("../../components/Map"), {
   ssr: false, 

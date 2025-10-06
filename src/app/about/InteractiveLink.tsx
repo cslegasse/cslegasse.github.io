@@ -15,7 +15,6 @@ interface InteractiveLinkProps {
   newTab?: boolean;
 }
 
-//  Client Component
 export default function InteractiveLink({ href, children, event, underline = false, newTab = false }: InteractiveLinkProps) {
   const linkStyle = {
     textDecoration: underline ? 'underline' : 'none'

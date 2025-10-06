@@ -4,7 +4,7 @@ import Link from 'next/link';
 import Navbar from "../../components/Navbar"
 import { TracingBeam } from "../../components/ui/tracing-beam";
 import InteractiveLink from './InteractiveLink';
-import Footer2 from '@/src/components/Footer-2';
+import Footer2 from '@components/Footer-2';
 
 
 // const education = [

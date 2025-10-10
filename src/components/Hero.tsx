@@ -1,16 +1,19 @@
 "use client";
 
-import React, { useEffect, FC, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
-import Button from './Button';
 import { HoverBorderGradient } from "./ui/hover-border-gradient";
-import posthog from 'posthog-js';
-import CalEmbed from "@components/CalEmbed";
 import { usePostHog } from 'posthog-js/react';
-
 import { CardSpotlight } from "@components/ui/card-spotlight";
-import Footer from './Footer';
+import posthog from 'posthog-js';
+import dynamic from "next/dynamic";
+
+const Navbar = dynamic(() => import("@components/Navbar"), { ssr: false });
+const Footer = dynamic(() => import("@components/Footer"), { ssr: false });
+const Button = dynamic(() => import("@components/Button"), { ssr: false });
+const CalEmbed = dynamic(() => import("@components/CalEmbed"), { ssr: false });
+const CoolMarquee = dynamic(() => import("@components/CoolMarquee"), { ssr: false });
 
 const handleProjButtomClick = () => {
   if (typeof window !== "undefined") {
@@ -162,36 +165,28 @@ const Hero = () => {
               </div>
             </div>
           </div>
-          <div className="flex flex-col space-y-4 px-5">
-            <h1 className="tracking-tight font-voyager-thin text-[21px]">see more</h1>
-            <div className="flex flex-col pb-20 md:pb-0 pt-6 md:pt-0 lg:pt-0 sm:flex-row w-full space-y-3 md:space-y-0 md:space-x-4">
-              <HoverBorderGradient
-                containerClassName="rounded-xl w-full text-center md:text-left sm:w-auto"
-                link="/projects"
-                as="button"
-                className="dark:bg-white bg-black text-white dark:text-black flex items-center space-x-2"
-                onClick={() => handleProjButtomClick()}
-              >
-                <p className="font-graebenbach-mono-regular">VIEW PROJECTS</p>
-              </HoverBorderGradient>
-              {}
-              <Button 
-                text="ABOUT ME"
-                link="/about"
-                className="w-full text-center md:text-left sm:w-auto"
-                event={`'aboutClicked', {property: 'value'}`}
-              ></Button>
-              <Button 
-                text="SOCIAL MEDIA"
-                link="/social"
-                className="w-full text-center md:text-left sm:w-auto"
-                event={`'aboutClicked', {property: 'value'}`}
-              ></Button>
-            </div>
-          </div>
+       <div className="flex flex-col w-full bg-black px-5 py-2 gap-2">
+        <h1 className="tracking-tight font-voyager-thin text-[21px]">see more</h1>
+        <div className="flex flex-col sm:flex-row w-full gap-2 md:gap-4">
+          <HoverBorderGradient
+            containerClassName="rounded-xl w-full text-center sm:w-auto"
+            link="/projects"
+            as="button"
+            className="bg-black text-white flex items-center space-x-2"
+            onClick={() => handleProjButtomClick()}
+          >
+            <p className="font-graebenbach-mono-regular">VIEW PROJECTS</p>
+          </HoverBorderGradient>
+
+          <Button text="ABOUT ME" link="/about" className="w-full sm:w-auto text-center" event={`'aboutClicked', {property: 'value'}`} />
+          <Button text="SOCIAL MEDIA" link="/social" className="w-full sm:w-auto text-center" event={`'aboutClicked', {property: 'value'}`} />
         </div>
-        <Footer>
-        </Footer>
+      </div>
+      </div>
+          <main className="flex flex-col w-full bg-black text-white">
+          <CoolMarquee />
+          <Footer />
+        </main>
       </main>
     </>
   );

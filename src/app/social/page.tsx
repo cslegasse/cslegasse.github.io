@@ -1,23 +1,20 @@
 "use client";
 
 import Link from "next/link";
-import Navbar from "@components/Navbar";
-import Footer2 from "@components/Footer-2";
-import Marquee from "react-fast-marquee";
 import { CardSpotlight } from "@components/ui/card-spotlight";
 import { TracingBeam } from "@components/ui/tracing-beam";
-import CalEmbed2 from "@components/CalEmbed2";
-import Brands from "@components/Brands";
-import Stats from "@components/Stats";
+import dynamic from "next/dynamic";
+
+const Navbar = dynamic(() => import("@components/Navbar"), { ssr: false });
+const Footer2 = dynamic(() => import("@components/Footer-2"), { ssr: false });
+const Stats = dynamic(() => import("@components/Stats"), { ssr: false });
+const CalEmbed2 = dynamic(() => import("@components/CalEmbed2"), { ssr: false });
+const CoolMarquee = dynamic(() => import("@components/CoolMarquee"), { ssr: false });
+const Brands = dynamic(() => import("@components/Brands"), { ssr: false });
+
+
 
 const Social = () => {
-  const stats = [
-    { label: "Likes", value: "225K+" },
-    { label: "Views", value: "17M+" },
-    { label: "Attention Rate", value: "73%" },
-    { label: "Avg. Engagement", value: "6.98%" },
-  ];
-
   const statImages = [
     "analytic_1.png",
     "analytic_2.png",
@@ -93,7 +90,7 @@ const Social = () => {
             />
                 
  <div className="w-full relative py-8">
-  <Brands brandImages={[   "dubbygg.png","ryneai.webp","cluely.jpg","vibecodeapp.png","fig.avif","ohara.avif, smodin.png, pagepilot.svg"]} />
+  <Brands brandImages={[ "adidas.png","cluely.jpg","vibecodeapp.png","fig.avif","ohara.avif","smodin.png","pagepilot.svg", "dubbygg.png","ryneai.webp"]} />
 
   <p className="w-full font-aeonik-bold tracking-tight text-center leading-[100%] text-[36px]"> PORTFOLIO </p>          
   <div className="grid grid-cols-1 min-h-screen md:grid-cols-3 gap-x-8 gap-y-6 pt-10 w-full overflow-hidden">
@@ -116,11 +113,11 @@ const Social = () => {
             src={video.src}
             className="w-full sm:w-[350px] h-[438px] rounded-lg shadow-md"
             allowFullScreen
-            style={{
-              scrollbarWidth: "none",
-            }}
-            scrolling="no" 
+            loading="lazy"
+            style={{ scrollbarWidth: "none" }}
+            scrolling="no"
           />
+
           <p className="text-center font-aeonik-bold text-sm tracking-tight mt-3">
             {video.title}
           </p>
@@ -166,26 +163,11 @@ const Social = () => {
               ))}
             </div>
           </div>
-            {}
-            <div className="w-full flex flex-row py-8 overflow-hidden">
-            <Marquee
-              gradient={false}
-              className="w-full"
-              speed={85}
-              autoFill
-              loop={0}
-            >
-              {["BRANDS", "EMAIL", "ME"].map((word, index) => (
-                <p key={index} className="font-voyager-thin tracking-tight leading-[100%] text-[54px] mr-6">
-                  {word}
-                </p>
-              ))}
-            </Marquee>
-          </div>
+            <CoolMarquee/>
 
             </div>
             </TracingBeam>
-          <Footer2></Footer2>
+         <Footer2/>
       </div>
     </div>
   

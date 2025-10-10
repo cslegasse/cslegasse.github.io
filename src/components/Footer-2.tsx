@@ -5,6 +5,9 @@ const Footer2 = () => (
         NULL@LEGASSEREMON.COM
       </h1>
     </div>
+    <div className="text-sm text-gray-400 text-center mt-8">
+      © GOOSE BIZ LLC 2025. All rights reserved.
+    </div>
   </footer>
 );
 

@@ -6,14 +6,13 @@ import Footer2 from "@components/Footer-2";
 import Marquee from "react-fast-marquee";
 import { CardSpotlight } from "@components/ui/card-spotlight";
 import { TracingBeam } from "@components/ui/tracing-beam";
-import CalEmbed from "@components/CalEmbed";
+import CalEmbed2 from "@components/CalEmbed2";
 import Brands from "@components/Brands";
 import Stats from "@components/Stats";
 
-
 const Social = () => {
   const stats = [
-    { label: "Likes", value: "124K+" },
+    { label: "Likes", value: "225K+" },
     { label: "Views", value: "17M+" },
     { label: "Attention Rate", value: "73%" },
     { label: "Avg. Engagement", value: "6.98%" },
@@ -94,7 +93,7 @@ const Social = () => {
             />
                 
  <div className="w-full relative py-8">
-  <Brands brandImages={[   "dubbygg.png","ryneai.webp","cluely.jpg","vibecodeapp.png","fig.avif","ohara.avif"]} />
+  <Brands brandImages={[   "dubbygg.png","ryneai.webp","cluely.jpg","vibecodeapp.png","fig.avif","ohara.avif, smodin.png, pagepilot.svg"]} />
 
   <p className="w-full font-aeonik-bold tracking-tight text-center leading-[100%] text-[36px]"> PORTFOLIO </p>          
   <div className="grid grid-cols-1 min-h-screen md:grid-cols-3 gap-x-8 gap-y-6 pt-10 w-full overflow-hidden">
@@ -135,7 +134,7 @@ const Social = () => {
               
             
               <div className="w-full md:w-[90%] lg:w-[80%] xl:w-[70%] mx-auto">
-                <CalEmbed/>
+                <CalEmbed2/>
               </div>
             </div>
           </div>

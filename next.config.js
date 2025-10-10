@@ -3,8 +3,14 @@
 const nextConfig = {
   output: "export", 
   reactStrictMode: true,
-  basePath: "/cslegassse.github.io",
+  basePath: "/cslegasse.github.io",
 };
+
+module.exports = {
+  experimental: {
+    appDir: true
+  }
+}
 
 module.exports = nextConfig;
 
@@ -14,5 +20,10 @@ module.exports = nextConfig;
 // const nextConfig = {
 //   reactStrictMode: true,
 // };
+// module.exports = {
+//   experimental: {
+//     appDir: true
+//   }
+// }
 
 // module.exports = nextConfig;

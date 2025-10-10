@@ -3,10 +3,6 @@
 import React from 'react';
 import posthog from 'posthog-js';
 
-if (typeof window !== "undefined") {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_API_KEY!, { api_host: 'https://us.i.posthog.com' });
-}
-
 interface InteractiveLinkProps {
   href: string;
   children: React.ReactNode;

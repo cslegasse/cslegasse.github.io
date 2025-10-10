@@ -28,9 +28,7 @@ export default function Research() {
                 CV
               </a>
 
-              {/* MAIN PROFILE SECTION */}
               <div className="w-full mt-16 grid grid-cols-1 md:grid-cols-3 gap-10">
-                {/* Sidebar */}
                 <aside className="md:col-span-1 flex flex-col items-center text-center md:items-start md:text-left">
                     
                   <img
@@ -45,15 +43,12 @@ export default function Research() {
                     <p>Research Inquiries</p>
                   </div>
 
-                  {/* Social Links */}
                   <div className="flex gap-4 mt-4 text-xl text-slate-100">
                     <a href="https://linkedin.com/legasse-remon/"><i className="fab fa-linkedin" /></a>
                     <a href="https://github.com/cslegasse/"><i className="fab fa-github" /></a>
-                    {/* <a href="https://scholar.google.com/"><i className="ai ai-google-scholar" /></a> */}
                   </div>
                 </aside>
 
-                  {/* Bio & Content */}
                 <main className="md:col-span-2 space-y-8">
                   <div>
                     <h1 className="text-4xl font-bold mb-2">Legasse Remon</h1>

@@ -1,15 +1,17 @@
+'use client';
+
 import React from 'react';
 import "../styles/fonts.css";
 import "../styles/globals.css";
 import { Inter } from "next/font/google";
 import { metadata } from './metadata';
-import { PostHogProvider } from "./providers";
+import PostHogClientProvider from '../components/PostHogClientProvider';
 
 const inter = Inter({ subsets: ["latin"] });
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html className={`${inter.className}`}>
+    <html className={inter.className}>
       <head>
         <title>{metadata.title.default}</title>
         <meta name="description" content={metadata.description} />
@@ -28,12 +30,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="twitter:image" content={metadata.twitter.images} />
         <link rel="icon" href="/favicon.ico" />
       </head>
-       <body className="bg-black text-white">
-        <PostHogProvider>
-          {children} {}
-        </PostHogProvider>
+      <body className="bg-black text-white">
+        <PostHogClientProvider>
+          {children}
+        </PostHogClientProvider>
       </body>
     </html>
   );
 };
-

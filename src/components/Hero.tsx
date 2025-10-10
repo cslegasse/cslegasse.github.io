@@ -12,11 +12,6 @@ import { usePostHog } from 'posthog-js/react';
 import { CardSpotlight } from "@components/ui/card-spotlight";
 import Footer from './Footer';
 
-if (typeof window !== "undefined") {
-  posthog.init(process.env.NEXT_PUBLIC_POSTHOG_API_KEY!, { api_host: 'https://us.i.posthog.com' });
-}
-
-
 const handleProjButtomClick = () => {
   if (typeof window !== "undefined") {
     posthog.capture('viewProjectsClicked', {property: 'value'});
@@ -29,26 +24,6 @@ const handleProjClick = (projectName: string, projectLink: string) => {
     url: projectLink,
   });
 };
-
-const nowProjects = [
-  { name: "by gen-z for the fashionable", link: "https://krop.store/" },
-];
-
-const prevProjects = [
-  { 
-    name: "krop fashion",
-    role: "growth lead",
-    desc: "by gen-z for the fashionable. 0 -> 500k arr. 1M customers.", 
-    link: "https://krop.store/",
-  },
-  { 
-    name: "synapse x",
-    role: "scripter",
-    desc: "inject scripts in seconds. 0 -> 175k arr.", 
-    link: "https://x.synapse.to/",
-  },
-
-];
 
 const Hero = () => {
   const [isMounted, setIsMounted] = useState(false);

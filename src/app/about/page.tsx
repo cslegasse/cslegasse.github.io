@@ -201,13 +201,13 @@ const About = () => {
         <div className="flex flex-col w-full px-8 md:px-22 lg:px-20 items-start justify-center text-6xl font-bold gap-y-4 ">
           <TracingBeam className="px-0 md:px-2">
             <div className="flex flex-col w-full align-center justify-center space-y-4 items-start">
-              <Link href="/" className="w-full font-aeonik-thin tracking-regular space-y-3 text-sm mb-4">
+              <Link href="/" className="w-full font-voyager-thin tracking-regular space-y-3 text-sm mb-4">
                 <p>← BACK TO HOME </p>
               </Link>
               <div className="flex flex-col w-full align-center justify-center space-y-4 items-center">
-                <p className="w-full font-aeonik-bold tracking-tight text-center leading-[100%] text-[21px] mb-3">ABOUT </p>
+                <p className="w-full font-voyager-thin tracking-tight text-center leading-[100%] text-[21px] mb-3">ABOUT </p>
                 <h1 className="font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">be yourself.</h1>
-                <div className="w-full md:w-2/3 font-aeonik-thin tracking-[0.015em] space-y-10 items-center align-center justify-center text-[21px] md:text-[21px]">
+                <div className="w-full md:w-2/3 font-voyager-thin tracking-[0.015em] space-y-10 items-center align-center justify-center text-[21px] md:text-[21px]">
                   <p className="leading-[150%]">My journey in software and security started at age 14 utilizing a DLL injector <InteractiveLink href="https://x.synapse.to" event='synapse' underline={true} newTab={true}>Synapse X.</InteractiveLink> where I was a scripter. Synapse Softworks was later <InteractiveLink href="https://devforum.roblox.com/t/exploit-prevention-update/2663101" event='synapse' underline={true} newTab={true}> acquired by ROBLOX</InteractiveLink> for millions.
                   </p>
                   <p className="leading-[150%]">At 15, I helped developed and release multiple hack clients and script hubs for Minecraft and ROBLOX on <InteractiveLink href="https://v3rmillion.net" event='verm' underline={true} newTab={true}> V3rmillion </InteractiveLink> (Wally Hub), <InteractiveLink href="https://wearedevs.net" event='wearedevs' underline={true} newTab={true}> WeAreDevs </InteractiveLink> (Shiba Hub), and <InteractiveLink href="https://builtbybit.com" event='mcmarket' underline={true} newTab={true}> MC-Market </InteractiveLink> (Incognito Client).</p>
@@ -226,11 +226,11 @@ const About = () => {
             {}
             </div>
           <div className="flex flex-col w-full py-10">
-            <p className="font-aeonik-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">EXPERIENCE</p>
+            <p className="font-voyager-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">EXPERIENCE</p>
             {groupedExperiences.map((group, index) => (
             <div key={index} className="flex flex-col md:flex-row w-full justify-between md:space-x-10 border-b pb-10 border-gray-800">
               {group.map((exp, idx) => (
-                <div key={idx} className="w-full py-10 font-aeonik-regular">
+                <div key={idx} className="w-full py-10 font-voyager-thin">
                   <InteractiveLink 
                     href={exp.link as string}
                     event={'aboutExperienceClicked'}
@@ -261,12 +261,12 @@ const About = () => {
             </div>
             ))}
 
-            <p className="font-aeonik-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">LEADERSHIP</p>
+            <p className="font-voyager-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">LEADERSHIP</p>
 
              {leadershipExperiences.map((group, index) => (
             <div key={index} className="flex flex-col md:flex-row w-full justify-between md:space-x-10 border-b pb-10 border-gray-800">
               {group.map((exp, idx) => (
-                <div key={idx} className="w-full py-10 font-aeonik-regular">
+                <div key={idx} className="w-full py-10 font-voyager-thin">
                   <InteractiveLink 
                     href={exp.link as string}
                     event={'aboutExperienceClicked'}
@@ -296,12 +296,12 @@ const About = () => {
               ))}
             </div>
             ))}
-            <p className="font-aeonik-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">PROGRAMS</p>
+            <p className="font-voyager-thin tracking-widest text-[18px] border-b border-gray-400 pb-3">PROGRAMS</p>
 
              {programExperiences.map((group, index) => (
             <div key={index} className="flex flex-col md:flex-row w-full justify-between md:space-x-10 border-b pb-10 border-gray-800">
               {group.map((exp, idx) => (
-                <div key={idx} className="w-full py-10 font-aeonik-regular">
+                <div key={idx} className="w-full py-10 font-voyager-thin">
                   <InteractiveLink 
                     href={exp.link as string}
                     event={'aboutExperienceClicked'}

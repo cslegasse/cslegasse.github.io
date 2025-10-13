@@ -90,7 +90,7 @@ const Hero = () => {
       <div className="flex flex-row w-full mb-3 items-center">
         <h1 className="tracking-tight font-voyager-thin text-[38px] md:text-[32px] lg:text-[32px]">hi, i'm legasse.</h1>
       </div>
-      <div className="w-full font-aeonik-regular space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px]">
+      <div className="w-full font-voyager-thin space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px]">
         <p>21yo security engineer + content creator. i am focused on entrepreneurship, research, and tech.</p>
         <p>i have experience with various forms of ecommerce dealing with marketing, sales, coding, and management. </p>
         <p>i'm currently building consumer apps with AI.</p>
@@ -133,7 +133,7 @@ const Hero = () => {
                       }`}
                     />
                   </div>
-                  <p className="opacity-70 font-aeonik-regular text-[14px] leading-[130%]">
+                  <p className="opacity-70 font-voyager-thin text-[14px] leading-[130%]">
                     fashion made by gen-z, for gen-z. custom fashion products from around the world. 1M+ happy customers.
                     <br/><br/>
                     featured on TikTok.
@@ -156,7 +156,7 @@ const Hero = () => {
                       }`}
                     />
                   </div>
-                  <p className="opacity-70 font-aeonik-regular text-[14px] leading-[130%]">
+                  <p className="opacity-70 font-voyager-thin text-[14px] leading-[130%]">
                         2-step injection method to hack your favorite games with custom scripts. 34,000 happy hackers.
                     <br/><br/>
                     featured on V3rmillion, SlurpTech.

@@ -28,7 +28,7 @@ export default function Abroad() {
             <div className="flex flex-col w-full">
               <Link
                 href="/"
-                className="w-full font-aeonik-thin tracking-regular space-y-3 text-sm mb-4"
+                className="w-full font-voyager-thin tracking-regular space-y-3 text-sm mb-4"
               >
                 <p>← BACK TO HOME</p>
               </Link>
@@ -36,7 +36,7 @@ export default function Abroad() {
               <div className="flex flex-col w-full align-center justify-center space-y-4 items-center">
                 <p
                   className={
-                    "w-full font-aeonik-bold tracking-tight text-center leading-[100%] text-[21px] mb-3"
+                    "w-full font-voyager-thin tracking-tight text-center leading-[100%] text-[21px] mb-3"
                   }
                 >
                   INTERNATIONAL EXPERIENCES
@@ -44,7 +44,7 @@ export default function Abroad() {
                 <h1 className="font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">
                   perspective across borders.
                 </h1>
-                <p className="max-w-2xl text-center text-base md:text-lg font-aeonik-thin tracking-regular leading-relaxed text-gray-600">
+                <p className="max-w-2xl text-center text-base md:text-lg font-voyager-thin tracking-regular leading-relaxed text-gray-600">
                   this page is a work in progress.
                 </p>
               </div>
@@ -63,11 +63,11 @@ export default function Abroad() {
                       />
                     )}
                     <div className="p-6 flex flex-col space-y-3">
-                      <h2 className="font-aeonik-bold text-lg tracking-tight">{exp.title}</h2>
-                      <p className="text-sm font-aeonik-thin text-gray-600">
+                      <h2 className="font-voyager-thin text-lg tracking-tight">{exp.title}</h2>
+                      <p className="text-sm font-voyager-thin text-gray-600">
                         {exp.city}, {exp.country}
                       </p>
-                      <p className="text-base font-aeonik-thin leading-relaxed text-gray-700">
+                      <p className="text-base font-voyager-thin leading-relaxed text-gray-700">
                         {exp.description}
                       </p>
                       <div className="flex flex-wrap gap-2 pt-2">
@@ -102,8 +102,8 @@ export default function Abroad() {
                   </div>
 
                   <div className="rounded-2xl bg-white-100 shadow p-6">
-                    <h2 className="text-xl font-aeonik-bold mb-2">About This Map</h2>
-                    <p className="text-gray-700 font-aeonik-thin leading-relaxed">
+                    <h2 className="text-xl font-voyager-thin mb-2">About This Map</h2>
+                    <p className="text-gray-700 font-voyager-thin leading-relaxed">
                       This map highlights where international locations connected to my coursework, language study, and cultural exploration throughout the last 4 years.
                       I've been to 32 countries 15 US states while in college. Check out these cool destinations!
                     
@@ -114,7 +114,7 @@ export default function Abroad() {
                 <div className="mt-10 w-full max-w-2xl mx-auto">
                   <button
                     onClick={() => setOpenMain(!openMain)}
-                    className="flex w-full items-center justify-between rounded-2xl bg-black-100 px-5 py-3 font-aeonik-bold text-lg tracking-tight shadow-sm hover:bg-white-200 transition"
+                    className="flex w-full items-center justify-between rounded-2xl bg-black-100 px-5 py-3 font-voyager-thin text-lg tracking-tight shadow-sm hover:bg-white-200 transition"
                   >
                     International Coursework
                     {openMain ? <ChevronUp size={20} /> : <ChevronDown size={20} />}
@@ -126,14 +126,14 @@ export default function Abroad() {
                         <div key={idx} className="w-full">
                           <button
                             onClick={() => setOpenSub(openSub === idx ? null : idx)}
-                            className="flex w-full items-center justify-between rounded-xl bg-gray px-4 py-2 font-aeonik-thin text-base shadow hover:bg-black-50 border"
+                            className="flex w-full items-center justify-between rounded-xl bg-gray px-4 py-2 font-voyager-thin text-base shadow hover:bg-black-50 border"
                           >
                             {item.title}
                             {openSub === idx ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
                           </button>
 
                           {openSub === idx && (
-                            <div className="px-6 py-3 text-sm text-gray-600 font-aeonik-thin leading-relaxed border-l-2 border-gray-300 bg-gray-50">
+                            <div className="px-6 py-3 text-sm text-gray-600 font-voyager-thin leading-relaxed border-l-2 border-gray-300 bg-gray-50">
                               {item.content}
                             </div>
                           )}

@@ -65,16 +65,16 @@ const Projects = () => {
         <TracingBeam className="px-0 md:px-2 mb-1">
           <div
             className="flex flex-col w-full md:justify-center space-y-4 items-start">
-            <Link href="/" className="w-full font-aeonik-thin tracking-regular space-y-3 text-sm mb-4">
+            <Link href="/" className="w-full font-voyager-thin tracking-regular space-y-3 text-sm mb-4">
               <p>← BACK TO HOME </p>
             </Link>
           </div>
           <div
             className="flex flex-col w-full align-center justify-center space-y-4 items-start">
-              <p className="w-full font-aeonik-bold tracking-tight text-center leading-[100%] text-[21px] mb-3">PROJECTS </p>
+              <p className="w-full font-voyager-thin tracking-tight text-center leading-[100%] text-[21px] mb-3">PROJECTS </p>
               <h1 className="w-full font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">some things i've worked on</h1>
               {projects.map((project) => (
-              <div key={project.name} className="w-full flex flex-col md:flex-row md:space-x-5 py-6 md:py-10 items-start font-aeonik-thin tracking-regular space-y-3 text-sm">
+              <div key={project.name} className="w-full flex flex-col md:flex-row md:space-x-5 py-6 md:py-10 items-start font-voyager-thin tracking-regular space-y-3 text-sm">
                 <div className="flex flex-col md:flex-row w-full md:w-1/2 lg:w-1/2">
                   <Image
                     priority
@@ -91,7 +91,7 @@ const Projects = () => {
                     <h1 className="font-voyager-thin">{project.role}</h1>
                   </div>
                   <p className="pt-3">{project.year}</p>
-                  <div className="flex flex-row my-10 tracking-normal font-aeonik-regular text-[18px] leading-[125%]">
+                  <div className="flex flex-row my-10 tracking-normal font-voyager-thin text-[18px] leading-[125%]">
                     <p>{project.description}</p>
                   </div>
                   <div className="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-3 text-center md:text-start">

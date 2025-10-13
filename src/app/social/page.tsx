@@ -4,6 +4,7 @@ import Link from "next/link";
 import { CardSpotlight } from "@components/ui/card-spotlight";
 import { TracingBeam } from "@components/ui/tracing-beam";
 import dynamic from "next/dynamic";
+import { drukWide } from "../fonts"
 
 const Navbar = dynamic(() => import("@components/Navbar"), { ssr: false });
 const Footer2 = dynamic(() => import("@components/Footer-2"), { ssr: false });
@@ -11,8 +12,6 @@ const Stats = dynamic(() => import("@components/Stats"), { ssr: false });
 const CalEmbed2 = dynamic(() => import("@components/CalEmbed2"), { ssr: false });
 const CoolMarquee = dynamic(() => import("@components/CoolMarquee"), { ssr: false });
 const Brands = dynamic(() => import("@components/Brands"), { ssr: false });
-
-
 
 const Social = () => {
   const statImages = [
@@ -29,13 +28,13 @@ const Social = () => {
         <div className="flex flex-col w-full px-8 sm:px-8 md:px-16 lg:px-20 items-start justify-center gap-y-4">
           <TracingBeam className="px-0 md:px-2">
             <div className="flex flex-col w-full">
-              <Link href="/" className="w-full font-aeonik-thin tracking-regular text-sm mb-4">
+              <Link href="/" className="w-full font-voyager-thin tracking-regular text-sm mb-4">
                 <p>← BACK TO HOME</p>
               </Link>
 
               {}
               <div className="flex flex-col w-full align-center justify-center space-y-4 items-center">
-                <p className="w-full font-aeonik-bold tracking-tight text-center leading-[100%] text-[21px] mb-3">
+                <p className="w-full font-voyager-thin tracking-tight text-center leading-[100%] text-[21px] mb-3">
                   SOCIAL MEDIA
                 </p>
                 <p className="w-full md:w-2/3 font-voyager-thin tracking-tight text-center leading-[100%] text-[44px] md:text-[54px] mb-3">
@@ -50,17 +49,16 @@ const Social = () => {
                     <h1 className="tracking-tight font-voyager-thin text-[16px] md:text-[14px] lg:text-[14px] mr-1">►</h1>
                   </div>
                   <div className="flex flex-col w-full align-center justify-center space-y-6 items-start">
-                  <p className="w-full font-aeonik-regular leading-[1.5] text-[28px] md:text-[24px] lg:text-[24px]">
-                      I create high quality content that authentically speaks to your brand's story and convert users
-
+                  <p className="w-full font-voyager-thin leading-[1.5] text-[28px] md:text-[24px] lg:text-[24px]">
+                      I create high quality content that authentically speaks to your brand's story and convert users.
                     </p>
                   </div>
                 </div>
               </div>
 
               <div className="w-full mt-8">
-                <p className="font-aeonik-bold text-[21px] mb-4">ANALYTICS</p>
-                <p className="font-aeonik-regular text-[18px] mb-8 text-gray-300">
+                <p className="font-voyager-thin text-[21px] mb-4">ANALYTICS</p>
+                <p className="font-voyager-thin text-[18px] mb-8 text-gray-300">
                   Performance from the last 30 days
                 </p>
 
@@ -90,9 +88,9 @@ const Social = () => {
             />
                 
  <div className="w-full relative py-8">
-  <Brands brandImages={[ "adidas.png","cluely.jpg","vibecodeapp.png","fig.avif","ohara.avif","smodin.png","pagepilot.svg", "dubbygg.png","ryneai.webp"]} />
+  <Brands brandImages={[ "adidas.png","cluely.jpg","vibecodeapp.png","fig.avif","ohara.avif","smodin.png","pagepilot.svg", "dubbygg.png","ryneai.webp", "wander.webp", "uphead.avif"]} />
 
-  <p className="w-full font-aeonik-bold tracking-tight text-center leading-[100%] text-[36px]"> PORTFOLIO </p>          
+  <p className="w-full font-voyager-thin tracking-tight text-center leading-[100%] text-[36px]"> PORTFOLIO </p>          
   <div className="grid grid-cols-1 min-h-screen md:grid-cols-3 gap-x-8 gap-y-6 pt-10 w-full overflow-hidden">
             {[
               { src: "https://www.instagram.com/p/DEaRLpAO-Ma/embed", title: "AI PARTNERSHIP" },
@@ -107,7 +105,7 @@ const Social = () => {
               ].map((video, index) => (
         <div
           key={index}
-          className="w-full font-aeonik-regular space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px] items-center overflow-hidden"
+          className="w-full font-voyager-thin space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px] items-center overflow-hidden"
         >
           <iframe
             src={video.src}
@@ -118,7 +116,7 @@ const Social = () => {
             scrolling="no"
           />
 
-          <p className="text-center font-aeonik-bold text-sm tracking-tight mt-3">
+          <p className="text-center font-voyager-thin text-sm tracking-tight mt-3">
             {video.title}
           </p>
         </div>
@@ -139,10 +137,10 @@ const Social = () => {
       </div>
 
             <div className="w-full mt-2">
-            <p className="w-full font-aeonik-bold tracking-tight text-left leading-[100%] text-[21px] mb-4">
+            <p className="w-full font-voyager-thin tracking-tight text-left leading-[100%] text-[21px] mb-4">
               TIMELINE
             </p>
-            <p className="w-full font-aeonik-regular leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px] mb-4">
+            <p className="w-full font-voyager-thin leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px] mb-4">
               Relatable content delivered to your audience.
             </p>
 

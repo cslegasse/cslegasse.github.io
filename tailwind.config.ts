@@ -71,9 +71,10 @@ const config = {
         },
       },
       fontFamily: {
-        "aeonik-bold": ["Aeonik-Bold", "sans-serif"],
-        "aeonik-regular": ["Aeonik-Regular", "sans-serif"],
-        "aeonik-thin": ["Aeonik-Thin", "sans-serif"],
+        "sans": ["var(--font-inter)", "sans-serif"],
+        // "aeonik-bold": ["Aeonik-Bold", "sans-serif"],
+        // "aeonik-regular": ["Aeonik-Regular", "sans-serif"],
+        // "aeonik-thin": ["Aeonik-Thin", "sans-serif"],
         "mono-regular": ["Graebenbach-Mono-Regular", "sans-serif"],
         "voyager-thin": ["Voyager-Thin", "sans-serif"],
       },

@@ -13,12 +13,12 @@ export default function Research() {
         <div className="flex flex-col w-full px-8 sm:px-8 md:px-16 lg:px-20 items-start justify-center gap-y-4">
           <TracingBeam className="px-0 md:px-2">
             <div className="flex flex-col w-full">
-                <Link href="/" className="w-full font-aeonik-thin tracking-regular space-y-3 text-sm mb-4">
+                <Link href="/" className="w-full font-voyager-thin tracking-regular space-y-3 text-sm mb-4">
                     <p>← BACK TO HOME</p>
                   </Link>
 
               <div className="flex flex-col w-full align-center justify-center space-y-4 items-center">
-               <p className={'w-full font-aeonik-bold tracking-tight text-center leading-[100%] text-[21px] mb-3'}>
+               <p className={'w-full font-voyager-thin tracking-tight text-center leading-[100%] text-[21px] mb-3'}>
                   RESEARCH
                 </p>
                 <h1 className="font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">knowledge is power.</h1>

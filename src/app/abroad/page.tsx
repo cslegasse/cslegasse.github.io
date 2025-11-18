@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import Navbar from "@components/Navbar";
 import { TracingBeam } from "@components/ui/tracing-beam";
@@ -8,15 +7,44 @@ import React, { useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import experiencesData from "@data/experiences.json";
 import subItemsData from "@data/subitems.json";
-
-const InteractiveMap = dynamic(() => import("../../components/Map"), {
-  ssr: false, 
-});
+import Footer from "@components/Footer"
+import Papa from "papaparse";
+import CoolMarquee from "@components/CoolMarquee"
+import Globe from "@components/Globe"
+import Marker from "@components/Globe"
 
 const experiences = experiencesData;
 const subItems = subItemsData;
 
+type CsvRow = {
+  lat: string;
+  lng: string;
+};
+
+type Marker = {
+  location: [number, number];
+  size: number;
+};
+
+
 export default function Abroad() {
+  const [markers, setMarkers] = useState<Marker[]>([]);
+
+  Papa.parse<CsvRow>("/data/travel-data.csv", {
+    download: true,
+    header: true,
+    complete: (results) => {
+      const formatted: Marker[] = results.data
+        .filter((row) => row.lat && row.lng)
+        .map((row) => ({
+          location: [parseFloat(row.lat), parseFloat(row.lng)],
+          size: 0.02,
+        }));
+
+      setMarkers(formatted);
+    },
+  });
+
   const [openMain, setOpenMain] = useState(false);
   const [openSub, setOpenSub] = useState<number | null>(null);
   return (
@@ -35,17 +63,15 @@ export default function Abroad() {
 
               <div className="flex flex-col w-full align-center justify-center space-y-4 items-center">
                 <p
-                  className={
-                    "w-full font-voyager-thin tracking-tight text-center leading-[100%] text-[21px] mb-3"
-                  }
+                  className={"w-full font-voyager-thin tracking-tight text-center leading-[100%] text-[21px] mb-3"}
                 >
                   INTERNATIONAL EXPERIENCES
                 </p>
-                <h1 className="font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">
+                <h1 className="font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3 text-white">
                   perspective across borders.
                 </h1>
-                <p className="max-w-2xl text-center text-base md:text-lg font-voyager-thin tracking-regular leading-relaxed text-gray-600">
-                  this page is a work in progress.
+                <p className="max-w-2xl text-center text-base md:text-lg font-voyager-thin tracking-regular leading-relaxed text-white">
+                  places i've traveled to and what i've learned.
                 </p>
               </div>
 
@@ -63,7 +89,7 @@ export default function Abroad() {
                       />
                     )}
                     <div className="p-6 flex flex-col space-y-3">
-                      <h2 className="font-voyager-thin text-lg tracking-tight">{exp.title}</h2>
+                      <h2 className="font-voyager-thin text-lg tracking-tight text-gray-600">{exp.title}</h2>
                       <p className="text-sm font-voyager-thin text-gray-600">
                         {exp.city}, {exp.country}
                       </p>
@@ -83,10 +109,7 @@ export default function Abroad() {
                     </div>
                   </div>
                 ))}
-                
               </div>
-
-             
 
                 <div className="mt-10 w-full max-w-5xl mx-auto">
                    <h1 className="font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">
@@ -95,15 +118,21 @@ export default function Abroad() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
                   <div className="rounded-2xl shadow overflow-hidden">
                     
-                    <div className="w-full h-80 bg-gray-200 flex items-center justify-center">
-                      <InteractiveMap locations={experiences} />
-
-                    </div>
+                    <div className="mt-6 flex justify-center">
+                    <Globe
+                      className="w-full h-full"
+                      markerColor="#ff0000"
+                      baseColor="#ffffff"
+                      glowColor="#00aaff"
+                      mapBrightness={8}
+                      markers={markers}
+                    />
+                  </div>
                   </div>
 
                   <div className="rounded-2xl bg-white-100 shadow p-6">
                     <h2 className="text-xl font-voyager-thin mb-2">About This Map</h2>
-                    <p className="text-gray-700 font-voyager-thin leading-relaxed">
+                    <p className="text-white font-voyager-thin leading-relaxed">
                       This map highlights where international locations connected to my coursework, language study, and cultural exploration throughout the last 4 years.
                       I've been to 32 countries 15 US states while in college. Check out these cool destinations!
                     
@@ -111,7 +140,7 @@ export default function Abroad() {
                   </div>
                 </div>
 
-                <div className="mt-10 w-full max-w-2xl mx-auto">
+                <div className="mt-10 w-full max-w-2xl mx-auto overflow-visible">
                   <button
                     onClick={() => setOpenMain(!openMain)}
                     className="flex w-full items-center justify-between rounded-2xl bg-black-100 px-5 py-3 font-voyager-thin text-lg tracking-tight shadow-sm hover:bg-white-200 transition"
@@ -145,6 +174,8 @@ export default function Abroad() {
                 </div>
             </div>
           </TracingBeam>
+          <CoolMarquee></CoolMarquee>
+          <Footer></Footer>
         </div>
       </div>
     </>

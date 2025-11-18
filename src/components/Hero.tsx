@@ -185,7 +185,7 @@ const Hero = () => {
       </div>
           <main className="flex flex-col w-full bg-black text-white">
           <CoolMarquee />
-          <Footer />
+          <Footer/>
         </main>
       </main>
     </>

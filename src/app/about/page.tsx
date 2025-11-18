@@ -1,10 +1,11 @@
 import React, { FC } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
-import Navbar from "../../components/Navbar"
+import Navbar from "@/components/Navbar"
 import { TracingBeam } from "../../components/ui/tracing-beam";
 import InteractiveLink from './InteractiveLink';
 import Footer2 from '@components/Footer-2';
+import CoolMarquee2 from "@components/CoolMarquee2"
 
 
 // const education = [
@@ -350,6 +351,7 @@ const About = () => {
           </div>
         </TracingBeam>
         </div>
+        <CoolMarquee2></CoolMarquee2>
       
       </div>
       <Footer2/>

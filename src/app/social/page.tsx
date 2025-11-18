@@ -4,7 +4,6 @@ import Link from "next/link";
 import { CardSpotlight } from "@components/ui/card-spotlight";
 import { TracingBeam } from "@components/ui/tracing-beam";
 import dynamic from "next/dynamic";
-import { drukWide } from "../fonts"
 
 const Navbar = dynamic(() => import("@components/Navbar"), { ssr: false });
 const Footer2 = dynamic(() => import("@components/Footer-2"), { ssr: false });
@@ -12,6 +11,7 @@ const Stats = dynamic(() => import("@components/Stats"), { ssr: false });
 const CalEmbed2 = dynamic(() => import("@components/CalEmbed2"), { ssr: false });
 const CoolMarquee = dynamic(() => import("@components/CoolMarquee"), { ssr: false });
 const Brands = dynamic(() => import("@components/Brands"), { ssr: false });
+
 
 const Social = () => {
   const statImages = [
@@ -88,7 +88,7 @@ const Social = () => {
             />
                 
  <div className="w-full relative py-8">
-  <Brands brandImages={[ "adidas.png","cluely.jpg","vibecodeapp.png","fig.avif","ohara.avif","smodin.png","pagepilot.svg", "dubbygg.png","ryneai.webp", "wander.webp", "uphead.avif"]} />
+  <Brands brandImages={[ "kulikuli.jpg","zo.png","adidas.png","cluely.jpg","vibecodeapp.png","fig.avif","ohara.avif","smodin.png","pagepilot.svg", "dubbygg.png","ryneai.webp", "wander.webp", "uphead.avif"]} />
 
   <p className="w-full font-voyager-thin tracking-tight text-center leading-[100%] text-[36px]"> PORTFOLIO </p>          
   <div className="grid grid-cols-1 min-h-screen md:grid-cols-3 gap-x-8 gap-y-6 pt-10 w-full overflow-hidden">

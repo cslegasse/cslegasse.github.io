@@ -4,7 +4,7 @@ import Button from '@components/Button';
 import Navbar from "@components/Navbar"
 import Footer2 from "@components/Footer-2"
 import { TracingBeam } from "@components/ui/tracing-beam";
-import Marquee from "react-fast-marquee";
+import CoolMarquee2 from "@components/CoolMarquee2"
 
 
 const projects =[
@@ -111,24 +111,7 @@ const Projects = () => {
           </TracingBeam>
         </div>
       </div>
-      <div className="w-full overflow-x-hidden"> {}
-        <Marquee
-          gradient={false} 
-          speed={85}
-          autoFill
-          loop={0}
-          className="w-[100vw]"
-        >
-          {["LETS", "BUILD"].map((word, index) => (
-            <p
-              key={index}
-              className="font-voyager-thin tracking-tight leading-[100%] text-[54px] mr-8"
-            >
-              {word}
-            </p>
-          ))}
-        </Marquee>
-      </div>
+        <CoolMarquee2></CoolMarquee2>
 
       <Footer2/>
     </>

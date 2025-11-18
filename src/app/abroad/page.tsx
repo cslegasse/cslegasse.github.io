@@ -3,7 +3,7 @@
 import Link from "next/link";
 import Navbar from "@components/Navbar";
 import { TracingBeam } from "@components/ui/tracing-beam";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import experiencesData from "@data/experiences.json";
 import subItemsData from "@data/subitems.json";
@@ -11,7 +11,6 @@ import Footer from "@components/Footer"
 import Papa from "papaparse";
 import CoolMarquee from "@components/CoolMarquee"
 import Globe from "@components/Globe"
-import Marker from "@components/Globe"
 
 const experiences = experiencesData;
 const subItems = subItemsData;
@@ -29,24 +28,26 @@ type Marker = {
 
 export default function Abroad() {
   const [markers, setMarkers] = useState<Marker[]>([]);
-
-  Papa.parse<CsvRow>("/data/travel-data.csv", {
-    download: true,
-    header: true,
-    complete: (results) => {
-      const formatted: Marker[] = results.data
-        .filter((row) => row.lat && row.lng)
-        .map((row) => ({
-          location: [parseFloat(row.lat), parseFloat(row.lng)],
-          size: 0.02,
-        }));
-
-      setMarkers(formatted);
-    },
-  });
-
   const [openMain, setOpenMain] = useState(false);
   const [openSub, setOpenSub] = useState<number | null>(null);
+
+  useEffect(() => {
+    Papa.parse<CsvRow>("/data/travel-data.csv", {
+      download: true,
+      header: true,
+      complete: (results) => {
+        const formatted: Marker[] = results.data
+          .filter((row) => row.lat && row.lng)
+          .map((row) => ({
+            location: [parseFloat(row.lat), parseFloat(row.lng)],
+            size: 0.02,
+          }));
+
+        setMarkers(formatted);
+      },
+    });
+  }, []);
+
   return (
     <>
       <Navbar />

@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from 'next/link';
 import Button from '@components/Button';
 import Navbar from "@components/Navbar"
-import Footer2 from "@components/Footer-2"
+import Footer from "@components/Footer"
 import { TracingBeam } from "@components/ui/tracing-beam";
 import CoolMarquee2 from "@components/CoolMarquee2"
 
@@ -110,10 +110,11 @@ const Projects = () => {
           </div>
           </TracingBeam>
         </div>
-      </div>
-        <CoolMarquee2></CoolMarquee2>
+                <CoolMarquee2></CoolMarquee2>
+      <Footer/>
 
-      <Footer2/>
+      </div>
+
     </>
   );
 };

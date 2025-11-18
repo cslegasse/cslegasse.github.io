@@ -9,21 +9,21 @@ import experiencesData from "@data/experiences.json";
 import subItemsData from "@data/subitems.json";
 import Footer from "@components/Footer"
 import Papa from "papaparse";
-import CoolMarquee from "@components/CoolMarquee"
-import Globe from "@components/Globe"
+import Globe, { type Marker } from "@components/Globe";
+
 
 const experiences = experiencesData;
 const subItems = subItemsData;
 
 type CsvRow = {
+  country: string;
+  city: string;
   lat: string;
   lng: string;
+  date: string;
 };
 
-type Marker = {
-  location: [number, number];
-  size: number;
-};
+
 
 
 export default function Abroad() {
@@ -40,15 +40,23 @@ export default function Abroad() {
           .filter((row) => row.lat && row.lng)
           .map((row) => ({
             location: [parseFloat(row.lat), parseFloat(row.lng)],
-            size: 0.02,
+            size: 0.05,
+            type: "cone",
+            height: 0.2,
+            data: {
+              country: row.country,
+              city: row.city,
+              date: row.date,
+            },
           }));
-
         setMarkers(formatted);
+
       },
     });
   }, []);
 
   return (
+    
     <>
       <Navbar />
       <div className="flex w-full flex-col pt-32 items-start">
@@ -125,7 +133,7 @@ export default function Abroad() {
                       markerColor="#ff0000"
                       baseColor="#ffffff"
                       glowColor="#00aaff"
-                      mapBrightness={8}
+                      mapBrightness={12}
                       markers={markers}
                     />
                   </div>
@@ -175,9 +183,8 @@ export default function Abroad() {
                 </div>
             </div>
           </TracingBeam>
-          <CoolMarquee></CoolMarquee>
-          <Footer></Footer>
         </div>
+                  <Footer></Footer>
       </div>
     </>
   );

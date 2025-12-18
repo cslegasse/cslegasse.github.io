@@ -8,7 +8,6 @@ const Brands = ({ brandImages }: { brandImages: string[] }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const gridCells = 15;
 
-
   const generateInitialPositions = () => {
     const positions: { x: number; y: number; rotate: number; size: number }[] = [];
     const occupied: { x: number; y: number; size: number }[] = [];
@@ -65,9 +64,9 @@ const Brands = ({ brandImages }: { brandImages: string[] }) => {
         className="relative mb-8"
       >
         <div className="flex items-center justify-between">
-          <h2 className="font-aeonik-bold tracking-tight text-left leading-[100%] text-[21px] md:text-[28px]">
+          <h2 className="font-body tracking-tight text-left leading-[100%] text-[21px] md:text-[28px]">
             <span className="bg-gradient-to-r from-white via-gray-200 to-gray-400 bg-clip-text text-transparent">
-              REVIEWS + CLIENTS
+                CLIENTS
             </span>
           </h2>
           
@@ -81,7 +80,6 @@ const Brands = ({ brandImages }: { brandImages: string[] }) => {
         />
       </motion.div>
 
-      {/* Contained Brand Box */}
       <motion.div
         ref={containerRef}
         className="relative w-full h-[500px] rounded-3xl overflow-hidden border-2 border-white/10 bg-gradient-to-br from-gray-900/50 to-black/50 backdrop-blur-sm"
@@ -98,10 +96,8 @@ const Brands = ({ brandImages }: { brandImages: string[] }) => {
         }
         transition={{ duration: 0.6 }}
       >
-        {/* Ambient glow */}
         <div className="absolute inset-0 bg-gradient-to-br from-blue-500/3 via-purple-500/3 to-pink-500/3" />
         
-        {/* Grid pattern overlay */}
         <div 
           className="absolute inset-0 opacity-5"
           style={{
@@ -113,7 +109,6 @@ const Brands = ({ brandImages }: { brandImages: string[] }) => {
           }}
         />
 
-        {/* Brand Cards */}
         {brandImages.slice(0, gridCells).map((image, index) => {
           const pos = positions[index];
           
@@ -211,7 +206,6 @@ const DraggableBrandCard = ({
         zIndex: 100,
       }}
     >
-      {/* Glow effect */}
       <motion.div
         className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-400/10 via-purple-400/10 to-pink-400/10 blur-xl"
         animate={{
@@ -220,7 +214,6 @@ const DraggableBrandCard = ({
         }}
       />
 
-      {/* Card */}
       <motion.div
         className="relative rounded-2xl overflow-hidden border border-white/20 backdrop-blur-sm"
         style={{
@@ -232,10 +225,8 @@ const DraggableBrandCard = ({
             : "0 10px 25px rgba(0,0,0,0.4)",
         }}
       >
-        {/* Gradient border */}
         <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-blue-500/30 via-purple-500/30 to-pink-500/30 opacity-0 group-hover:opacity-100 transition-opacity" />
 
-        {/* Image */}
         <div className="relative w-full h-full p-3 flex items-center justify-center">
           <img
             src={`/ugc/${image}`}
@@ -248,7 +239,6 @@ const DraggableBrandCard = ({
           />
         </div>
 
-        {/* Shine effect when dragging */}
         {isDragging && (
           <motion.div
             className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/20 to-transparent"

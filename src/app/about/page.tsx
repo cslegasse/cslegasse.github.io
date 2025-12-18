@@ -1,11 +1,14 @@
 import React, { FC } from 'react';
 import Image from "next/image";
 import Link from 'next/link';
-import Navbar from "@/components/Navbar"
-import { TracingBeam } from "../../components/ui/tracing-beam";
-import InteractiveLink from './InteractiveLink';
-import Footer2 from '@components/Footer-2';
-import CoolMarquee2 from "@components/CoolMarquee2"
+import dynamic from "next/dynamic";
+import { TracingBeam } from "@components/ui/tracing-beam";
+
+const Navbar = dynamic(() => import("@components/Navbar"), { ssr: false });
+const Footer = dynamic(() => import("@components/Footer"), { ssr: false });
+const CoolMarquee = dynamic(() => import("@components/CoolMarquee"), { ssr: false });
+const InteractiveLink = dynamic(() => import("@components/InteractiveLink"), { ssr: false });
+const Quadrant = dynamic(() => import("@components/Quadrant"), { ssr: false });
 
 
 // const education = [
@@ -30,11 +33,11 @@ const programmes = [
       companyName: "Gilman Scholarship",
       link: "https://www.gilmanscholarship.org/",
       imageName: "/projects/gilman.png",
-      roleDescription: "US gov scholarship to study abroad."
+      roleDescription: "US government scholarship to study abroad."
     },
     {
       number: "02",
-      position: "SERGE & EMERGE ALUMNI",
+      position: "SERGE ALUMNI",
       year: "2024",
       companyName: "Stanford SERGE",
       link: "https://engineering.stanford.edu/SERGE",
@@ -72,10 +75,10 @@ const programmes = [
       number: "06",
       position: "UF PROGRAM ALUMNI",
       year: "2022-2025",
-      companyName: "ISP, REPU, & AI Scholar",
+      companyName: "Program Scholar",
       link: "https://ai.ufl.edu/for-our-students/meet-scholars/",
       imageName: "/projects/uf.png",
-      roleDescription: "International, AI, and research scholar programs."
+      roleDescription: "Completed the McNair, ISP, REPU, USP, ESP, and AI scholar programs."
     },
        {
       number: "07",
@@ -96,7 +99,7 @@ const experiences = [
       companyName: "Harvard University",
       link: "https://www.harvard.edu/",
       imageName: "/projects/harvard.png",
-      roleDescription: "AI cyberattack research."
+      roleDescription: "AI cyberattacks research."
     },
     {
         number: "02",
@@ -114,7 +117,7 @@ const experiences = [
         companyName: "Princeton University",
         link: "https://www.ai.princeton.edu/",
         imageName: "/projects/princetonu.png",
-        roleDescription: "VLMs for cognitive control research."
+        roleDescription: "VLMs research."
     },
     {
         number: "04",
@@ -137,7 +140,6 @@ const experiences = [
 ];
 
 const leadership = [
-
     {
       number: "01",
       position: "BOOTCAMP DIRECTOR",
@@ -149,7 +151,7 @@ const leadership = [
     },
     {
       number: "02",
-      position: "GRADUATE COORDINATOR",
+      position: "VICE PRESIDENT OF RESEARCH",
       year: "2024",
       companyName: "Society of Hispanic Prof. Eng.",
       link: "https://www.shpeuf.com/",
@@ -158,15 +160,6 @@ const leadership = [
     },
     {
       number: "03",
-      position: "RED TEAM",
-      year: "2023-2024",
-      companyName: "UF Security Information Team",
-      link: "https://www.ufsit.club/",
-      imageName: "/projects/sit.webp",
-      roleDescription: "Did some trolling."
-    },
-    {
-      number: "04",
       position: "RESEARCH DIRECTOR",
       year: "2022-2023",
       companyName: "Society of Hispanic Prof. Eng.",
@@ -209,6 +202,8 @@ const About = () => {
                 <p className="w-full font-voyager-thin tracking-tight text-center leading-[100%] text-[21px] mb-3">ABOUT </p>
                 <h1 className="font-voyager-thin text-[44px] md:text-[54px] leading-[125%] text-center tracking-tight mb-3">be yourself.</h1>
                 <div className="w-full md:w-2/3 font-voyager-thin tracking-[0.015em] space-y-10 items-center align-center justify-center text-[21px] md:text-[21px]">
+                  
+
                   <p className="leading-[150%]">My journey in software and security started at age 14 utilizing a DLL injector <InteractiveLink href="https://x.synapse.to" event='synapse' underline={true} newTab={true}>Synapse X.</InteractiveLink> where I was a scripter. Synapse Softworks was later <InteractiveLink href="https://devforum.roblox.com/t/exploit-prevention-update/2663101" event='synapse' underline={true} newTab={true}> acquired by ROBLOX</InteractiveLink> for millions.
                   </p>
                   <p className="leading-[150%]">At 15, I helped developed and release multiple hack clients and script hubs for Minecraft and ROBLOX on <InteractiveLink href="https://v3rmillion.net" event='verm' underline={true} newTab={true}> V3rmillion </InteractiveLink> (Wally Hub), <InteractiveLink href="https://wearedevs.net" event='wearedevs' underline={true} newTab={true}> WeAreDevs </InteractiveLink> (Shiba Hub), and <InteractiveLink href="https://builtbybit.com" event='mcmarket' underline={true} newTab={true}> MC-Market </InteractiveLink> (Incognito Client).</p>
@@ -219,8 +214,7 @@ const About = () => {
                   </p>
                   <p className="leading-[150%]">At 20, I created <InteractiveLink href="https://beacons.ai/legasse/" event='beacons_link' underline={true} newTab={true}> AI-generated/automated shorts </InteractiveLink> on <InteractiveLink href="https://youtube.com/" event='yt' underline={true} newTab={true}> Youtube </InteractiveLink> and <InteractiveLink href="https://tiktok.com/" event='tt' underline={true} newTab={true}> TikTok </InteractiveLink>, grossing 18k MRR across 25 channels and sold them to <InteractiveLink href="https://www.forbes.com/profile/pubity-group/" event='pubity' underline={true} newTab={true}> Pubity Group </InteractiveLink>. </p>
                 
-                  <p className="leading-[150%]">Today, I'm working on consumer tech apps.
-                  </p>
+                  <Quadrant/>
           
                 </div>
               </div>
@@ -351,10 +345,9 @@ const About = () => {
           </div>
         </TracingBeam>
         </div>
-        <CoolMarquee2></CoolMarquee2>
-      
+      <CoolMarquee></CoolMarquee>
       </div>
-      <Footer2/>
+      <Footer/>
     </>
   );
 };

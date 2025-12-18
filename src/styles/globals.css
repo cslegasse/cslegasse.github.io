@@ -99,4 +99,211 @@
   font-family: 'Aeonik-Bold', -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell,
     Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
+
+@keyframes float-slow {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(30px, -30px) scale(1.1); }
+  }
   
+  @keyframes float-slower {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    50% { transform: translate(-40px, 40px) scale(0.9); }
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    33% { transform: translate(20px, -20px); }
+    66% { transform: translate(-20px, 20px); }
+  }
+  
+  .animate-float-slow {
+    animation: float-slow 20s ease-in-out infinite;
+  }
+  
+  .animate-float-slower {
+    animation: float-slower 25s ease-in-out infinite;
+  }
+  
+  .animate-float {
+    animation: float 15s ease-in-out infinite;
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+  }
+  
+  .animate-fade-in-up {
+    opacity: 0;
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+
+  @keyframes float-xl {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(40px, -30px) scale(1.05); }
+    50% { transform: translate(80px, 20px) scale(0.98); }
+    75% { transform: translate(30px, 50px) scale(1.02); }
+  }
+  
+  @keyframes float-xxl {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(-50px, 40px) scale(0.95); }
+    66% { transform: translate(-30px, -30px) scale(1.08); }
+  }
+  
+  /* Medium Orbs - Moderate Speed, Circular Motion */
+  @keyframes float-medium {
+    0%, 100% { transform: translate(0, 0) rotate(0deg); }
+    25% { transform: translate(30px, -40px) rotate(5deg); }
+    50% { transform: translate(-20px, -60px) rotate(-3deg); }
+    75% { transform: translate(-40px, -20px) rotate(4deg); }
+  }
+  
+  @keyframes float-medium-alt {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    33% { transform: translate(50px, 30px) scale(1.1); }
+    66% { transform: translate(-40px, 60px) scale(0.92); }
+  }
+  
+  @keyframes float-diagonal {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(-60px, -60px); }
+  }
+  
+  /* Fast Orbs - Quick, Sporadic Movement */
+  @keyframes float-fast {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    20% { transform: translate(25px, -30px) scale(1.15); }
+    40% { transform: translate(-15px, -50px) scale(0.9); }
+    60% { transform: translate(35px, -25px) scale(1.05); }
+    80% { transform: translate(-10px, -10px) scale(0.95); }
+  }
+  
+  @keyframes float-fast-alt {
+    0%, 100% { transform: translate(0, 0) scale(1); }
+    25% { transform: translate(-30px, 40px) scale(1.12); }
+    50% { transform: translate(20px, 20px) scale(0.88); }
+    75% { transform: translate(-20px, -30px) scale(1.08); }
+  }
+  
+  @keyframes float-erratic {
+    0% { transform: translate(0, 0); }
+    15% { transform: translate(20px, -15px); }
+    30% { transform: translate(-25px, -30px); }
+    45% { transform: translate(15px, -40px); }
+    60% { transform: translate(-10px, -20px); }
+    75% { transform: translate(30px, -10px); }
+    90% { transform: translate(-20px, -35px); }
+    100% { transform: translate(0, 0); }
+  }
+  
+  /* Pulse Animations for Tiny Orbs */
+  @keyframes pulse-slow {
+    0%, 100% { opacity: 0.3; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.2); }
+  }
+  
+  @keyframes pulse-slower {
+    0%, 100% { opacity: 0.4; transform: scale(1); }
+    50% { opacity: 0.7; transform: scale(1.15); }
+  }
+  
+  .animate-slide-up {
+    animation: slide-up 0.8s ease-out forwards;
+  }
+  
+  .animate-fade-in-up {
+    opacity: 0;
+    animation: fade-in-up 0.6s ease-out forwards;
+  }
+  
+  
+  .animate-float-medium-alt {
+    animation: float-medium-alt 28s ease-in-out infinite;
+  }
+  
+ 
+  
+  .animate-float-fast-alt {
+    animation: float-fast-alt 20s ease-in-out infinite;
+  }
+  
+  .animate-float-erratic {
+    animation: float-erratic 22s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slow {
+    animation: pulse-slow 8s ease-in-out infinite;
+  }
+  
+  .animate-pulse-slower {
+    animation: pulse-slower 10s ease-in-out infinite;
+  }
+
+  @keyframes float-xl {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(40px, -40px) scale(1.08); }
+}
+
+@keyframes float-xxl {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50% { transform: translate(-50px, 50px) scale(0.95); }
+}
+
+@keyframes float-medium {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(30px, -30px); }
+}
+
+@keyframes float-diagonal {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(35px, 25px); }
+}
+
+@keyframes float-fast {
+  0%, 100% { transform: translate(0, 0); }
+  33% { transform: translate(20px, -15px); }
+  66% { transform: translate(-20px, 15px); }
+}
+
+.animate-float-xl {
+  animation: float-xl 28s ease-in-out infinite;
+}
+
+.animate-float-xxl {
+  animation: float-xxl 34s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float-medium 22s ease-in-out infinite;
+}
+
+.animate-float-diagonal {
+  animation: float-diagonal 26s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: float-fast 18s ease-in-out infinite;
+}
+

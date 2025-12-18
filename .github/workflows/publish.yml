@@ -9,6 +9,9 @@ permissions:
   pages: write
   id-token: write
 
+env:
+  NEXT_PUBLIC_DEPLOY_ENV: github
+
 concurrency:
   group: "pages"
   cancel-in-progress: false

@@ -16,10 +16,10 @@ const StatsSection = ({ stats }: { stats: { label: string; value: string }[] }) 
             transition={{ duration: 0.8, delay: index * 0.15, type: "spring", stiffness: 90 }}
             whileHover={{ scale: 1.08 }}
           >
-            <p className="text-[36px] md:text-[42px] font-voyager-thin text-white">
+            <p className="text-[36px] md:text-[42px] font-header text-white">
               {stat.value}
             </p>
-            <p className="text-sm md:text-base font-aeonik-regular text-gray-400 mt-2 text-center">
+            <p className="text-sm md:text-base font-body text-gray-400 mt-2 text-center">
               {stat.label}
             </p>
           </motion.div>

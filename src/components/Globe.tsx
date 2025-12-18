@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useRef } from "react";
 import createGlobe from "cobe";
-import { cn } from "../../utils/cn";
+import { cn } from "../../lib/cn";
 
 
 export type Marker = {
@@ -172,9 +172,9 @@ const resolvedGlowColor: [number, number, number] =
 
   return (
     <div
-      className={cn("flex items-center justify-center z-[10] mx-auto", className)}
-      style={{ width: "20rem", height: "20rem", overflow: "hidden" }}
-    >
+    className={cn("flex items-center justify-center z-[10] mx-auto", className)}
+    style={{ width: "20rem", height: "20rem", overflow: "hidden" }} 
+  >
       <canvas
         ref={canvasRef}
         style={{ width: "100%", height: "100%", cursor: "grab", display: "block" }}

@@ -1,17 +1,16 @@
 "use client";
 
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { CardSpotlight } from "@components/ui/card-spotlight";
 import { TracingBeam } from "@components/ui/tracing-beam";
-import dynamic from "next/dynamic";
 
 const Navbar = dynamic(() => import("@components/Navbar"), { ssr: false });
-const Footer2 = dynamic(() => import("@components/Footer-2"), { ssr: false });
+const Footer = dynamic(() => import("@components/Footer"), { ssr: false });
 const Stats = dynamic(() => import("@components/Stats"), { ssr: false });
-const CalEmbed2 = dynamic(() => import("@components/CalEmbed2"), { ssr: false });
 const CoolMarquee = dynamic(() => import("@components/CoolMarquee"), { ssr: false });
 const Brands = dynamic(() => import("@components/Brands"), { ssr: false });
-
+const SectionHeader = dynamic(() => import("@components/SectionHeader"), { ssr: false });
 
 const Social = () => {
   const statImages = [
@@ -28,16 +27,16 @@ const Social = () => {
         <div className="flex flex-col w-full px-8 sm:px-8 md:px-16 lg:px-20 items-start justify-center gap-y-4">
           <TracingBeam className="px-0 md:px-2">
             <div className="flex flex-col w-full">
-              <Link href="/" className="w-full font-voyager-thin tracking-regular text-sm mb-4">
+              <Link href="/" className="w-full font-body tracking-regular text-sm mb-4">
                 <p>← BACK TO HOME</p>
               </Link>
 
               {}
               <div className="flex flex-col w-full align-center justify-center space-y-4 items-center">
-                <p className="w-full font-voyager-thin tracking-tight text-center leading-[100%] text-[21px] mb-3">
+                <p className="w-full font-body tracking-tight text-center leading-[100%] text-[21px] mb-3">
                   SOCIAL MEDIA
                 </p>
-                <p className="w-full md:w-2/3 font-voyager-thin tracking-tight text-center leading-[100%] text-[44px] md:text-[54px] mb-3">
+                <p className="w-full md:w-2/3 font-body tracking-tight text-center leading-[100%] text-[44px] md:text-[54px] mb-3">
                   ugc portfolio
                 </p>
               </div>
@@ -46,10 +45,10 @@ const Social = () => {
               <div className="flex flex-col w-full max-w-[600px] mx-auto mt-3 p-4 justify-center text-6xl font-bold gap-y-2">
                 <div className="flex flex-row w-full space-x-1">
                   <div className="self-start mt-3">
-                    <h1 className="tracking-tight font-voyager-thin text-[16px] md:text-[14px] lg:text-[14px] mr-1">►</h1>
+                    <h1 className="tracking-tight font-body text-[16px] md:text-[14px] lg:text-[14px] mr-1">►</h1>
                   </div>
                   <div className="flex flex-col w-full align-center justify-center space-y-6 items-start">
-                  <p className="w-full font-voyager-thin leading-[1.5] text-[28px] md:text-[24px] lg:text-[24px]">
+                  <p className="w-full font-header leading-[1.5] text-[28px] md:text-[24px] lg:text-[24px]">
                       I create high quality content that authentically speaks to your brand's story and convert users.
                     </p>
                   </div>
@@ -57,8 +56,8 @@ const Social = () => {
               </div>
 
               <div className="w-full mt-8">
-                <p className="font-voyager-thin text-[21px] mb-4">ANALYTICS</p>
-                <p className="font-voyager-thin text-[18px] mb-8 text-gray-300">
+                <SectionHeader title="ANALYTICS" />
+                <p className="font-body text-[18px] mb-8 text-gray-300">
                   Performance from the last 30 days
                 </p>
 
@@ -90,57 +89,55 @@ const Social = () => {
  <div className="w-full relative py-8">
   <Brands brandImages={[ "kulikuli.jpg","zo.png","adidas.png","cluely.jpg","vibecodeapp.png","fig.avif","ohara.avif","smodin.png","pagepilot.svg", "dubbygg.png","ryneai.webp", "wander.webp", "uphead.avif"]} />
 
-  <p className="w-full font-voyager-thin tracking-tight text-center leading-[100%] text-[36px]"> PORTFOLIO </p>          
-  <div className="grid grid-cols-1 min-h-screen md:grid-cols-3 gap-x-8 gap-y-6 pt-10 w-full overflow-hidden">
-            {[
-              { src: "https://www.instagram.com/p/DEaRLpAO-Ma/embed", title: "AI PARTNERSHIP" },
-              { src: "https://www.instagram.com/p/DBmFg0yONq1/embed", title: "CODING" },
-              { src: "https://www.instagram.com/p/DDXrUmWyE1G/embed", title: "STUDY METHODS" },
-              { src: "https://www.instagram.com/p/C96Q26wAR1H/embed", title: "FITNESS" },
-              { src: "https://www.instagram.com/p/DMImtVgTHM3/embed", title: "JAPAN LIFE" },
-              { src: "https://www.instagram.com/p/DMSijmYsvlR/embed", title: "JAPAN LIFE" },
-              { src: "https://www.instagram.com/p/C_qdNqwPiVy/embed", title: "TECH MEMES" },
-              { src: "https://www.instagram.com/p/C_lXVarvdRA/embed", title: "TECH MEMES" },
-              { src: "https://www.instagram.com/p/DAOfNGjuhtB/embed", title: "TECH" },
-              ].map((video, index) => (
-        <div
-          key={index}
-          className="w-full font-voyager-thin space-y-6 leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px] items-center overflow-hidden"
-        >
-          <iframe
-            src={video.src}
-            className="w-full sm:w-[350px] h-[438px] rounded-lg shadow-md"
-            allowFullScreen
-            loading="lazy"
-            style={{ scrollbarWidth: "none" }}
-            scrolling="no"
-          />
+  <SectionHeader title="PORTFOLIO" />
+  <div className="flex flex-col md:flex-row gap-8 mt-10 justify-center items-start md:items-stretch">
+    {[ 
 
-          <p className="text-center font-voyager-thin text-sm tracking-tight mt-3">
-            {video.title}
-          </p>
-        </div>
-      ))}
-    </div>
-        <div className="flex flex-col w-full max-w-6xl mx-auto mt-0 md:mt-7 lg:pt-3 p-3 md:p-0 lg:p-0 justify-center text-6xl font-bold gap-y-6">
-          <div className="w-full flex flex-col items-center justify-center text-center">
-            <div className="w-full flex flex-col items-center justify-center">
-              <div className="text-6xl font-bold mb-6">book a call with me.</div>
-              
-            
-              <div className="w-full md:w-[90%] lg:w-[80%] xl:w-[70%] mx-auto">
-                <CalEmbed2/>
-              </div>
-            </div>
+      {
+        src: "https://www.instagram.com/p/DMImtVgTHM3/embed",
+        title: "JAPAN LIFE",
+        brand: "Adidas",
+        stats: { views: "2.8M", likes: "244K" },
+        feedback: "",
+      },
+      {
+        src: "https://www.instagram.com/p/DDXrUmWyE1G/embed",
+        title: "STUDY METHODS",
+        brand: "Smodin",
+        stats: { views: "2.4M", likes: "80K" },
+        feedback: "",
+      },
+    ].map((video, index) => (
+      <div
+        key={index}
+        className="flex-1 flex flex-col bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300"
+      >
+        <iframe
+          src={video.src}
+          className="w-full h-[400px] sm:h-[450px] rounded-t-xl"
+          allowFullScreen
+          loading="lazy"
+        />
+        <div className="p-4 flex flex-col gap-2">
+          <h3 className="font-header text-xl">{video.title}</h3>
+          <div className="flex items-center justify-between mt-1">
+            <span className="font-body text-sm text-gray-300">{video.brand}</span>
+            <span className="font-body text-sm text-gray-300">
+              {video.stats.views} views • {video.stats.likes} likes
+            </span>
           </div>
+          <p className="font-body text-gray-200 mt-2 text-sm">{video.feedback}</p>
         </div>
       </div>
+    ))}
+  </div>
+  </div>
+
 
             <div className="w-full mt-2">
-            <p className="w-full font-voyager-thin tracking-tight text-left leading-[100%] text-[21px] mb-4">
-              TIMELINE
-            </p>
-            <p className="w-full font-voyager-thin leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px] mb-4">
+            <SectionHeader title="TIMELINE" />
+
+            <p className="w-full font-body leading-[1.5] text-[21px] md:text-[18px] lg:text-[18px] mb-4">
               Relatable content delivered to your audience.
             </p>
 
@@ -150,9 +147,9 @@ const Social = () => {
                 { title: "Develop", description: "Editing, scripting, content creation, & draft feedback." },
                 { title: "Delivery", description: "Revisions. Final content produced within 14 business days." },
               ].map((milestone, index) => (
-                <CardSpotlight key={index} radius={200} color="#FFD700" className="w-full py-4 px-6 shadow-xl">
+                <CardSpotlight key={index} radius={200} color="#FFD700" className="font-header w-full py-4 px-6 shadow-xl">
                   <div className="flex flex-col items-center justify-center">
-                    <h2 className="text-2xl font-bold text-center text-white">{milestone.title}</h2>
+                    <h2 className="text-2xl font-header text-center text-white">{milestone.title}</h2>
                     <p className="mt-2 text-center text-white opacity-80">
                       {milestone.description}
                     </p>
@@ -162,10 +159,9 @@ const Social = () => {
             </div>
           </div>
             <CoolMarquee/>
-
             </div>
             </TracingBeam>
-         <Footer2/>
+         <Footer/>
       </div>
     </div>
   

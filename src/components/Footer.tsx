@@ -1,17 +1,17 @@
 const Footer = () => (
   <footer className="flex flex-col items-center text-center px-6 lg:px-24 pb-5 lg:pb-10 mt-20 max-w-[90%] mx-auto min-h-[30vh]">
     <div className="flex flex-col gap-y-4 w-full">
-      <h1 className="tracking-tight font-aeonik-bold text-[29px] md:text-[72px] lg:text-[108px] leading-[110%]">
+      <h1 className="tracking-tight font-body text-[23px] md:text-[64px] lg:text-[108px] leading-[110%]">
         LET'S BUILD.
       </h1>
       <div className="flex flex-col md:flex-row justify-center md:justify-between px-4 md:px-10 w-full">
-        <h1 className="tracking-tight font-aeonik-bold text-[29px] md:text-[72px] lg:text-[72px] leading-[70%]">
+        <h1 className="tracking-tight font-body text-[23px] md:text-[64px] lg:text-[108px] leading-[100%]">
           NULL@LEGASSEREMON.COM
         </h1>
 
       </div>
-      <div className="text-sm text-gray-400 text-center mt-8">
-      © GOOSE BIZ LLC 2025. All rights reserved.
+      <div className="text-sm font-body text-gray-400 text-center mt-8">
+      © GOOSE TECHNOLOGIES. All rights reserved.
     </div>
   
     </div>

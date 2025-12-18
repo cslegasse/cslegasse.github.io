@@ -7,7 +7,7 @@ export default function ContinuousMarquee() {
   const repeatedWords = Array(20).fill(words).flat();
 
   return (
-    <div className="w-full py-0 overflow-hidden bg-black">
+  <div className="w-full py-0 overflow-hidden bg-transparent">
       <Marquee
         gradient={false}
         speed={150}         
@@ -18,7 +18,7 @@ export default function ContinuousMarquee() {
         {repeatedWords.map((word, index) => (
           <span
             key={index}
-            className="mx-2 font-voyager-thin text-[64px] md:text-[64px] tracking-tight text-white uppercase"
+            className="mx-2 font-header text-[64px] md:text-[64px] tracking-tight text-white uppercase"
           >
             {word}
           </span>

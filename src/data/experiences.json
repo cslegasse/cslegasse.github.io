@@ -4,30 +4,74 @@
     "city": "Kyoto",
     "latitude": 35.0116,
     "longitude": 135.7681,
-    "image": "abroad/kyoto_default.jpg",
-    "title": "Study Abroad",
+    "image": "/abroad/kyoto_default.jpg",
+    "title": "Kyoto University",
+    "slug": "kyoto-study-abroad",
+    "date": "03-31-2025",
+    "duration":"6 months",
     "description": "Spent a semester at Kyoto University, learned Japanese, joined a soccer team, attended cultural events and made international friends.",
-    "tags": ["Study Abroad", "Japan", "Asia"]
+    "essay": "In Progress.",
+    "learnings": [
+      "Japanese culture emphasizes personal pride in work and conduct. Public cleanliness, proper restaurant queuing, honorifics; there is a heightened sense of responsibility and accountability for how small actions affect the collective.",
+      "Japanese language and etiquette are highly structured with honorifics (さん、ちゃん、かた） reflecting social hierarchy. Bowing replaces handshakes in nearly all contexts. Attention to detail and respect in everyday life builds trust and social acceptance amongst the public.",
+      "Japan is a collective society where the group comes before individual expression.",
+      "Japanese social communication relies on “空気を読む” (reading the air)."
+    ],
+    
+    "highlights": [
+      "Joined the Kyoto BOMBERS Japanese Football Club",
+      "Achieved JPLT N5 proficiency and certification",
+      "Hiked an active volcano in Aso, Fukuoka",
+      "Met Sunny Girl at the MURO Indie Rock Festival in Yokohama",
+      "Walking around the farms in rural towns in Gifu Prefecture ",
+      "Presenting American culture at the Miyama Cultural Expo in Kyoto",
+      "1000Y あくた川 ラーメン",
+      "Biwa-Maiko summer fireworks festival"
+    ],
+    "photos": [
+      { "url": "/abroad/japan/kyoto_default.jpg", "caption": "Farming homes in Koka, Shiga " }
+    ]
   },
   {
     "country": "Ecuador",
     "city": "Cuenca",
     "latitude": -2.9006,
     "longitude": -79.0043,
-    "image": "abroad/cuenca_default.jpg",
-    "title": "Cultural Study",
+    "image": "/abroad/cuenca_default.jpg",
+    "title": "Ecuadorian Exploration",
+    "slug": "ecuador-cuenca-25",
+    "date": "02-27-2025",
+    "duration":"1 month",
     "description": "Spent 1 month living and working, hiking the Andes, and refining my Spanish.",
-    "tags": ["South America", "Culture", "Spanish"]
+    "learnings": [
+      "In progress"
+    ],
+    "highlights": [
+      "In progress"
+    ],
+    "photos": [
+    ]
   },
   { 
     "country": "South Korea", 
     "city": "Seoul", 
     "latitude": 37.5326,
     "longitude": 127.0246,
-    "image": "abroad/seoul_default.jpg", 
-    "title": "Cultural Study", 
-    "description": "Spent 2 weeks exploring social customs, learning Korean, and normal tourist things.", 
-    "tags": ["Asia", "Culture", "Tourism"]
+    "image": "/abroad/seoul_default.jpg", 
+    "title": "The Korean Republic",
+    "slug": "korea-seoul-25",
+    "date": "05-01-2025",
+    "duration":"2 weeks",
+    "description": "Exploring social customs, learning Korean, and normal tourist things.", 
+    "learnings": [
+      "In progress"
+    ],
+    "highlights": [
+      "In progress"
+    ],
+    "photos": [
+    ]
+  
   }
 
 ]

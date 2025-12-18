@@ -1,22 +1,29 @@
 'use client';
 
 import React from 'react';
-import "../styles/fonts.css";
 import "../styles/globals.css";
-import { Inter } from "next/font/google";
+import { Graebenbach, Inter_18pt, drukWide} from './fonts';
 import { metadata } from './metadata';
-import PostHogClientProvider from '../components/PostHogClientProvider';
+import PostHogClientProvider from '@components/PostHogClientProvider';
 
-const inter = Inter({ subsets: ["latin"] });
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   return (
-    <html className={inter.className}>
+    <html
+      lang="en"
+      className={`${Inter_18pt.variable} ${Graebenbach.variable} ${drukWide.variable} font-sans`}
+    >
       <head>
         <title>{metadata.title.default}</title>
         <meta name="description" content={metadata.description} />
         <meta name="keywords" content={metadata.keywords.join(', ')} />
-        <meta name="robots" content={metadata.robots.index ? 'index,follow' : 'noindex,nofollow'} />
+        <meta
+          name="robots"
+          content={metadata.robots.index ? 'index,follow' : 'noindex,nofollow'}
+        />
         <meta property="og:url" content={metadata.openGraph.url} />
         <meta property="og:type" content={metadata.openGraph.type} />
         <meta property="og:title" content={metadata.openGraph.title.default} />
@@ -31,10 +38,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body className="bg-black text-white">
-        <PostHogClientProvider>
-          {children}
-        </PostHogClientProvider>
+        <PostHogClientProvider>{children}</PostHogClientProvider>
       </body>
     </html>
   );
-};
+}

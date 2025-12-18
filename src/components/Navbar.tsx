@@ -105,7 +105,7 @@ const Navbar = ({ minimal }: { minimal?: boolean }) => {
       <div className="fixed-header-container">
         <header className="z-50 fixed top-0 w-full flex items-center justify-between">
             <Link href={"/"}>
-              <p className="font-aeonik-bold text-[21px] md:text-[18px] tracking-tighter text-white absolute left-8 top-8 transition duration-200 ease-in-out hover:text-blue-500">LEGASSE REMON</p>
+              <p className="font-body text-[21px] md:text-[18px] tracking-tighter text-white absolute left-8 top-8 transition duration-200 ease-in-out hover:text-blue-500">LEGASSE REMON</p>
             </Link>
             {isMobile ? (
               <>
@@ -126,7 +126,7 @@ const Navbar = ({ minimal }: { minimal?: boolean }) => {
                     <div className="grid gap-4 p-6">
                       {navLinks.map((link) => (
                         <Link
-                          className="text-start no-underline text-white text-[32px] font-graebenbach-mono-regular transition duration-200 ease-in-out hover:text-white tracking-normal"
+                          className="text-start no-underline text-white text-[32px] font-body transition duration-200 ease-in-out hover:text-white tracking-normal"
                           href={link.link}
                           key={`${link.link} + ${link.text}`}
                           onClick={() => {
@@ -188,11 +188,6 @@ const Navbar = ({ minimal }: { minimal?: boolean }) => {
           </header>
         {isMobile ? null : (
           <div className="flex flex-col space-y-3.5 fixed right-8 bottom-8 items-end">
-            <Link href="https://github.com/cslegasse" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('GitHub', false)}>
-              <div className="text-[#ffffff80] text-xl pb-2 transition duration-200 ease-in-out hover:text-white">
-                <FaGithub/>
-              </div>
-            </Link>
             <Link href="https://www.instagram.com/remonbiz" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('Instagram', false)}>
               <div className="text-[#ffffff80] text-xl pb-2 transition duration-200 ease-in-out hover:text-white">
                 <FaInstagram/>
@@ -208,11 +203,7 @@ const Navbar = ({ minimal }: { minimal?: boolean }) => {
               <FaYoutube/>
               </div>
             </Link>
-             <Link href="https://linkedin.com/in/legasse-remon/" passHref target="_blank" rel="noopener noreferrer" onClick={() => handleSocialClick('LinkedIn', true)}>
-              <div className="text-[#ffffff80] text-xl transition duration-200 ease-in-out hover:text-white">
-              <FaLinkedin />
-              </div>
-            </Link>
+    
           </div>
         )}
       </div>

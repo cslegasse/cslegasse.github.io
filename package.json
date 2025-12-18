@@ -39,7 +39,6 @@
     "react-icons": "^5.2.1",
     "react-leaflet": "^4.2.1",
     "react-map-gl": "^7.1.9",
-    "react-simple-maps": "^1.0.0",
     "react-simple-typewriter": "^5.0.1",
     "remove-markdown": "^0.3.0",
     "tailwind-merge": "^2.5.3",

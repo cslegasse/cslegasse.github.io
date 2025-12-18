@@ -18,8 +18,6 @@ import { Lessons } from "@components/Lessons";
 
 const SectionHeader = dynamic(() => import("@components/SectionHeader"), { ssr: true });
 
-
-
 const experiences = experiencesData;
 const subItems = subItemsData;
 
@@ -38,32 +36,32 @@ export default function Abroad() {
 
   
 
-  useEffect(() => {
-    import("papaparse").then(({ default: Papa }) => {
+  // useEffect(() => {
+  //   import("papaparse").then(({ default: Papa }) => {
 
-    Papa.parse<CsvRow>("/data/travel-data.csv", {
-      download: true,
-      header: true,
-      complete: (results) => {
-        const formatted: Marker[] = results.data
-          .filter((row) => row.lat && row.lng)
-          .map((row) => ({
-            location: [parseFloat(row.lat), parseFloat(row.lng)],
-            size: 0.05,
-            type: "cone",
-            height: 0.2,
-            data: {
-              country: row.country,
-              city: row.city,
-              date: row.date,
-            },
-          }));
-        setMarkers(formatted);
+  //   Papa.parse<CsvRow>("/data/travel-data.csv", {
+  //     download: true,
+  //     header: true,
+  //     complete: (results) => {
+  //       const formatted: Marker[] = results.data
+  //         .filter((row) => row.lat && row.lng)
+  //         .map((row) => ({
+  //           location: [parseFloat(row.lat), parseFloat(row.lng)],
+  //           size: 0.05,
+  //           type: "cone",
+  //           height: 0.2,
+  //           data: {
+  //             country: row.country,
+  //             city: row.city,
+  //             date: row.date,
+  //           },
+  //         }));
+  //       setMarkers(formatted);
         
-      },
-    });
-    });
-  }, []);
+  //     },
+  //   });
+  //   });
+  // }, []);
 
   return (
     
@@ -159,8 +157,7 @@ export default function Abroad() {
                         </div>
                       </div>
 
-                 
-
+            
                       <div className="w-0 h-0.5 bg-gradient-to-r from-blue-400 to-white group-hover:w-full transition-all duration-500" />
                     </div>
 

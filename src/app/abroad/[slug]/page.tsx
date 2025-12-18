@@ -9,17 +9,22 @@ import experiencesData from "@data/experiences.json";
 import Navbar from "@components/Navbar";
 import { MapPin, Calendar, Clock, BookOpen, Camera, Lightbulb, Heart } from "lucide-react";
 import { CardSpotlight } from "@components/ui/card-spotlight";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+import experiences from "@/data/experiences.json"
 
-const CoolMarquee = dynamic(() => import("@components/CoolMarquee"), { ssr: true });
 const Footer = dynamic(() => import("@components/Footer"), {ssr: false,});
+
+export async function generateStaticParams() {
+  return experiences.map((exp) => ({
+    slug: exp.slug,
+  }));
+}
 
 export default function ExperienceDetail() {
   const params = useParams();
   const slug = params.slug as string;
   const [activeTab, setActiveTab] = useState("story");
 
-  
   const experience = experiencesData.find(
     exp => (exp.slug || exp.title.toLowerCase().replace(/\s+/g, '-')) === slug
   );

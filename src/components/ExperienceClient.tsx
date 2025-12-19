@@ -9,8 +9,7 @@ import { CardSpotlight } from "@components/ui/card-spotlight";
 import { MapPin, Calendar, Clock, BookOpen, Camera, Lightbulb, Heart } from "lucide-react";
 
 const Footer = dynamic(() => import("@components/Footer"), { ssr: false });
-
-import type { Experience } from "@/styles/experiences";
+import type { Experience } from "@/types/experiences";
 
 type Props = {
   experience: Experience;

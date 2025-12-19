@@ -1,6 +1,7 @@
 import experiences from "@/data/experiences.json";
-import ExperienceDetailClient from "@components/ExperienceClient";
-import { Experience } from "@/styles/experiences";
+import ExperienceClient from "@components/ExperienceClient";
+import type { Experience } from "@/types/experiences";
+import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   return experiences.map((exp) => ({
@@ -13,13 +14,13 @@ export default function Page({
 }: {
   params: { slug: string };
 }) {
-  const experience = (experiences as Experience[]).find(
+  const experience = experiences.find(
     (exp) => exp.slug === params.slug
-  );
+  ) as Experience | undefined;
 
   if (!experience) {
-    return null;
+    notFound();
   }
 
-  return <ExperienceDetailClient experience={experience} />;
+  return <ExperienceClient experience={experience} />;
 }
